@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand Colors ── */
+  --color-orth-dark:     #060F30;
+  --color-orth-navy:     #0A1C4E;
+  --color-orth-blue:     #1B3A8A;
+  --color-orth-electric: #2563EB;
+  --color-orth-sky:      #7CB3FF;
+  --color-orth-cream:    #F7F8FC;
+  --color-orth-line:     #E2E6F0;
+  --color-orth-muted:    #8A97B4;
+
+  /* ── Typography ── */
+  --font-display: var(--font-dm-serif), "Georgia", serif;
+  --font-sans:    var(--font-geist), "system-ui", sans-serif;
+
+  /* ── Custom Animations ── */
+  --animate-marquee:         marquee 40s linear infinite;
+  --animate-float:           float 6s ease-in-out infinite;
+  --animate-float-delayed:   float 6s ease-in-out 2s infinite;
+  --animate-fade-up:         fade-up 0.6s ease-out forwards;
+  --animate-accordion-down:  accordion-down 0.22s ease-out;
+  --animate-accordion-up:    accordion-up 0.22s ease-out;
+}
+
+/* ── Keyframes ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes float-b {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50%       { transform: translateY(-10px) rotate(-3deg); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to   { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to   { height: 0; opacity: 0; }
+}
+
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: #060F30;
+  color: #ffffff;
+  font-family: var(--font-geist), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Marquee pause on hover ── */
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: #2563EB;
+  color: #fff;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #060F30; }
+::-webkit-scrollbar-thumb { background: #1B3A8A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2563EB; }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Gradient text utility ── */
+.gradient-text {
+  background: linear-gradient(135deg, #7CB3FF 0%, #2563EB 50%, #1B3A8A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Glow effect ── */
+.glow-electric {
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.4), 0 0 80px rgba(37, 99, 235, 0.2);
+}
+
+/* ── Float animations ── */
+.float-a { animation: float 6s ease-in-out infinite; }
+.float-b { animation: float-b 7s ease-in-out 1s infinite; }
+.float-c { animation: float 8s ease-in-out 2s infinite; }
