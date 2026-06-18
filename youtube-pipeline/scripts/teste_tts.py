@@ -78,20 +78,23 @@ def gerar_audio(api_key: str, voice_id: str, texto: str) -> bytes:
     cliente = ElevenLabs(api_key=api_key)
 
     try:
+        # A chamada devolve um gerador (streaming); o pedido HTTP de fato só
+        # acontece quando começamos a consumir os pedaços no b"".join() -
+        # por isso o join precisa estar dentro do try, senão o erro escapa
+        # sem passar pela mensagem clara abaixo.
         audio_em_pedacos = cliente.text_to_speech.convert(
             text=texto,
             voice_id=voice_id,
             model_id=MODELO_TTS,
             output_format="mp3_44100_128",
         )
+        return b"".join(audio_em_pedacos)
     except Exception as erro:
         # Mensagem de erro clara em vez de deixar o traceback genérico subir
         # sem explicação - é mais fácil debugar sabendo que a falha foi
-        # na chamada à API (chave errada, sem créditos, voice_id inválido etc).
+        # na chamada à API (chave errada, sem créditos, voice_id inválido,
+        # rede bloqueada etc).
         sys.exit(f"ERRO ao chamar a API da ElevenLabs: {erro}")
-
-    # A API devolve o áudio em pedaços (streaming); aqui juntamos tudo.
-    return b"".join(audio_em_pedacos)
 
 
 def main():
