@@ -55,8 +55,13 @@ Preparei o script (`scripts/teste_tts.py`) que lê o roteiro
    evite as marcadas como "calm" ou "meditative". O `voice_id` da voz
    escolhida aparece na própria página da voz ou via API.
 
+## Resultado do teste
+
+Áudio gerado com sucesso via `scripts/teste_tts.py` usando o roteiro da
+Fase 2. Custo real: **US$ 0,45 (≈ R$ 2,29)** para 2.699 caracteres — em
+linha com a estimativa desta página. O arquivo fica em
+`youtube-pipeline/audio/` (não versionado, gerado localmente a cada execução).
+
 ## Próximo passo
 
-Me passe a chave de API e o `voice_id` escolhido (de preferência como
-variável de ambiente, não direto na mensagem — ver instruções no script)
-para eu rodar o teste e te mostrar o áudio + custo real gerado.
+Fase 4 — geração de imagens com Flux Pro (fal.ai ou Replicate).
