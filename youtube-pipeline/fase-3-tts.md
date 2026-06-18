@@ -55,8 +55,8 @@ Rodei `scripts/teste_tts.py` com a chave de API e o `voice_id`
   `.gitignore` da raiz, regra `.env*` cobre só os `.env`; o áudio fica local
   mesmo, não versionamos binário gerado).
 
-## Próximo passo
+## Status: concluída
 
-Validar se a voz/tom do áudio gerado está direta/enérgica como o esperado.
-Se sim, Fase 3 fica concluída e seguimos para a Fase 4 (geração de imagens
-com Flux Pro via fal.ai).
+Voz e tom aprovados pela Gabriela. Voice_id final: `9pDzHy2OpOgeXM8SeL0t`,
+modelo `eleven_multilingual_v2`. Próxima fase: geração de imagens
+(Fase 4, [`fase-4-imagens.md`](./fase-4-imagens.md)).
