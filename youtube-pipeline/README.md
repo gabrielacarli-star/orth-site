@@ -26,7 +26,7 @@ TTS, imagens, montagem) já tiver funcionado isolada pelo menos uma vez.
 | 1 | Estratégia de conteúdo | ✅ Concluída | [`fase-1-estrategia-conteudo.md`](./fase-1-estrategia-conteudo.md) |
 | 2 | Roteiro | ✅ Concluída (1ª ideia) | [`fase-2-roteiro.md`](./fase-2-roteiro.md) |
 | 3 | Narração (TTS) | ✅ Concluída (teste de áudio gerado) | [`fase-3-tts.md`](./fase-3-tts.md) |
-| 4 | Imagens (Flux Pro) | Pendente | — |
+| 4 | Imagens (Flux Pro) | 🔶 Pesquisa feita, falta chave de API pra testar | [`fase-4-imagens.md`](./fase-4-imagens.md) |
 | 5 | Montagem do vídeo | Pendente | — |
 | 6 | Script único ponta a ponta | Pendente | — |
 | 7 | Métricas e rastreamento de leads | Pendente | — |

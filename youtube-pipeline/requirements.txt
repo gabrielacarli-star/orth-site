@@ -1,3 +1,7 @@
 # Fase 3 — dependências pra gerar áudio de teste com a ElevenLabs
 elevenlabs
 python-dotenv
+
+# Fase 4 — dependências pra gerar imagens de teste com o fal.ai (Flux Pro)
+fal-client
+requests
