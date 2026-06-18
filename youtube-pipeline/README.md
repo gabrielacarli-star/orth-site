@@ -24,8 +24,8 @@ TTS, imagens, montagem) já tiver funcionado isolada pelo menos uma vez.
 | Fase | Descrição | Status | Arquivo |
 |---|---|---|---|
 | 1 | Estratégia de conteúdo | ✅ Concluída | [`fase-1-estrategia-conteudo.md`](./fase-1-estrategia-conteudo.md) |
-| 2 | Roteiro | ⏳ Próxima | — |
-| 3 | Narração (TTS) | Pendente | — |
+| 2 | Roteiro | ✅ Concluída (1ª ideia) | [`fase-2-roteiro.md`](./fase-2-roteiro.md) |
+| 3 | Narração (TTS) | ⏳ Próxima | — |
 | 4 | Imagens (Flux Pro) | Pendente | — |
 | 5 | Montagem do vídeo | Pendente | — |
 | 6 | Script único ponta a ponta | Pendente | — |

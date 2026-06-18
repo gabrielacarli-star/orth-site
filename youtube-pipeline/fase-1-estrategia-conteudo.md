@@ -91,7 +91,7 @@ Pontos importantes desse CTA:
   rastreamento de leads da Fase 7 sem precisar de nada técnico agora — é só
   outro link `wa.me`. Quando chegarmos na Fase 7 formalizamos isso.
 
-## Reaproveitamento do curso "Site em 2 Horas"
+## Reaproveitamento do curso "Renda Max" (ex-"Site em 2 Horas")
 
 Faz sentido usar como base de roteiro para os vídeos que falam de site,
 porque o curso já tem a explicação e os argumentos validados — só precisa
@@ -102,7 +102,7 @@ correspondência direta:
   uma aula no curso sobre os erros mais comuns; é só extrair os 2-3 pontos
   mais fortes.
 - **#8** (site profissional rápido sem gastar fortuna) — argumento central
-  do próprio curso ("Site em 2 Horas").
+  do próprio curso.
 - **#14** (site é coisa do passado?) — provavelmente módulo de
   posicionamento/objeções do curso.
 - **#17** (bastidores: site em 72h) — é praticamente a demonstração do
