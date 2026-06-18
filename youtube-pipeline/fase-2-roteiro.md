@@ -14,8 +14,7 @@ sem forçar a venda de um serviço específico só.
 
 ## Duração recomendada
 
-**Entre 4 e 6 minutos** de vídeo final (script com ~750-900 palavras, no
-ritmo de fala usado abaixo). Raciocínio:
+**Entre 4 e 6 minutos** de vídeo final. Raciocínio:
 
 - Empreendedor ocupado decide nos primeiros 5-8 segundos se continua
   assistindo — por isso o roteiro vai direto ao gancho, sem intro de canal.
@@ -27,6 +26,12 @@ ritmo de fala usado abaixo). Raciocínio:
 - Recomendo manter esse intervalo (4-6 min) como padrão pros próximos
   roteiros, exceto vídeos de "como fazer" passo a passo, que podem chegar a
   7-8 min se o passo a passo exigir.
+
+> Nota (medido na Fase 3): a narração final deste roteiro ficou com ~500
+> palavras / ~2.800 caracteres, o que dá perto de 3 a 3min30s em ritmo
+> natural — um pouco abaixo da faixa acima. Funciona bem mesmo assim; nos
+> próximos roteiros vale esticar um pouco os exemplos pra chegar mais perto
+> de 4-5 min.
 
 ## Roteiro — narração completa
 
@@ -118,7 +123,7 @@ te mostra, de graça, como ficaria isso no seu negócio.
 
 - O roteiro tem blocos curtos de frase, de propósito — facilita testar o
   TTS por trecho antes de gerar o áudio inteiro, e facilita re-gravar só um
-  bloco se algo saber estranho na voz.
+  bloco se algo sair estranho na voz.
 - Números nos títulos dos erros ("Erro número 1", "Erro número 2"...) foram
   escritos por extenso de propósito, porque alguns serviços de TTS em
   português leem "1" e "2" de forma estranha demais quando vêm sozinhos.
