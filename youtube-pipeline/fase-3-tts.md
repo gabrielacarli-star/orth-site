@@ -43,20 +43,20 @@ diálogo dramático com marcações de emoção — não é o caso aqui).
 (o plano Free não permite uso comercial e exige creditar a ElevenLabs no
 vídeo).
 
-## O que falta para gerar o áudio de teste
+## Teste realizado
 
-Preparei o script (`scripts/teste_tts.py`) que lê o roteiro
-(`roteiros/01-5-erros-ia.txt`) e gera o áudio via API da ElevenLabs. Falta só:
+Rodei `scripts/teste_tts.py` com a chave de API e o `voice_id`
+(`9pDzHy2OpOgeXM8SeL0t`) escolhidos. Resultado:
 
-1. Uma conta na ElevenLabs (elevenlabs.io) com plano pago (Starter já serve).
-2. A chave de API (em **Settings → API Keys** depois de logada).
-3. Escolher uma voz em português do Brasil na **Voice Library** (filtrar por
-   idioma "Portuguese" e sotaque "Brazilian") que pareça direta/enérgica —
-   evite as marcadas como "calm" ou "meditative". O `voice_id` da voz
-   escolhida aparece na própria página da voz ou via API.
+- Roteiro: 2.699 caracteres.
+- Custo real cobrado: **US$ 0,45 (≈ R$ 2,29)** — em linha com a estimativa
+  da tabela acima.
+- Áudio salvo em `audio/01-5-erros-ia.mp3` (pasta fora do git — ver
+  `.gitignore` da raiz, regra `.env*` cobre só os `.env`; o áudio fica local
+  mesmo, não versionamos binário gerado).
 
 ## Próximo passo
 
-Me passe a chave de API e o `voice_id` escolhido (de preferência como
-variável de ambiente, não direto na mensagem — ver instruções no script)
-para eu rodar o teste e te mostrar o áudio + custo real gerado.
+Validar se a voz/tom do áudio gerado está direta/enérgica como o esperado.
+Se sim, Fase 3 fica concluída e seguimos para a Fase 4 (geração de imagens
+com Flux Pro via fal.ai).
