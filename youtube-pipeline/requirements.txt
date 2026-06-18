@@ -2,5 +2,5 @@
 elevenlabs
 python-dotenv
 
-# Fase 4 — dependência pra gerar imagens de teste com Flux Pro via fal.ai
-fal-client
+# Fase 4 — dependência pra gerar imagens de teste com a OpenAI (gpt-image-1)
+openai

@@ -1,25 +1,25 @@
 """
-Fase 4 - teste isolado de geração de imagens (Flux Pro via fal.ai).
+Fase 4 - teste isolado de geração de imagens (gpt-image-1 via OpenAI).
 
 O que este script faz, passo a passo:
-  1. Lê a chave de API do fal.ai a partir de variável de ambiente
+  1. Lê a chave de API da OpenAI a partir de variável de ambiente
      (arquivo .env na pasta youtube-pipeline/).
   2. Para cada uma das 7 cenas do roteiro "01-5-erros-ia" (extraídas das
      marcações [Imagem: ...] de fase-2-roteiro.md), manda o prompt
-     correspondente pro Flux Pro.
-  3. Baixa e salva cada imagem em imagens/01-5-erros-ia/cena-N.png.
-  4. Mostra o custo total real no final.
+     correspondente pro gpt-image-1.
+  3. Decodifica e salva cada imagem em imagens/01-5-erros-ia/cena-N.png.
+  4. Mostra o custo estimado total no final.
 
 Como rodar:
   cd youtube-pipeline
   pip install -r requirements.txt
-  cp .env.example .env   # depois preencher o .env com sua chave do fal.ai
+  cp .env.example .env   # depois preencher o .env com sua chave da OpenAI
   python scripts/teste_imagens.py
 """
 
+import base64
 import os
 import sys
-import urllib.request
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -27,9 +27,11 @@ from dotenv import load_dotenv
 PASTA_PIPELINE = Path(__file__).resolve().parent.parent
 PASTA_SAIDA = PASTA_PIPELINE / "imagens" / "01-5-erros-ia"
 
-# Modelo Flux Pro mais recente e barato pra esse tipo de imagem realista
-MODELO_FLUX = "fal-ai/flux-pro/v1.1"
-PRECO_USD_POR_IMAGEM = 0.04
+MODELO_IMAGEM = "gpt-image-1"
+TAMANHO_IMAGEM = "1536x1024"  # paisagem, mais próximo de 16:9
+QUALIDADE_IMAGEM = "medium"
+# Estimativa pra qualidade "medium" em 1536x1024 (ver platform.openai.com/docs/pricing)
+PRECO_USD_POR_IMAGEM = 0.07
 COTACAO_USD_PARA_BRL = 5.10
 
 # Prompts traduzidos/expandidos a partir das marcações [Imagem: ...] do
@@ -61,44 +63,45 @@ CENAS = [
 
 
 def carregar_chave() -> str:
-    """Lê a chave de API do fal.ai do .env e avisa claramente se faltar."""
+    """Lê a chave de API da OpenAI do .env e avisa claramente se faltar."""
     load_dotenv(PASTA_PIPELINE / ".env")
 
-    fal_key = os.getenv("FAL_KEY")
-    if not fal_key:
+    openai_key = os.getenv("OPENAI_API_KEY")
+    if not openai_key:
         sys.exit(
-            "ERRO: variável FAL_KEY não encontrada.\n"
+            "ERRO: variável OPENAI_API_KEY não encontrada.\n"
             "-> Copie youtube-pipeline/.env.example para youtube-pipeline/.env "
-            "e preencha FAL_KEY com a chave da sua conta fal.ai (formato "
-            "id:secret)."
+            "e preencha OPENAI_API_KEY com a chave da sua conta OpenAI."
         )
-    return fal_key
+    return openai_key
 
 
-def gerar_imagem(prompt: str) -> str:
-    """Chama a API do fal.ai e devolve a URL da imagem gerada."""
-    import fal_client
-
+def gerar_imagem(cliente, prompt: str) -> bytes:
+    """Chama a API da OpenAI e devolve os bytes da imagem gerada."""
     try:
-        resultado = fal_client.subscribe(
-            MODELO_FLUX,
-            arguments={"prompt": prompt, "aspect_ratio": "16:9"},
+        resultado = cliente.images.generate(
+            model=MODELO_IMAGEM,
+            prompt=prompt,
+            size=TAMANHO_IMAGEM,
+            quality=QUALIDADE_IMAGEM,
         )
-        return resultado["images"][0]["url"]
+        return base64.b64decode(resultado.data[0].b64_json)
     except Exception as erro:
-        sys.exit(f"ERRO ao chamar a API do fal.ai: {erro}")
+        sys.exit(f"ERRO ao chamar a API da OpenAI: {erro}")
 
 
 def main():
-    os.environ["FAL_KEY"] = carregar_chave()
+    from openai import OpenAI
+
+    cliente = OpenAI(api_key=carregar_chave())
 
     PASTA_SAIDA.mkdir(parents=True, exist_ok=True)
 
     for nome, prompt in CENAS:
         print(f"Gerando {nome}...")
-        url = gerar_imagem(prompt)
+        imagem_bytes = gerar_imagem(cliente, prompt)
         destino = PASTA_SAIDA / f"{nome}.png"
-        urllib.request.urlretrieve(url, destino)
+        destino.write_bytes(imagem_bytes)
         print(f"  salva em: {destino}")
 
     custo_usd = len(CENAS) * PRECO_USD_POR_IMAGEM
