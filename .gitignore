@@ -44,3 +44,5 @@ next-env.d.ts
 # youtube pipeline: gerados localmente, não versionar
 youtube-pipeline/.venv
 youtube-pipeline/audio
+youtube-pipeline/imagens
+__pycache__/
