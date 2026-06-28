@@ -44,6 +44,18 @@ Abra `app/layout.tsx`, localize `GOOGLE TAG MANAGER`, descomente **ambos** os tr
 
 ---
 
+## video-use (ferramenta externa, fora deste repo)
+
+[`video-use`](https://github.com/browser-use/video-use) é um agente de automação de navegador (browser-use) usado para gerar vídeo a partir de ações no navegador. Não é uma dependência deste site — instale na sua máquina local, fora deste projeto:
+
+```bash
+pip install video-use
+```
+
+Depois siga as instruções de configuração e uso no próprio repositório do projeto. Sessões remotas/efêmeras (como esta) não persistem instalações globais entre execuções — a instalação deve ser feita no ambiente onde você de fato vai usar a ferramenta.
+
+---
+
 ## Estrutura
 
 ```
