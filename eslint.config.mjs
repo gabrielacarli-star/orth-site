@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone Pet Saudável PWA — has its own tooling.
+    "pet-saudavel/**",
   ]),
 ]);
 

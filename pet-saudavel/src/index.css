@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   Pet Saudável — sistema de design
+   Paleta e tipografia herdadas do material da marca Dr. Eduardo Sebastião.
+   ========================================================================= */
+@theme {
+  --color-ink: #3a2a1a; /* texto principal */
+  --color-dark: #241c14; /* fundo escuro / barras */
+  --color-parchment: #f1e7d2; /* fundo pergaminho */
+  --color-card: #f8f2e6; /* cartões claros */
+  --color-gold: #b2925a; /* dourado — bordas e destaques */
+  --color-gold-soft: #c4b08a; /* dourado suave */
+  --color-muted: #6f5b3e; /* texto secundário */
+  --color-line: #e3d7be; /* linhas divisórias */
+  --color-cream: #e3d7be;
+  --color-danger: #9a3412; /* vermelho terroso — SOS / atrasado */
+  --color-danger-soft: #f4e2d8;
+  --color-success: #4d6a3a; /* verde oliva — em dia */
+
+  --font-serif: "EB Garamond", Georgia, serif;
+  --font-display: "Cinzel", "EB Garamond", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-dark);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* área segura para o "notch" do iPhone quando instalado como PWA */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Reset de foco acessível e coerente com a marca */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* util para textos em Cinzel */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* esconde a scrollbar horizontal de abas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

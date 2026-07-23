@@ -1,0 +1,22 @@
+# Configuração do projeto Supabase (usada pela CLI `supabase`).
+# Troque "pet-saudavel" pelo ref/nome do seu projeto se preferir.
+project_id = "pet-saudavel"
+
+# --- Edge Functions -------------------------------------------------------
+# webhook da Hotmart: NÃO recebe JWT de usuário (valida o próprio hottok).
+[functions.hotmart-webhook]
+verify_jwt = false
+
+# rotina de lembretes: chamada pelo agendador (protegida por CRON_SECRET).
+[functions.send-reminders]
+verify_jwt = false
+
+# funções chamadas pelo app logado: o gateway valida o JWT do usuário.
+[functions.claim-purchase]
+verify_jwt = true
+
+[functions.ebook-url]
+verify_jwt = true
+
+[functions.delete-account]
+verify_jwt = true
