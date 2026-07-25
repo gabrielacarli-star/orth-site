@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#F1E7D2; color:#3A2A1A;
+  font-family:'EB Garamond', Georgia, 'Times New Roman', serif;
+  line-height:1.6; font-size:13.5px; -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+.font-display { font-family:'Cinzel', Georgia, serif; }
+.cover { text-align:center; padding:10px 0 26px; border-bottom:1px solid #B2925A; margin-bottom:22px; }
+.seal { width:64px; height:64px; margin:0 auto 14px; border:2px solid #B2925A; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; position:relative; }
+.seal::before { content:""; position:absolute; inset:4px; border:1px solid #B2925A; border-radius:50%; }
+.seal span { font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:22px; color:#3A2A1A; }
+.kicker { font-family:'Cinzel', Georgia, serif; font-size:9.5px; font-weight:600; letter-spacing:0.2em;
+  text-transform:uppercase; color:#6F5B3E; margin-bottom:10px; }
+h1.title { font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:24px; color:#3A2A1A; line-height:1.25; }
+.tagline { font-style:italic; color:#6F5B3E; font-size:13.5px; margin-top:10px; }
+section { margin-top:22px; page-break-inside:avoid; }
+.sec-head { display:flex; align-items:baseline; gap:9px; padding-bottom:6px; margin-bottom:12px; border-bottom:1px solid #B2925A; }
+.sec-num { font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:12px; color:#B2925A; }
+.sec-title { font-family:'Cinzel', Georgia, serif; font-weight:600; font-size:13.5px; letter-spacing:0.04em;
+  text-transform:uppercase; color:#3A2A1A; }
+p.body { font-size:13.5px; margin-bottom:10px; }
+ul.plain, ol.plain { margin:0 0 6px 18px; }
+ul.plain li, ol.plain li { margin-bottom:7px; padding-left:2px; }
+.feature { background:#F8F2E6; border:1px solid #E3D7BE; border-radius:6px; padding:11px 13px; margin-bottom:9px; page-break-inside:avoid; }
+.feature-name { font-family:'Cinzel', Georgia, serif; font-weight:600; font-size:12.5px; color:#3A2A1A; margin-bottom:4px; }
+.feature-desc { font-size:13px; color:#6F5B3E; line-height:1.5; }
+.callout { border-left:3px solid #B2925A; background:#F8F2E6; padding:11px 13px; margin:12px 0; page-break-inside:avoid; }
+.callout.danger { border-left-color:#9a3412; background:#F4E2D8; }
+.callout strong { color:#9a3412; }
+.callout.tip strong { color:#6F5B3E; }
+table { width:100%; border-collapse:collapse; font-size:12px; margin:8px 0 14px; }
+th { font-family:'Cinzel', Georgia, serif; font-size:9.5px; font-weight:600; letter-spacing:0.08em;
+  text-transform:uppercase; color:#6F5B3E; text-align:left; padding:7px 6px; border-bottom:1px solid #B2925A; }
+td { padding:9px 6px; border-bottom:1px solid #E3D7BE; vertical-align:top; }
+.foot { margin-top:26px; border-top:1px solid #B2925A; padding-top:14px; page-break-inside:avoid; }
+.foot .name { font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:12.5px; }
+.foot .crmv { font-style:italic; color:#6F5B3E; font-size:11.5px; }
+.foot .aviso { margin-top:8px; font-size:10px; color:#6F5B3E; max-width:480px; }
