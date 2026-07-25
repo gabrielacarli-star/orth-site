@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOS Pet — Dr. Eduardo Sebastião</title>
+<meta name="description" content="O assistente de primeiros socorros que fica no seu celular, pra você não travar na hora da emergência.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sepia:#241C14; --tinta:#3A2A1A; --latao:#B2925A;
+    --cafe:#6F5B3E; --areia:#E3D7BE; --pergaminho:#F1E7D2; --papel:#F8F2E6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--pergaminho);
+    background-image:
+      radial-gradient(circle at 20% 8%, rgba(178,146,90,.10), transparent 55%),
+      radial-gradient(circle at 85% 82%, rgba(111,91,62,.10), transparent 50%);
+    color:var(--tinta); font-family:'EB Garamond',Georgia,serif;
+    font-size:19px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:32px 20px 70px;}
+
+  header.capa{text-align:center;margin-bottom:26px;}
+  .selo{width:64px;height:64px;margin:0 auto 14px;border:1px solid var(--latao);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;}
+  .selo::after{content:"";position:absolute;inset:4px;border:1px solid rgba(178,146,90,.55);border-radius:50%;}
+  .selo span{font-family:'Cinzel',serif;font-weight:700;font-size:20px;letter-spacing:.06em;color:var(--tinta);}
+  .credencial{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--cafe);margin-bottom:14px;}
+  h1.headline{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(24px,6.5vw,34px);
+    letter-spacing:.03em;margin:0 0 12px;color:var(--sepia);line-height:1.3;}
+  p.sub{font-size:18px;font-style:italic;color:var(--cafe);margin:0 auto;max-width:520px;}
+
+  .video-box{max-width:640px;margin:0 auto 8px;background:var(--papel);
+    border:1px solid var(--latao);padding:14px;}
+  .video-placeholder{aspect-ratio:16/9;background:var(--sepia);color:var(--areia);
+    display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:20px;}
+
+  #oferta{display:none;}
+
+  .bloco{background:var(--papel);border:1px solid rgba(178,146,90,.5);
+    padding:26px 22px 30px;margin:26px 0;}
+  .bloco.marco{border-width:2px;border-color:var(--latao);}
+  h2.transicao{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(21px,6vw,28px);
+    letter-spacing:.04em;text-align:center;color:var(--sepia);margin:6px 0 30px;}
+
+  h3.rot{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--cafe);margin:0 0 16px;display:flex;align-items:center;gap:10px;}
+  h3.rot::after{content:"";flex:1;height:1px;background:rgba(178,146,90,.4);}
+
+  .lista-emerg{font-family:'Cinzel',serif;letter-spacing:.06em;font-size:17px;
+    line-height:2;color:var(--sepia);display:grid;grid-template-columns:1fr 1fr;gap:2px 18px;
+    list-style:none;margin:0;padding:0;}
+  .lista-emerg li::before{content:"— ";color:var(--latao);}
+
+  .bonus{border-left:2px solid var(--latao);padding:2px 0 2px 18px;margin:16px 0;}
+  .bonus .rot-bonus{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.1em;
+    color:var(--sepia);display:block;margin-bottom:3px;}
+  .bonus p{margin:0;color:var(--cafe);}
+
+  .preco-box{text-align:center;margin:28px 0;padding:22px;border:1px dashed var(--latao);}
+  .preco-box .comparacao{font-size:16px;color:var(--cafe);margin:0 0 10px;}
+  .preco-box .valor{font-family:'Cinzel',serif;font-weight:700;font-size:40px;color:var(--sepia);}
+  .preco-box .cond{font-size:14px;color:var(--cafe);margin-top:4px;}
+
+  a.cta{display:block;text-decoration:none;text-align:center;font-family:'Cinzel',serif;
+    font-size:16px;letter-spacing:.1em;text-transform:uppercase;background:var(--sepia);
+    color:var(--pergaminho);border:1px solid var(--latao);padding:18px 20px;margin:22px 0;}
+  a.cta:hover{background:var(--tinta);}
+  a.cta.grande{font-size:18px;padding:22px;}
+  p.microcopy{text-align:center;font-size:14px;color:var(--cafe);margin-top:-14px;margin-bottom:8px;}
+
+  .garantia{text-align:center;padding:20px;}
+  .garantia .selo-garantia{width:70px;height:70px;margin:0 auto 12px;border:2px solid var(--latao);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel',serif;font-size:11px;letter-spacing:.05em;text-align:center;color:var(--sepia);
+    line-height:1.2;}
+
+  .obj{margin-bottom:22px;}
+  .obj:last-child{margin-bottom:0;}
+  .obj .pergunta{font-family:'Cinzel',serif;font-size:15px;letter-spacing:.03em;
+    color:var(--sepia);display:block;margin-bottom:6px;}
+  .obj .resposta{color:var(--tinta);margin:0;}
+
+  .compliance{border:1px dashed var(--latao);padding:16px 18px;margin-top:6px;
+    font-size:15px;color:var(--cafe);}
+  .compliance strong{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.2em;
+    text-transform:uppercase;display:block;color:var(--tinta);margin-bottom:6px;}
+
+  footer.rodape{text-align:center;margin-top:40px;padding-top:24px;
+    border-top:1px solid rgba(178,146,90,.45);font-family:'Cinzel',serif;font-size:10px;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--cafe);line-height:2.1;}
+
+  @media (max-width:480px){
+    body{font-size:18px;} .wrap{padding:22px 14px 50px;}
+    .bloco{padding:20px 16px 24px;} .lista-emerg{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="capa">
+    <div class="selo"><span>ES</span></div>
+    <div class="credencial">Dr. Eduardo Sebastião · CRMV-MT 6412</div>
+    <h1 class="headline">Se o seu pet engasgasse agora, você saberia o que fazer?</h1>
+    <p class="sub">O assistente de primeiros socorros que fica no seu celular, pra você não travar na hora da emergência.</p>
+  </header>
+
+  <div class="video-box">
+    <!--
+      Cole aqui o embed do VTurb (SmartPlayer). Exemplo do formato que a
+      VTurb fornece no painel dela:
+
+      <vturb-smartplayer id="vid-SEU_ID_AQUI" style="display:block;margin:0 auto;width:100%;"></vturb-smartplayer>
+      <script type="text/javascript" src="https://scripts.converteai.net/SEU_CODIGO/players/SEU_PLAYER/v4/player.js" async></script>
+
+      Depois de colar, configure no painel do VTurb o elemento com
+      id="oferta" (a div logo abaixo) para aparecer no tempo do CTA
+      (ex.: 4:35), como você já faz nas outras VSLs.
+    -->
+    <div class="video-placeholder">Cole aqui o player do VTurb</div>
+  </div>
+
+  <!-- Tudo daqui pra baixo fica escondido até o VTurb revelar no tempo do CTA -->
+  <div id="oferta">
+
+    <h2 class="transicao">Garanta agora o seu SOS Pet</h2>
+
+    <div class="bloco">
+      <h3 class="rot">O que você recebe</h3>
+      <p>O passo a passo dos primeiros minutos das principais emergências em cães e gatos, em linguagem simples, sem termo técnico, direto no seu celular:</p>
+      <ul class="lista-emerg">
+        <li>Engasgo</li>
+        <li>Convulsão</li>
+        <li>Intoxicação</li>
+        <li>Hemorragia</li>
+        <li>Fraturas</li>
+        <li>Afogamento</li>
+        <li>Queimaduras</li>
+        <li>Picadas</li>
+      </ul>
+
+      <h3 class="rot" style="margin-top:28px;">E mais 3 bônus inclusos</h3>
+      <div class="bonus">
+        <span class="rot-bonus">Bônus 1 — Guia de Alimentos que Podem Intoxicar seu Pet</span>
+        <p>Pra evitar a emergência antes mesmo dela começar.</p>
+      </div>
+      <div class="bonus">
+        <span class="rot-bonus">Bônus 2 — Guia de Transporte Seguro</span>
+        <p>Como levar seu pet até a clínica sem piorar o quadro no caminho.</p>
+      </div>
+      <div class="bonus">
+        <span class="rot-bonus">Bônus 3 — Carteira de Vacinação Digital</span>
+        <p>As vacinas e vermífugos do seu pet organizados no celular, com lembrete de quando chega a próxima.</p>
+      </div>
+    </div>
+
+    <div class="bloco marco">
+      <div class="preco-box">
+        <p class="comparacao">Um atendimento de emergência, de madrugada ou fim de semana, custa a partir de <strong>[VALOR DA CONSULTA 24H]</strong> — e isso é só a consulta.</p>
+        <div class="valor">R$ 57</div>
+        <p class="cond">Pagamento único · sem mensalidade · acesso com todas as atualizações incluídas</p>
+      </div>
+
+      <a class="cta grande" href="https://pay.hotmart.com/L106879279A" target="_blank" rel="noopener noreferrer">Quero meu SOS Pet agora</a>
+      <p class="microcopy">Acesso liberado na hora, direto no seu celular</p>
+
+      <div class="garantia">
+        <div class="selo-garantia">7 dias<br>garantia</div>
+        <p>São 7 dias de garantia. Se entrar e sentir que não era o que esperava, é só pedir o reembolso dentro do prazo. Sem perguntas.</p>
+      </div>
+    </div>
+
+    <div class="bloco">
+      <h3 class="rot">Perguntas antes de decidir</h3>
+      <div class="obj">
+        <span class="pergunta">"Meu veterinário é aqui pertinho."</span>
+        <p class="resposta">Que bom. E esperamos que ele esteja aberto no dia em que você precisar. Mas emergência tem hora ruim: madrugada, domingo, feriado. Os minutos entre o que aconteceu e a hora que você chega na clínica são seus — não tem veterinário nenhum neles.</p>
+      </div>
+      <div class="obj">
+        <span class="pergunta">"Na hora eu pesquiso."</span>
+        <p class="resposta">Você já tentou procurar alguma coisa com a mão tremendo? Você abre três abas, cada uma fala uma coisa, e não sabe em qual confiar. No SOS Pet é um toque, e a resposta é de um veterinário só.</p>
+      </div>
+      <div class="obj">
+        <span class="pergunta">"Não sou boa com aplicativo."</span>
+        <p class="resposta">Você não instala nada. Abre direto no celular, funciona com uma mão, e o texto é grande o suficiente pra ler no susto.</p>
+      </div>
+    </div>
+
+    <a class="cta" href="https://pay.hotmart.com/L106879279A" target="_blank" rel="noopener noreferrer">Quero meu SOS Pet agora</a>
+
+    <div class="compliance">
+      <strong>Aviso importante</strong>
+      O SOS Pet orienta os primeiros cuidados até a chegada ao médico veterinário. Não substitui avaliação, diagnóstico ou tratamento profissional.
+    </div>
+
+    <footer class="rodape">
+      Dr. Eduardo Sebastião · CRMV-MT 6412<br>
+      O que o seu veterinário não tem tempo de explicar
+    </footer>
+
+  </div>
+  <!-- fim do bloco #oferta -->
+
+</div>
+</body>
+</html>
