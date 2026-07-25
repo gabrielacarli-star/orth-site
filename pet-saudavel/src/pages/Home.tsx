@@ -154,6 +154,22 @@ export default function Home() {
           </div>
         </>
       )}
+
+      <a
+        href="https://wa.me/5565993511308?text=Ol%C3%A1%2C%20Dr.%20Eduardo!%20Vim%20pelo%20app%20Pet%20Sa%C3%BAd%C3%A1vel%20e%20gostaria%20de%20marcar%20uma%20consulta."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-8 block"
+      >
+        <Card className="flex items-center gap-3 border-gold transition hover:bg-gold/10">
+          <span className="text-2xl">💬</span>
+          <div className="min-w-0 flex-1">
+            <p className="font-display font-semibold text-ink">Fale com o Dr. Eduardo</p>
+            <p className="text-xs text-muted">Marque uma consulta pelo WhatsApp</p>
+          </div>
+          <span className="text-gold">↗</span>
+        </Card>
+      </a>
     </Layout>
   )
 }
