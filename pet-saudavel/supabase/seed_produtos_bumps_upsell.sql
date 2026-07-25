@@ -45,5 +45,6 @@ on conflict (hotmart_product_id) do update
       descricao = excluded.descricao,
       capa_url = excluded.capa_url,
       arquivo_path = excluded.arquivo_path,
+      link_compra = excluded.link_compra,
       ativo = excluded.ativo,
       desbloqueia_sos = excluded.desbloqueia_sos;
