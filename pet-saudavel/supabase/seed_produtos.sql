@@ -1,25 +1,24 @@
 -- =========================================================================
--- Exemplo de cadastro de e-books no catálogo.
--- Rode no SQL Editor DEPOIS de subir os PDFs no bucket privado "ebooks".
+-- Cadastro do produto "SOS Pet" no catálogo.
 --
--- • hotmart_product_id → o ID do produto na Hotmart (o mesmo que chega no webhook)
--- • arquivo_path        → caminho do PDF dentro do bucket "ebooks"
--- • capa_url            → imagem da capa (pode ficar no bucket público pet-fotos
---                         ou em qualquer URL de imagem)
--- • link_compra         → link de checkout da Hotmart (para quem ainda não comprou)
--- • desbloqueia_sos     → true SOMENTE no produto que corresponde ao guia de
---                         primeiros socorros. Quem comprar este produto passa
---                         a ver o passo a passo completo das fichas SOS no app.
+-- ANTES de rodar, faça os 2 uploads no Supabase → Storage:
+--   1. bucket "ebooks" (privado)   → suba materiais-hotmart/bonus-sos-pet.pdf
+--   2. bucket "pet-fotos" (público) → suba materiais-hotmart/capa-sos-pet.png
+--      copie a "public URL" gerada e cole no lugar de SUBSTITUA-URL-DA-CAPA
+--      abaixo.
+--
+-- Também troque SUBSTITUA-LINK-CHECKOUT pelo link de vendas do produto na
+-- Hotmart (Produtos → SOS Pet → Página de vendas → copiar link).
 -- =========================================================================
 
 insert into produtos (hotmart_product_id, titulo, descricao, capa_url, arquivo_path, link_compra, ativo, desbloqueia_sos)
 values
   (
-    'SUBSTITUA_ID_HOTMART',
-    'Guia de Emergências do Pet',
-    'O passo a passo completo para agir nas principais emergências até chegar ao veterinário.',
-    'https://SUBSTITUA-URL-DA-CAPA.jpg',
-    'guia-emergencias.pdf',
+    '8190678',
+    'SOS Pet',
+    'O guia completo de primeiros socorros para cães e gatos: as 8 emergências mais comuns, passo a passo. Com 3 bônus: carteira de vacinação, guia de transporte seguro e alimentos que podem intoxicar seu pet.',
+    'https://SUBSTITUA-URL-DA-CAPA.png',
+    'bonus-sos-pet.pdf',
     'https://pay.hotmart.com/SUBSTITUA-LINK-CHECKOUT',
     true,
     true
