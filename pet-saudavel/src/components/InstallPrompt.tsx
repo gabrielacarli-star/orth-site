@@ -43,7 +43,7 @@ export function InstallPrompt() {
     }
     window.addEventListener("beforeinstallprompt", onPrompt)
 
-    // iPhone não dispara o evento — mostramos ajuda manual no 2º acesso.
+    // iPhone não dispara o evento; mostramos ajuda manual no 2º acesso.
     if (isIOS() && segundoAcesso) setShow(true)
 
     return () => window.removeEventListener("beforeinstallprompt", onPrompt)

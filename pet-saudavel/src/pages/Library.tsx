@@ -43,8 +43,23 @@ export default function Library() {
     }
   }
 
+  const lojaUrl = import.meta.env.VITE_LOJA_URL as string | undefined
+
   return (
     <Layout title="Biblioteca">
+      {lojaUrl && (
+        <a href={lojaUrl} target="_blank" rel="noopener noreferrer" className="mb-4 block">
+          <Card className="flex items-center gap-3 border-gold transition hover:bg-gold/10">
+            <span className="text-2xl">🛍️</span>
+            <div className="min-w-0 flex-1">
+              <p className="font-display font-semibold text-ink">Loja do Dr. Eduardo</p>
+              <p className="text-xs text-muted">Veja todos os e-books e materiais disponíveis</p>
+            </div>
+            <span className="text-gold">↗</span>
+          </Card>
+        </a>
+      )}
+
       {loading ? (
         <div className="flex justify-center py-16">
           <Spinner size={32} />

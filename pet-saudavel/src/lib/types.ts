@@ -1,5 +1,5 @@
 // Tipos do domínio + esquema mínimo do banco para o supabase-js.
-// Espelha as tabelas criadas em supabase/migrations/0001_init.sql.
+// Espelha as tabelas criadas em supabase/migrations/0001_init.sql e 0002_cartao_emergencia.sql.
 
 export type Especie = "cao" | "gato" | "outro"
 export type TipoAntiparasitario = "vermifugo" | "pulga" | "carrapato"
@@ -14,6 +14,13 @@ export interface Pet {
   alergias: string | null
   foto_url: string | null
   created_at: string
+  // Cartão de emergência (0002_cartao_emergencia.sql)
+  condicoes_saude: string | null
+  medicacao_continua: string | null
+  vet_nome: string | null
+  vet_telefone: string | null
+  emergencia_24h_telefone: string | null
+  emergencia_24h_endereco: string | null
 }
 
 export interface Vacina {
@@ -51,6 +58,17 @@ export interface Produto {
   arquivo_path: string | null
   link_compra: string | null
   ativo: boolean
+  desbloqueia_sos: boolean
+}
+
+// Conteúdo protegido do SOS (tabela sos_conteudo). Só chega ao app via
+// Edge Function "sos-conteudo", nunca direto do banco pelo cliente.
+export interface SosConteudo {
+  slug: string
+  sinais: string[]
+  passos: string[]
+  nunca_faca: string | null
+  levar_ao_vet: string | null
 }
 
 export interface Compra {

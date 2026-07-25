@@ -1,4 +1,4 @@
-// Utilidades de data — tudo em português do Brasil, sem dependências externas.
+// Utilidades de data, tudo em português do Brasil, sem dependências externas.
 
 const MS_DIA = 1000 * 60 * 60 * 24
 
@@ -34,7 +34,7 @@ export function diasAte(iso: string): number {
 
 /** Formata ISO → "23/07/2026". */
 export function formatarData(iso: string | null | undefined): string {
-  if (!iso) return "—"
+  if (!iso) return "-"
   const d = parseISO(iso)
   return d.toLocaleDateString("pt-BR")
 }

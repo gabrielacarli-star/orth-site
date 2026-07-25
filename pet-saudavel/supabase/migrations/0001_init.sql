@@ -1,5 +1,5 @@
 -- =========================================================================
--- Pet Saudável — esquema inicial do banco (v1)
+-- Pet Saudável - esquema inicial do banco (v1)
 -- Cole tudo no Supabase → SQL Editor → Run. Roda de uma vez só.
 -- Idempotente o suficiente para rodar novamente sem quebrar (usa IF NOT EXISTS).
 -- =========================================================================
@@ -115,7 +115,7 @@ drop policy if exists "minhas compras" on compras;
 create policy "minhas compras" on compras
   for select using (auth.uid() = user_id);
 
--- produtos: catálogo público — qualquer usuário logado vê a lista.
+-- produtos: catálogo público - qualquer usuário logado vê a lista.
 drop policy if exists "catalogo publico" on produtos;
 create policy "catalogo publico" on produtos
   for select using (ativo = true);
@@ -143,13 +143,13 @@ create trigger on_auth_user_created_link_compras
   after insert on auth.users
   for each row execute function public.link_compras_ao_novo_usuario();
 
--- A função só deve rodar pelo trigger — nunca ser chamada via API REST.
+-- A função só deve rodar pelo trigger - nunca ser chamada via API REST.
 revoke execute on function public.link_compras_ao_novo_usuario() from public;
 revoke execute on function public.link_compras_ao_novo_usuario() from anon;
 revoke execute on function public.link_compras_ao_novo_usuario() from authenticated;
 
 -- =========================================================================
--- STORAGE — buckets e políticas.
+-- STORAGE - buckets e políticas.
 -- Buckets:
 --   • "pet-fotos"  → PÚBLICO   (fotos dos pets)
 --   • "ebooks"     → PRIVADO   (PDFs; acesso só via link temporário assinado)

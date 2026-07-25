@@ -1,5 +1,5 @@
 // =========================================================================
-// Edge Function: delete-account  (direito do titular — LGPD/RGPD)
+// Edge Function: delete-account  (direito do titular - LGPD/RGPD)
 // Apaga a conta do tutor logado e TODOS os seus dados.
 // Os pets (e, em cascata, vacinas/antiparasitários/pesos) são removidos;
 // as compras são desvinculadas; por fim o usuário de auth é excluído.

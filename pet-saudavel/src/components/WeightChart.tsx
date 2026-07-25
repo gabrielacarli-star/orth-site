@@ -1,7 +1,7 @@
 import type { Peso } from "../lib/types"
 import { formatarData, parseISO } from "../lib/dates"
 
-// Gráfico de linha simples em SVG — sem bibliotecas, leve e offline.
+// Gráfico de linha simples em SVG, sem bibliotecas, leve e offline.
 export function WeightChart({ pesos }: { pesos: Peso[] }) {
   const dados = [...pesos].sort((a, b) => a.data.localeCompare(b.data))
   if (dados.length < 2) return null

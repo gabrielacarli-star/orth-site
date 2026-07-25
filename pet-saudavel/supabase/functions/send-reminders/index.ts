@@ -99,7 +99,7 @@ Deno.serve(async (req) => {
 
 async function enviarEmail(to: string, avisos: Aviso[]): Promise<boolean> {
   if (!RESEND_API_KEY) {
-    console.warn("RESEND_API_KEY ausente — pulando envio")
+    console.warn("RESEND_API_KEY ausente - pulando envio")
     return false
   }
   const linhas = avisos

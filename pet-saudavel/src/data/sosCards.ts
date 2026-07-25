@@ -1,105 +1,83 @@
 // =========================================================================
-// Fichas de emergência (SOS)
+// Fichas de emergência (SOS): metadados públicos
 // -------------------------------------------------------------------------
-// COMPLIANCE (trava da marca): estas fichas ORIENTAM os primeiros socorros
-// "até chegar à clínica veterinária". NUNCA diagnosticam, NUNCA prescrevem
-// dosagem, produto ou conduta clínica. Toda ficha termina levando o tutor
-// ao veterinário. Conteúdo educativo — revisado pelo Dr. Eduardo antes de
-// publicar. O texto vive dentro do app (bundle) e por isso abre SEM internet.
+// Só título, resumo e ícone ficam aqui (dentro do pacote do app). O passo
+// a passo real (sinais, passos, nunca faça, leve ao veterinário) mora no
+// banco, protegido por RLS, e só é entregue pela Edge Function
+// "sos-conteudo" depois de conferir que o usuário tem compra ativa.
+// Ver supabase/migrations/0003_travar_sos.sql e
+// supabase/functions/sos-conteudo/index.ts.
 //
-// Regra de negócio (plano v1, seção 08): 2 fichas são amostra grátis;
-// as demais aparecem "bloqueadas" e o protocolo completo fica no e-book.
+// Fonte do conteúdo: "Primeiros Socorros para Cães e Gatos", guia escrito
+// pelo Dr. Eduardo Sebastião (CRMV-MT 6412).
 // =========================================================================
 
-export interface SosCard {
+export interface SosCardMeta {
   slug: string
   titulo: string
   resumo: string
-  icone: string // emoji — leve e universal
-  gratis: boolean
-  passos: string[]
-  atencao?: string
+  icone: string // emoji, leve e universal
 }
 
-export const SOS_CARDS: SosCard[] = [
+export const SOS_CARDS: SosCardMeta[] = [
   {
     slug: "engasgo",
-    titulo: "Engasgo / obstrução",
-    resumo: "O pet tosse, se debate, leva a pata à boca ou fica com a gengiva arroxeada.",
+    titulo: "Engasgo e obstrução das vias aéreas",
+    resumo:
+      "Objeto, comida ou brinquedo bloqueia a passagem de ar. É a emergência mais rápida de todas: poucos minutos definem tudo.",
     icone: "🫁",
-    gratis: true,
-    passos: [
-      "Mantenha a calma — um animal em pânico morde. Contenha com firmeza e delicadeza.",
-      "Abra a boca com cuidado e olhe se há um objeto visível. Só retire se conseguir enxergar e alcançar com segurança — nunca empurre às cegas com o dedo, pois pode encravar mais fundo.",
-      "Cães pequenos e gatos: segure de cabeça para baixo por poucos segundos e dê tapinhas firmes entre as escápulas (nas costas, na altura dos ombros).",
-      "Cães grandes: com o animal em pé, faça pressão firme e para dentro/para cima logo atrás das costelas, algumas vezes seguidas.",
-      "Assim que o objeto sair — ou mesmo se sair — vá imediatamente ao veterinário. A garganta pode ficar inflamada e o risco continua.",
-    ],
-    atencao:
-      "Se a gengiva ou a língua ficarem azuladas, o oxigênio está faltando: isto é emergência máxima. Vá para a clínica AGORA, mesmo em trânsito.",
   },
   {
     slug: "hemorragia",
-    titulo: "Hemorragia / corte profundo",
-    resumo: "Sangramento que não para sozinho, corte fundo ou ferida por atropelamento/briga.",
+    titulo: "Hemorragia e ferimentos",
+    resumo:
+      "Cortes, brigas e quedas podem causar sangramentos superficiais ou graves. Estancar corretamente nos primeiros minutos faz toda a diferença.",
     icone: "🩸",
-    gratis: true,
-    passos: [
-      "Proteja-se: mesmo o pet mais dócil pode morder com dor. Se necessário, improvise uma focinheira com atadura (nunca em animal que vomita ou tem dificuldade para respirar).",
-      "Pressione o ferimento com um pano limpo, gaze ou toalha, com firmeza e de forma contínua.",
-      "Não fique levantando o pano para “ver se parou” — isso desfaz o coágulo. Se encharcar, coloque outro por cima sem tirar o primeiro.",
-      "Se for em uma pata e o sangramento for intenso, mantenha o membro elevado enquanto pressiona.",
-      "Mantenha a pressão a caminho da clínica. Vá ao veterinário imediatamente — cortes profundos precisam de avaliação e podem exigir sutura.",
-    ],
-    atencao:
-      "Não use torniquete apertado por conta própria e não aplique nenhum produto, pó ou pomada na ferida. Leve o pet ao veterinário.",
   },
-
-  // --- Fichas com protocolo completo no e-book (bloqueadas na v1) ---
   {
     slug: "intoxicacao",
-    titulo: "Intoxicação / envenenamento",
-    resumo: "Suspeita de ingestão de veneno, planta tóxica, chocolate, remédio humano ou produto de limpeza.",
+    titulo: "Intoxicação por alimentos e substâncias",
+    resumo:
+      "Suspeita de ingestão de veneno, planta tóxica, alimento perigoso ou remédio humano. Costuma ser silenciosa nas primeiras horas: agir antes dos sintomas é o que salva.",
     icone: "☠️",
-    gratis: false,
-    passos: [],
-    atencao:
-      "Nunca provoque vômito por conta própria — em alguns venenos isso agrava a lesão. Guarde a embalagem do que foi ingerido e leve ao veterinário na mesma hora.",
   },
   {
     slug: "convulsao",
     titulo: "Convulsão",
-    resumo: "O pet cai, treme, faz movimentos involuntários e perde consciência.",
+    resumo:
+      "O pet perde a consciência, treme e faz movimentos involuntários. Na maioria das vezes a crise dura pouco: o papel do tutor é proteger o animal, não contê-lo.",
     icone: "⚡",
-    gratis: false,
-    passos: [],
   },
   {
-    slug: "atropelamento",
-    titulo: "Atropelamento / queda",
-    resumo: "Trauma por impacto — pode haver fratura ou lesão interna mesmo sem sangue visível.",
-    icone: "🚑",
-    gratis: false,
-    passos: [],
-  },
-  {
-    slug: "insolacao",
-    titulo: "Insolação / calor extremo",
-    resumo: "Ofegância intensa, fraqueza e prostração após exposição ao calor ou carro fechado.",
-    icone: "🌡️",
-    gratis: false,
-    passos: [],
+    slug: "afogamento",
+    titulo: "Afogamento e quase afogamento",
+    resumo:
+      "Piscinas, baldes e até a banheira são riscos reais, principalmente para filhotes e animais pequenos. Os primeiros segundos fora da água são decisivos.",
+    icone: "🌊",
   },
   {
     slug: "picada",
-    titulo: "Picada de inseto / cobra",
-    resumo: "Inchaço súbito, dor localizada ou reação alérgica após picada.",
+    titulo: "Picada de inseto e de cobra",
+    resumo:
+      "Picadas de abelha, aranha, escorpião ou cobra têm gravidade variável. O perigo está na reação alérgica grave e na picada de cobra peçonhenta.",
     icone: "🐝",
-    gratis: false,
-    passos: [],
+  },
+  {
+    slug: "queimaduras",
+    titulo: "Queimaduras",
+    resumo:
+      "Contato com superfícies quentes, líquidos fervendo, eletricidade ou produtos químicos. O pelo do animal pode esconder a real gravidade da lesão.",
+    icone: "🔥",
+  },
+  {
+    slug: "fraturas",
+    titulo: "Fraturas e trauma",
+    resumo:
+      "Quedas, atropelamentos e brigas podem fraturar ossos ou machucar a coluna. Movimentar o animal do jeito certo evita piorar a lesão.",
+    icone: "🦴",
   },
 ]
 
-export function findSos(slug: string): SosCard | undefined {
+export function findSosMeta(slug: string): SosCardMeta | undefined {
   return SOS_CARDS.find((c) => c.slug === slug)
 }

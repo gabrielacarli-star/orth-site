@@ -11,7 +11,7 @@ if (!url || !anonKey) {
   )
 }
 
-// Cliente sem geração de tipos do schema — os resultados são convertidos
+// Cliente sem geração de tipos do schema; os resultados são convertidos
 // explicitamente para as interfaces de domínio em lib/types.ts nas telas.
 export const supabase = createClient(url, anonKey, {
   auth: {

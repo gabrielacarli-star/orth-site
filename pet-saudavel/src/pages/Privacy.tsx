@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { Seal } from "../components/ui"
 
-// Política de Privacidade — modelo base (LGPD/RGPD).
+// Política de Privacidade (modelo base, LGPD/RGPD).
 // ⚠️ Revise com apoio jurídico antes de publicar e confira nome da empresa,
 // endereço e e-mail de contato do responsável pelos dados.
 export default function Privacy() {

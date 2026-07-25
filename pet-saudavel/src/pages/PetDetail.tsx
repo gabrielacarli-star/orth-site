@@ -96,12 +96,20 @@ export default function PetDetail() {
             <p className="mt-0.5 text-xs text-danger">⚠️ Alergias: {pet.alergias}</p>
           )}
         </div>
-        <Link
-          to={`/pets/${pet.id}/editar`}
-          className="rounded-lg border border-gold px-2.5 py-1 font-display text-xs text-muted"
-        >
-          Editar
-        </Link>
+        <div className="flex shrink-0 flex-col gap-1.5">
+          <Link
+            to={`/pets/${pet.id}/cartao`}
+            className="rounded-lg border border-gold bg-gold/10 px-2.5 py-1 text-center font-display text-xs text-muted"
+          >
+            🪪 Cartão
+          </Link>
+          <Link
+            to={`/pets/${pet.id}/editar`}
+            className="rounded-lg border border-gold px-2.5 py-1 text-center font-display text-xs text-muted"
+          >
+            Editar
+          </Link>
+        </div>
       </div>
 
       {/* Abas */}
@@ -334,7 +342,7 @@ function AntipTab({
         <EmptyState
           icon="💊"
           titulo="Nenhum registro"
-          texto="Vermífugo, antipulgas e anticarrapato — o app avisa quando repetir."
+          texto="Vermífugo, antipulgas e anticarrapato: o app avisa quando repetir."
         />
       ) : (
         itens.map((a) => (
@@ -424,7 +432,7 @@ function PesoTab({ petId, pesos, onChange }: { petId: string; pesos: Peso[]; onC
       </Card>
 
       {pesos.length === 0 ? (
-        <EmptyState icon="⚖️" titulo="Nenhum peso registrado" texto="Pese uma vez por mês — é o que revela problemas cedo." />
+        <EmptyState icon="⚖️" titulo="Nenhum peso registrado" texto="Pese uma vez por mês: é o que revela problemas cedo." />
       ) : (
         <div className="space-y-1.5">
           {pesos.map((p) => (

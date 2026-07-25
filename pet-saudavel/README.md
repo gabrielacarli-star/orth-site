@@ -1,11 +1,11 @@
-# Pet Saudável — App (PWA)
+# Pet Saudável - App (PWA)
 
 App de cuidados com o pet da marca **Dr. Eduardo Sebastião**. Organiza vacinas,
 antiparasitários, peso e emergências, e entrega os e-books comprados na Hotmart.
 
 > **PWA** = um site que o tutor "adiciona à tela de início" e passa a usar como
 > app, com ícone próprio e tela cheia. Sem App Store, sem Google Play. Todo o
-> backend vive no **Supabase** (grátis). O front é estático — sobe em qualquer
+> backend vive no **Supabase** (grátis). O front é estático - sobe em qualquer
 > hospedagem (Hostinger, Vercel, Netlify).
 
 ## 👉 Para publicar, siga [`PUBLICAR.md`](./PUBLICAR.md)
@@ -70,13 +70,14 @@ pet-saudavel/
 
 Cadastro/login · perfil de vários pets (com foto) · carteira de vacinação ·
 vermífugo/pulga/carrapato com cálculo automático da próxima dose · controle de
-peso com gráfico · SOS de emergências (2 gratuitas, offline) · biblioteca de
+peso com gráfico · SOS de emergências (conteúdo completo travado por compra,
+verificado no servidor) · cartão de emergência imprimível · biblioteca de
 e-books liberada pela compra na Hotmart · lembretes por e-mail · instalação na
 tela de início · política de privacidade e exclusão de conta.
 
 ## Compliance (a trava da marca)
 
-O app **organiza e educa — nunca diagnostica nem prescreve**. Não sugere
+O app **organiza e educa - nunca diagnostica nem prescreve**. Não sugere
 dosagem, produto ou conduta clínica. O intervalo do antiparasitário é
 preenchido pelo tutor conforme orientação do veterinário dele. As fichas SOS
 orientam "até chegar à clínica". CRMV-MT aparece como autoridade.

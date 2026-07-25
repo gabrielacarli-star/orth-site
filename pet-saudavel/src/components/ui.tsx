@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react"
 
-/* Selo circular "ES" da marca — usado no cabeçalho e telas de boas-vindas. */
+/* Selo circular "ES" da marca, usado no cabeçalho e telas de boas-vindas. */
 export function Seal({ size = 64 }: { size?: number }) {
   return (
     <div

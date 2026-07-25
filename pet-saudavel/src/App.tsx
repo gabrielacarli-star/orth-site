@@ -8,6 +8,7 @@ import Home from "./pages/Home"
 import Pets from "./pages/Pets"
 import PetForm from "./pages/PetForm"
 import PetDetail from "./pages/PetDetail"
+import EmergencyCard from "./pages/EmergencyCard"
 import SOS from "./pages/SOS"
 import SOSDetail from "./pages/SOSDetail"
 import Library from "./pages/Library"
@@ -48,6 +49,7 @@ export default function App() {
       <Route path="/pets/novo" element={<Protected><PetForm /></Protected>} />
       <Route path="/pets/:id/editar" element={<Protected><PetForm /></Protected>} />
       <Route path="/pets/:id" element={<Protected><PetDetail /></Protected>} />
+      <Route path="/pets/:id/cartao" element={<Protected><EmergencyCard /></Protected>} />
       <Route path="/sos" element={<Protected><SOS /></Protected>} />
       <Route path="/sos/:slug" element={<Protected><SOSDetail /></Protected>} />
       <Route path="/biblioteca" element={<Protected><Library /></Protected>} />

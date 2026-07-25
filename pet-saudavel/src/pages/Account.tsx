@@ -69,7 +69,7 @@ export default function Account() {
         <p className="font-display text-[10px] uppercase tracking-[0.14em] text-muted">
           Pet Saudável · Dr. Eduardo Sebastião
         </p>
-        <p className="mt-1 text-xs italic text-muted">CRMV-MT · O app organiza e educa — não substitui o veterinário.</p>
+        <p className="mt-1 text-xs italic text-muted">CRMV-MT · O app organiza e educa, não substitui o veterinário.</p>
       </footer>
     </Layout>
   )

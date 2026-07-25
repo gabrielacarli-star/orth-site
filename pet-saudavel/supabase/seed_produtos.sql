@@ -7,9 +7,12 @@
 -- • capa_url            → imagem da capa (pode ficar no bucket público pet-fotos
 --                         ou em qualquer URL de imagem)
 -- • link_compra         → link de checkout da Hotmart (para quem ainda não comprou)
+-- • desbloqueia_sos     → true SOMENTE no produto que corresponde ao guia de
+--                         primeiros socorros. Quem comprar este produto passa
+--                         a ver o passo a passo completo das fichas SOS no app.
 -- =========================================================================
 
-insert into produtos (hotmart_product_id, titulo, descricao, capa_url, arquivo_path, link_compra, ativo)
+insert into produtos (hotmart_product_id, titulo, descricao, capa_url, arquivo_path, link_compra, ativo, desbloqueia_sos)
 values
   (
     'SUBSTITUA_ID_HOTMART',
@@ -18,6 +21,7 @@ values
     'https://SUBSTITUA-URL-DA-CAPA.jpg',
     'guia-emergencias.pdf',
     'https://pay.hotmart.com/SUBSTITUA-LINK-CHECKOUT',
+    true,
     true
   )
 on conflict (hotmart_product_id) do update
@@ -26,4 +30,8 @@ on conflict (hotmart_product_id) do update
       capa_url = excluded.capa_url,
       arquivo_path = excluded.arquivo_path,
       link_compra = excluded.link_compra,
-      ativo = excluded.ativo;
+      ativo = excluded.ativo,
+      desbloqueia_sos = excluded.desbloqueia_sos;
+
+-- Outros produtos que NÃO devem liberar o SOS: deixe desbloqueia_sos = false
+-- (ou simplesmente omita a coluna, o padrão já é false).

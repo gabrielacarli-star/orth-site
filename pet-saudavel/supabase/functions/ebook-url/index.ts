@@ -1,7 +1,7 @@
 // =========================================================================
 // Edge Function: ebook-url
 // Gera um link temporário (assinado, expira em minutos) para o PDF de um
-// e-book — SOMENTE se o tutor logado tiver uma compra ativa daquele produto.
+// e-book - SOMENTE se o tutor logado tiver uma compra ativa daquele produto.
 // O app nunca recebe o caminho real nem um link permanente.
 // =========================================================================
 import { createClient } from "jsr:@supabase/supabase-js@2"

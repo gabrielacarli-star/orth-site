@@ -54,7 +54,7 @@ Deno.serve(async (req) => {
   const produtoIdStr = productId != null ? String(productId) : ""
 
   if (!email || !produtoIdStr) {
-    // Evento sem os dados que nos interessam — respondemos 200 para a
+    // Evento sem os dados que nos interessam - respondemos 200 para a
     // Hotmart não ficar reenviando.
     return json({ ok: true, ignored: true })
   }

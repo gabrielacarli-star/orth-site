@@ -208,5 +208,5 @@ function especieLabel(e: Pet["especie"]) {
   if (e === "cao") return "Cão"
   if (e === "gato") return "Gato"
   if (e === "outro") return "Outro"
-  return "—"
+  return "-"
 }

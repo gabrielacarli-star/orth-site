@@ -16,7 +16,7 @@ export function Layout({ children, title }: { children: ReactNode; title?: strin
   return (
     <div className="mx-auto flex min-h-full max-w-[560px] flex-col bg-parchment shadow-xl">
       {/* Top bar */}
-      <header className="safe-top sticky top-0 z-10 border-b border-gold bg-parchment/95 backdrop-blur">
+      <header className="safe-top sticky top-0 z-10 border-b border-gold bg-parchment/95 backdrop-blur print:hidden">
         <div className="flex items-center gap-3 px-4 py-2.5">
           <button onClick={() => navigate("/")} aria-label="Início" className="shrink-0">
             <Seal size={38} />
@@ -31,12 +31,14 @@ export function Layout({ children, title }: { children: ReactNode; title?: strin
       </header>
 
       {/* Conteúdo */}
-      <main className="flex-1 px-4 pb-28 pt-4">{children}</main>
+      <main className="flex-1 px-4 pb-28 pt-4 print:pb-4">{children}</main>
 
-      <InstallPrompt />
+      <div className="print:hidden">
+        <InstallPrompt />
+      </div>
 
       {/* Bottom nav */}
-      <nav className="safe-bottom fixed inset-x-0 bottom-0 z-10 mx-auto max-w-[560px] border-t border-gold bg-dark">
+      <nav className="safe-bottom fixed inset-x-0 bottom-0 z-10 mx-auto max-w-[560px] border-t border-gold bg-dark print:hidden">
         <ul className="flex">
           {NAV.map((item) => (
             <li key={item.to} className="flex-1">
