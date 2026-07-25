@@ -32,15 +32,34 @@
   .selo span{font-family:'Cinzel',serif;font-weight:700;font-size:20px;letter-spacing:.06em;color:var(--tinta);}
   .credencial{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.26em;
     text-transform:uppercase;color:var(--cafe);margin-bottom:14px;}
-  h1.headline{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(24px,6.5vw,34px);
-    letter-spacing:.03em;margin:0 0 12px;color:var(--sepia);line-height:1.3;}
+  .kicker-alerta{display:inline-block;font-family:'Cinzel',serif;font-weight:700;
+    font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--papel);
+    background:var(--sepia);padding:6px 15px;margin-bottom:16px;}
+  h1.headline{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(26px,7.2vw,40px);
+    letter-spacing:.02em;margin:0 0 14px;color:var(--sepia);line-height:1.25;}
+  h1.headline mark{background:linear-gradient(transparent 58%, rgba(178,146,90,.5) 58%);
+    color:inherit;padding:0 3px;}
   p.sub{font-size:18px;font-style:italic;color:var(--cafe);margin:0 auto;max-width:520px;}
 
+  .assista{margin:26px auto 12px;max-width:560px;text-align:center;}
+  .assista .linha1{font-family:'Cinzel',serif;font-weight:700;
+    font-size:clamp(16px,5vw,22px);letter-spacing:.06em;text-transform:uppercase;
+    color:var(--sepia);margin:0 0 6px;}
+  .assista .linha2{font-size:16px;color:var(--cafe);margin:0;}
+  .seta{font-size:30px;color:var(--latao);line-height:1;margin-top:8px;
+    animation:pula 1.4s ease-in-out infinite;}
+  @keyframes pula{0%,100%{transform:translateY(0);opacity:.65;}50%{transform:translateY(9px);opacity:1;}}
+
   .video-box{max-width:640px;margin:0 auto 8px;background:var(--papel);
-    border:1px solid var(--latao);padding:14px;}
+    border:1px solid var(--latao);padding:14px;animation:brilho 2.6s ease-in-out infinite;}
+  @keyframes brilho{
+    0%,100%{box-shadow:0 0 0 1px rgba(178,146,90,.55),0 8px 24px rgba(36,28,20,.12);}
+    50%{box-shadow:0 0 0 2px var(--latao),0 10px 32px rgba(178,146,90,.4);}}
   .video-placeholder{aspect-ratio:16/9;background:var(--sepia);color:var(--areia);
     display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;
     font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:20px;}
+  .pos-video{text-align:center;font-family:'Cinzel',serif;font-size:11px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--cafe);margin:4px 0 0;}
 
   #oferta{display:none;}
 
@@ -108,9 +127,15 @@
 
   <header class="capa">
     <div class="selo"><span>ES</span></div>
-    <div class="credencial">Dr. Eduardo Sebastião · CRMV-MT 6412</div>
-    <h1 class="headline">Se o seu pet engasgasse agora, você saberia o que fazer?</h1>
-    <p class="sub">O assistente de primeiros socorros que fica no seu celular, pra você não travar na hora da emergência.</p>
+    <div class="kicker-alerta">Para todo tutor de cão ou gato</div>
+    <h1 class="headline">Na emergência do seu pet, os primeiros minutos são <mark>seus</mark>. Você vai saber o que fazer?</h1>
+    <p class="sub">Existe uma forma de ter o passo a passo de cada emergência na palma da mão — sem decorar nada, sem depender do Google na hora do desespero.</p>
+
+    <div class="assista">
+      <p class="linha1">▶ Assista ao vídeo abaixo</p>
+      <p class="linha2">Dê o play e deixe o som ligado. Em poucos minutos o Dr. Eduardo te explica tudo.</p>
+      <div class="seta">▼</div>
+    </div>
   </header>
 
   <div class="video-box">
@@ -127,6 +152,7 @@
     -->
     <div class="video-placeholder">Cole aqui o player do VTurb</div>
   </div>
+  <p class="pos-video">Assista até o final — é rápido</p>
 
   <!-- Tudo daqui pra baixo fica escondido até o VTurb revelar no tempo do CTA -->
   <div id="oferta">
