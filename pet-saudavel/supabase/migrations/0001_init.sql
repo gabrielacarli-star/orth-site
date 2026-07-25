@@ -143,30 +143,44 @@ create trigger on_auth_user_created_link_compras
   after insert on auth.users
   for each row execute function public.link_compras_ao_novo_usuario();
 
+-- A função só deve rodar pelo trigger — nunca ser chamada via API REST.
+revoke execute on function public.link_compras_ao_novo_usuario() from public;
+revoke execute on function public.link_compras_ao_novo_usuario() from anon;
+revoke execute on function public.link_compras_ao_novo_usuario() from authenticated;
+
 -- =========================================================================
--- STORAGE — rode DEPOIS de criar os buckets no painel (ver README).
+-- STORAGE — buckets e políticas.
 -- Buckets:
 --   • "pet-fotos"  → PÚBLICO   (fotos dos pets)
 --   • "ebooks"     → PRIVADO   (PDFs; acesso só via link temporário assinado)
--- -------------------------------------------------------------------------
--- Políticas do bucket público pet-fotos: cada tutor gerencia a sua pasta
--- (o app salva em  {user_id}/arquivo).  Leitura é pública.
--- Descomente após criar o bucket "pet-fotos".
 -- =========================================================================
 
--- drop policy if exists "fotos leitura publica" on storage.objects;
--- create policy "fotos leitura publica" on storage.objects
---   for select using (bucket_id = 'pet-fotos');
+-- Cria os buckets (idempotente).
+insert into storage.buckets (id, name, public)
+values ('pet-fotos', 'pet-fotos', true)
+on conflict (id) do update set public = true;
 
--- drop policy if exists "fotos dono escreve" on storage.objects;
--- create policy "fotos dono escreve" on storage.objects
---   for insert to authenticated
---   with check (bucket_id = 'pet-fotos' and (storage.foldername(name))[1] = auth.uid()::text);
+insert into storage.buckets (id, name, public)
+values ('ebooks', 'ebooks', false)
+on conflict (id) do update set public = false;
 
--- drop policy if exists "fotos dono atualiza" on storage.objects;
--- create policy "fotos dono atualiza" on storage.objects
---   for update to authenticated
---   using (bucket_id = 'pet-fotos' and (storage.foldername(name))[1] = auth.uid()::text);
+-- Bucket público pet-fotos: os arquivos são servidos pela URL pública, então
+-- NÃO se cria política de SELECT (isso só habilitaria listar todos os arquivos).
+-- Cada tutor só escreve/edita/apaga na própria pasta ({user_id}/arquivo).
+drop policy if exists "fotos dono escreve" on storage.objects;
+create policy "fotos dono escreve" on storage.objects
+  for insert to authenticated
+  with check (bucket_id = 'pet-fotos' and (storage.foldername(name))[1] = auth.uid()::text);
+
+drop policy if exists "fotos dono atualiza" on storage.objects;
+create policy "fotos dono atualiza" on storage.objects
+  for update to authenticated
+  using (bucket_id = 'pet-fotos' and (storage.foldername(name))[1] = auth.uid()::text);
+
+drop policy if exists "fotos dono apaga" on storage.objects;
+create policy "fotos dono apaga" on storage.objects
+  for delete to authenticated
+  using (bucket_id = 'pet-fotos' and (storage.foldername(name))[1] = auth.uid()::text);
 
 -- O bucket "ebooks" NÃO recebe política pública: os arquivos só são
 -- acessíveis via Edge Function "ebook-url", que confere a compra e gera

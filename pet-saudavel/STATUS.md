@@ -17,16 +17,24 @@ Referência rápida do que foi feito na preparação e o que depende de você am
 | 8 · Lembretes | Função de e-mail (7 dias antes e no dia) + agendamento por cron |
 | Compliance | Textos "organiza e educa", sem dosagem; política de privacidade + excluir conta |
 
-## 🔧 Depende de você amanhã (contas e chaves) — ver `PUBLICAR.md`
+## ✅ Backend já PROVISIONADO no Supabase (projeto `pet-saudavel`, São Paulo)
 
-- Criar o projeto **Supabase** e rodar o SQL
-- Criar os buckets `pet-fotos` (público) e `ebooks` (privado)
+- Projeto criado — ref `iqbrncszbkrmlgkmcixp`, URL
+  `https://iqbrncszbkrmlgkmcixp.supabase.co`
+- Banco (6 tabelas + RLS + gatilho) aplicado
+- Buckets `pet-fotos` (público) e `ebooks` (privado) criados com políticas
+- As 5 Edge Functions publicadas e ativas
+- Verificação de segurança do Supabase: **sem alertas**
+
+## 🔧 Depende de você (contas e chaves) — ver `PUBLICAR.md`
+
 - Publicar o app (Vercel ou Hostinger) com as 2 variáveis de ambiente
-- Fazer deploy das 5 Edge Functions e cadastrar os segredos
-- Ligar o **webhook da Hotmart** e cadastrar os e-books
+- Cadastrar os segredos das funções (Hotmart hottok, Resend key, cron secret)
+- Ligar o **webhook da Hotmart** e cadastrar os e-books (subir PDFs + seed)
 - Verificar o domínio no **Resend** e agendar o cron
 - Preencher e-mail/data na política de privacidade
 - Revisar as fichas SOS com o Dr. Eduardo
+- Definir Site URL e confirmação de e-mail em Authentication
 
 ## 🔜 Fica para a v2 (conforme o plano)
 

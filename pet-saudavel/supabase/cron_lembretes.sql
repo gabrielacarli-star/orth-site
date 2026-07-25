@@ -2,8 +2,8 @@
 -- Agendamento da rotina diária de lembretes (pg_cron + pg_net).
 -- Rode UMA vez, depois de fazer o deploy da função "send-reminders".
 --
--- Antes de rodar, substitua:
---   • SEU_PROJETO_REF   → o ref do projeto (ex.: abcdefgh) na URL do Supabase
+-- O ref do projeto (iqbrncszbkrmlgkmcixp) já está preenchido abaixo.
+-- Antes de rodar, substitua apenas:
 --   • SEU_CRON_SECRET   → o mesmo valor que você colocou no segredo CRON_SECRET
 -- =========================================================================
 
@@ -18,7 +18,7 @@ select cron.schedule(
   '0 12 * * *',
   $$
   select net.http_post(
-    url     := 'https://SEU_PROJETO_REF.functions.supabase.co/send-reminders',
+    url     := 'https://iqbrncszbkrmlgkmcixp.functions.supabase.co/send-reminders',
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
       'x-cron-secret', 'SEU_CRON_SECRET'

@@ -1,199 +1,148 @@
 # 🚀 Publicar o Pet Saudável — passo a passo
 
-Guia para colocar o app no ar. Segue na ordem. Cada bloco tem um ✅ no final
-para você saber que terminou aquela parte. Tempo estimado: **1 a 2 horas**,
-a maior parte esperando coisas carregarem.
+Guia para colocar o app no ar. O **backend já está construído e rodando** — o
+que sobra são passos que dependem das suas contas (hospedagem, Hotmart, Resend).
+Tempo estimado do que falta: **~1 hora**.
 
-> **O que já está pronto** (feito na preparação): todo o código do app, todas
-> as telas, o banco de dados em SQL, as funções de servidor (Hotmart, e-books,
-> lembretes, excluir conta), os ícones, o service worker (offline) e a política
-> de privacidade base. Você **não vai programar** — vai criar contas, colar
-> chaves e publicar.
+---
+
+## ✅ O que JÁ ESTÁ PRONTO (feito na preparação)
+
+- Todo o código do app (front) — testado rodando de ponta a ponta.
+- **Projeto Supabase criado e configurado**: `pet-saudavel`, região São Paulo.
+  - Banco com as 6 tabelas + segurança (RLS) + gatilho de compras.
+  - Buckets de arquivos: `pet-fotos` (público) e `ebooks` (privado).
+  - As 5 Edge Functions no ar: `hotmart-webhook`, `claim-purchase`,
+    `ebook-url`, `delete-account`, `send-reminders`.
+  - Verificação de segurança passou sem nenhum alerta.
+
+### Credenciais do seu projeto (para configurar o app)
+
+- **VITE_SUPABASE_URL** = `https://iqbrncszbkrmlgkmcixp.supabase.co`
+- **VITE_SUPABASE_ANON_KEY** = a chave **anon/publishable** — pegue em
+  Supabase → **Project Settings → API** (ou use o valor que te passei no chat).
+  Essa chave é pública (vai no app mesmo), o RLS é quem protege os dados.
 
 ---
 
 ## Pré-requisitos (tenha à mão)
 
-- [ ] Acesso ao painel da **Hostinger** (onde mora o domínio `medveteduardosebastiao.com`)
-- [ ] Uma conta **Supabase** (grátis) → https://supabase.com
+- [ ] Acesso ao painel da **Hostinger** (domínio `medveteduardosebastiao.com`)
+- [ ] Uma conta **Vercel** (grátis) — ou usar a Hostinger para hospedar
 - [ ] Uma conta **Resend** (grátis) para os e-mails → https://resend.com
 - [ ] Acesso ao painel da **Hotmart** do Dr. Eduardo
 - [ ] Os **PDFs dos e-books** no computador
-- [ ] O **Node.js** instalado no computador (https://nodejs.org — versão LTS)
+- [ ] **Node.js** instalado (só se for publicar pela Hostinger) — https://nodejs.org
 
 ---
 
-## Parte 1 — Criar o backend no Supabase (≈ 25 min)
+## Parte 1 — Colocar o app no ar (≈ 20 min)
 
-### 1.1 Criar o projeto
-1. Entre em https://supabase.com → **New project**.
-2. Nome: `pet-saudavel`. Escolha uma senha de banco forte (guarde-a).
-3. Região: **South America (São Paulo)** se disponível.
-4. Aguarde ~2 min até o projeto ficar pronto.
-
-### 1.2 Criar as tabelas
-1. Menu lateral → **SQL Editor** → **New query**.
-2. Abra o arquivo `supabase/migrations/0001_init.sql` deste projeto, copie **tudo** e cole.
-3. Clique **Run**. Deve aparecer "Success".
-
-✅ As 6 tabelas, a segurança (RLS) e o gatilho de compras estão criados.
-
-### 1.3 Criar os buckets de arquivos
-1. Menu lateral → **Storage** → **New bucket**.
-2. Crie o bucket **`pet-fotos`** e marque como **Public bucket**. Create.
-3. Crie o bucket **`ebooks`** e deixe **PRIVADO** (não marque público). Create.
-4. Volte ao **SQL Editor** e rode o bloco de políticas do bucket `pet-fotos`
-   que está **comentado no final** do arquivo `0001_init.sql` (tire os `--` das
-   3 políticas `storage.objects` e clique Run).
-
-✅ Fotos dos pets (público) e e-books (privado) prontos.
-
-### 1.4 Guardar as chaves do projeto
-Menu lateral → **Project Settings** → **API**. Anote:
-- **Project URL** → algo como `https://abcdefgh.supabase.co`
-- **anon public** key → chave longa que começa com `eyJ...`
-- **service_role** key → **SECRETA**, nunca vai no app. Só nos segredos das funções.
-
-✅ Chaves anotadas.
-
----
-
-## Parte 2 — Colocar o app no ar (≈ 20 min)
-
-Você pode publicar de dois jeitos. **A Vercel é a mais fácil** (recomendada) e
-já vem com HTTPS; a Hostinger funciona se quiser tudo no mesmo lugar.
-
-### Opção A — Vercel (recomendada)
-1. Suba este projeto para um repositório no GitHub (a pasta `pet-saudavel`).
-2. Em https://vercel.com → **Add New → Project** → importe o repositório.
-3. Em **Root Directory**, aponte para `pet-saudavel`.
-4. Em **Environment Variables**, adicione:
-   - `VITE_SUPABASE_URL` = a Project URL do passo 1.4
-   - `VITE_SUPABASE_ANON_KEY` = a anon key do passo 1.4
-5. **Deploy**. Em ~1 min o app está no ar num endereço `.vercel.app`.
-6. Em **Settings → Domains**, adicione `app.medveteduardosebastiao.com` e siga a
-   instrução de DNS (você cria um registro **CNAME** na Hostinger apontando para
-   a Vercel).
+### Opção A — Vercel (recomendada, já vem com HTTPS)
+1. Suba a pasta `pet-saudavel` para um repositório no GitHub.
+2. https://vercel.com → **Add New → Project** → importe o repositório.
+3. **Root Directory** = `pet-saudavel`.
+4. **Environment Variables** — adicione as duas:
+   - `VITE_SUPABASE_URL` = `https://iqbrncszbkrmlgkmcixp.supabase.co`
+   - `VITE_SUPABASE_ANON_KEY` = a chave anon (Project Settings → API)
+5. **Deploy**. Em ~1 min está no ar.
+6. **Settings → Domains** → adicione `app.medveteduardosebastiao.com` e crie o
+   **CNAME** indicado na Hostinger.
 
 ### Opção B — Hostinger (arquivos estáticos)
-1. No computador, dentro da pasta `pet-saudavel`:
-   ```bash
-   cp .env.example .env      # e preencha as duas variáveis do passo 1.4
-   npm install
-   npm run build             # gera a pasta dist/
-   ```
-2. No painel Hostinger, crie o subdomínio **`app.medveteduardosebastiao.com`**.
-3. No **Gerenciador de Arquivos**, entre na pasta desse subdomínio e envie
-   **todo o conteúdo de `dist/`** (inclusive o arquivo `.htaccess`).
-4. Confirme que o HTTPS/SSL está ligado para o subdomínio.
-
-✅ Abrindo `https://app.medveteduardosebastiao.com` aparece a tela de login.
-
-> **Teste rápido:** crie uma conta de teste, cadastre um pet, registre uma
-> vacina com reforço para daqui a poucos dias e veja aparecer em "Próximos
-> cuidados". Instale na tela de início do celular.
-
----
-
-## Parte 3 — Funções de servidor (Hotmart, e-books, lembretes) (≈ 30 min)
-
-As funções ficam no Supabase (Edge Functions). Precisam da CLI do Supabase.
-
-### 3.1 Instalar a CLI e conectar
 ```bash
-npm install -g supabase
-supabase login
 cd pet-saudavel
-supabase link --project-ref SEU_PROJETO_REF   # o "abcdefgh" da sua URL
+cp .env.example .env      # preencha as 2 variáveis acima
+npm install
+npm run build             # gera dist/
 ```
+Depois crie o subdomínio `app.medveteduardosebastiao.com`, envie **todo o
+conteúdo de `dist/`** (inclusive o `.htaccess`) e ligue o SSL.
 
-### 3.2 Cadastrar os segredos das funções
-```bash
-supabase secrets set \
-  SUPABASE_SERVICE_ROLE_KEY="a service_role do passo 1.4" \
-  HOTMART_HOTTOK="voce-cria-esse-token-ver-parte-4" \
-  RESEND_API_KEY="a chave do Resend (parte 5)" \
-  REMINDER_FROM="Dr. Eduardo Sebastião <no-reply@medveteduardosebastiao.com>" \
-  CRON_SECRET="uma-frase-secreta-qualquer-para-o-agendador"
-```
-> `SUPABASE_URL` e `SUPABASE_ANON_KEY` já existem automaticamente no ambiente
-> das funções — não precisa cadastrar.
-
-### 3.3 Publicar as funções
-```bash
-supabase functions deploy hotmart-webhook
-supabase functions deploy claim-purchase
-supabase functions deploy ebook-url
-supabase functions deploy delete-account
-supabase functions deploy send-reminders
-```
-
-✅ As 5 funções estão no ar. As URLs ficam em
-`https://SEU_PROJETO_REF.functions.supabase.co/<nome-da-funcao>`.
+✅ Abrindo o endereço, aparece a tela de login. Crie uma conta de teste,
+cadastre um pet e uma vacina com reforço próximo — deve aparecer em "Próximos
+cuidados". Instale na tela de início do celular.
 
 ---
 
-## Parte 4 — Ligar a Hotmart (≈ 20 min)
+## Parte 2 — Segredos das funções (≈ 10 min)
 
-1. Crie um token qualquer (uma senha aleatória) — esse é o **HOTMART_HOTTOK**.
-   Use o mesmo valor que você colocou nos segredos (passo 3.2).
-2. No painel da Hotmart → **Ferramentas → Webhook (Postback)** → adicionar.
+As funções já estão no ar, mas algumas precisam de segredos para funcionar.
+Vá em Supabase → **Edge Functions → Secrets** (ou **Project Settings →
+Functions**) e adicione:
+
+| Segredo | Para quê | De onde vem |
+|---|---|---|
+| `HOTMART_HOTTOK` | validar o webhook da Hotmart | um token que **você inventa** (uma senha aleatória) |
+| `RESEND_API_KEY` | enviar os lembretes | painel do Resend (Parte 4) |
+| `REMINDER_FROM` | remetente do e-mail | ex.: `Dr. Eduardo Sebastião <no-reply@medveteduardosebastiao.com>` |
+| `CRON_SECRET` | proteger a rotina de lembretes | outra senha aleatória que você inventa |
+
+> `SUPABASE_URL`, `SUPABASE_ANON_KEY` e `SUPABASE_SERVICE_ROLE_KEY` já existem
+> automaticamente no ambiente das funções — **não precisa** cadastrar.
+
+> Se preferir pela linha de comando: `supabase login`, depois
+> `supabase link --project-ref iqbrncszbkrmlgkmcixp`, depois
+> `supabase secrets set HOTMART_HOTTOK="..." RESEND_API_KEY="..." ...`
+
+---
+
+## Parte 3 — Ligar a Hotmart (≈ 20 min)
+
+1. Use o mesmo token do `HOTMART_HOTTOK` (Parte 2).
+2. Hotmart → **Ferramentas → Webhook (Postback)** → adicionar.
 3. **URL** do webhook:
-   `https://SEU_PROJETO_REF.functions.supabase.co/hotmart-webhook?hottok=SEU_HOTMART_HOTTOK`
-4. Marque os eventos: **Compra aprovada, Compra completa, Reembolso, Chargeback,
-   Cancelamento**.
-5. Salve e use o botão de **teste** da Hotmart. No Supabase, em **Table Editor →
-   compras**, deve aparecer uma linha.
-6. Cadastre os e-books no catálogo: suba os PDFs no bucket **`ebooks`** e rode o
-   `supabase/seed_produtos.sql` (ajustando os valores) no SQL Editor. O
+   `https://iqbrncszbkrmlgkmcixp.functions.supabase.co/hotmart-webhook?hottok=SEU_HOTMART_HOTTOK`
+4. Marque os eventos: **Compra aprovada, Compra completa, Reembolso,
+   Chargeback, Cancelamento**.
+5. Use o botão de **teste** da Hotmart. No Supabase → **Table Editor → compras**
+   deve aparecer uma linha.
+6. Cadastre os e-books: suba os PDFs no bucket **`ebooks`** (Storage) e rode o
+   `supabase/seed_produtos.sql` no **SQL Editor**, ajustando os valores. O
    `hotmart_product_id` precisa ser **igual** ao ID que a Hotmart envia.
 
-✅ Compra na Hotmart libera o e-book sozinha; reembolso derruba o acesso.
+✅ Compra libera o e-book sozinha; reembolso derruba o acesso.
 
 ---
 
-## Parte 5 — Lembretes por e-mail (≈ 20 min)
+## Parte 4 — Lembretes por e-mail (≈ 15 min)
 
 1. Em https://resend.com, crie a conta e **verifique o domínio**
-   `medveteduardosebastiao.com` (adiciona uns registros DNS na Hostinger).
-2. Gere uma **API Key** → esse é o `RESEND_API_KEY` (passo 3.2).
-3. Confirme que o remetente em `REMINDER_FROM` usa o domínio verificado.
+   `medveteduardosebastiao.com` (adiciona registros DNS na Hostinger).
+2. Gere uma **API Key** → coloque em `RESEND_API_KEY` (Parte 2).
+3. Confirme que `REMINDER_FROM` usa o domínio verificado.
 4. Agende a rotina diária: abra `supabase/cron_lembretes.sql`, troque
-   `SEU_PROJETO_REF` e `SEU_CRON_SECRET`, e rode no SQL Editor.
-5. Teste na hora (sem esperar o horário):
+   `SEU_PROJETO_REF` por **`iqbrncszbkrmlgkmcixp`** e `SEU_CRON_SECRET` pelo
+   valor que você definiu, e rode no **SQL Editor**.
+5. Teste na hora (cadastre antes uma dose que vença hoje ou em 7 dias):
    ```bash
-   curl -X POST https://SEU_PROJETO_REF.functions.supabase.co/send-reminders \
+   curl -X POST https://iqbrncszbkrmlgkmcixp.functions.supabase.co/send-reminders \
      -H "x-cron-secret: SEU_CRON_SECRET"
    ```
-   (Cadastre antes uma dose que vença hoje ou em 7 dias para ver o e-mail chegar.)
 
 ✅ Todo dia de manhã, quem tem dose próxima recebe o lembrete assinado.
 
 ---
 
-## Parte 6 — Ajustes finais antes de divulgar
+## Parte 5 — Ajustes finais antes de divulgar
 
-- [ ] Abrir `src/pages/Privacy.tsx` e preencher **e-mail de contato** e a **data**.
-- [ ] Revisar com o Dr. Eduardo o texto das fichas SOS em `src/data/sosCards.ts`
-      (as 2 gratuitas: *engasgo* e *hemorragia*).
-- [ ] No Supabase → **Authentication → Providers → Email**: decidir se exige
+- [ ] `src/pages/Privacy.tsx`: preencher **e-mail de contato** e a **data**.
+- [ ] Revisar com o Dr. Eduardo as 2 fichas SOS grátis em `src/data/sosCards.ts`.
+- [ ] Supabase → **Authentication → Providers → Email**: decidir se exige
       **confirmação de e-mail** (mais seguro) ou não (cadastro mais rápido).
-- [ ] No Supabase → **Authentication → URL Configuration**: colocar o endereço
-      do app em **Site URL** (ex.: `https://app.medveteduardosebastiao.com`).
-- [ ] (Opcional) Em produção, trocar o `*` por seu domínio no
-      `supabase/functions/_shared/cors.ts` e no `hotmart-webhook`.
-- [ ] Enviar o aviso para a base atual de compradores: "o app do Dr. Eduardo
-      chegou". Peça para instalarem na tela de início.
+- [ ] Supabase → **Authentication → URL Configuration**: colocar o endereço do
+      app em **Site URL** (`https://app.medveteduardosebastiao.com`).
+- [ ] (Opcional) trocar o `*` por seu domínio no CORS das funções, se quiser
+      restringir quem chama.
+- [ ] Avisar a base atual de compradores que o app chegou.
 
 ---
 
-## Depois de publicar — como atualizar
+## Como atualizar depois
 
-- **Vercel:** faça o push no GitHub → deploy automático.
-- **Hostinger:** rode `npm run build` e reenvie a pasta `dist/`.
-- **Funções:** `supabase functions deploy <nome>` de novo.
-
-Qualquer dúvida em qualquer passo, é só chamar que a gente resolve junto.
+- **Vercel:** push no GitHub → deploy automático.
+- **Hostinger:** `npm run build` e reenviar `dist/`.
+- **Funções/banco:** dá para redeployar pela CLI do Supabase, ou me chamar.
 ```
 Pet Saudável · v1 · Marca Dr. Eduardo Sebastião · Estratégia: Gabriela Carli
 ```
