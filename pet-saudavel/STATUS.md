@@ -28,23 +28,20 @@ Referência rápida do que foi feito na preparação e o que depende de você.
   `ebook-url`, `delete-account`, `send-reminders`
 - Verificação de segurança do Supabase: **sem alertas**
 
-## ⚠️ Pendente por causa de uma aprovação travada nesta sessão
+## ✅ PUBLICADO
 
-As duas ações abaixo estão prontas no código mas **não consegui aplicar**
-porque os pedidos de aprovação pararam de passar (tentei várias vezes).
-Enviei os arquivos prontos para você aplicar manualmente:
+App no ar, backend configurado de ponta a ponta e testado pela Gabriela:
 
-- [ ] **SQL do Cartão de Emergência + trava do SOS** (`migracoes-pendentes.sql`
-      que te mandei): cole no Supabase → SQL Editor → Run. Corresponde aos
-      arquivos `supabase/migrations/0002_cartao_emergencia.sql` e
-      `0003_travar_sos.sql`.
-- [ ] **Função `sos-conteudo`** (`sos-conteudo-index.ts` que te mandei):
-      Supabase → Edge Functions → Deploy a new function → nome
-      `sos-conteudo` → cole o código → ligue "Verify JWT" → Deploy.
-
-Sem isso, o Cartão de Emergência e as fichas SOS não vão funcionar (vão dar
-erro ao carregar), porque dependem dessas duas peças. É rápido de aplicar,
-uns 3 minutos no total.
+- [x] Migração do Cartão de Emergência + trava do SOS aplicada
+- [x] Função `sos-conteudo` publicada
+- [x] Produto principal "SOS Pet" + 2 order bumps + 1 upsell cadastrados,
+      com capas e links de compra da Hotmart
+- [x] Webhook da Hotmart configurado (conta do Dr. Eduardo)
+- [x] Materiais de entrega (PDFs) enviados ao Hotmart
+- [x] Site URL / Redirect URLs corrigidos no Supabase Auth
+- [x] `RESEND_API_KEY` configurado, domínio verificado, cron diário
+      agendado e testado (e-mail de lembrete confirmado recebido)
+- [x] Build mais recente publicado no Hostinger (`app.medveteduardosebastiao.com`)
 
 ## 🔒 SOS agora 100% travado por compra (mudança desta rodada)
 
@@ -62,20 +59,11 @@ Isso exige um passo a mais na configuração: no `seed_produtos.sql`, marque
 socorros. Só quem comprar esse produto específico desbloqueia o SOS
 completo.
 
-## 🔧 Depende de você (contas e chaves) - ver `PUBLICAR.md`
+## 🔧 Único item pendente
 
-- Publicar o app (Vercel ou Hostinger) com as 2 variáveis de ambiente
-- Aplicar a migração e a função pendentes (ver acima)
-- Cadastrar os segredos das funções (Hotmart hottok, Resend key, cron secret)
-- Ligar o **webhook da conta Hotmart que vende o produto** e cadastrar os
-  e-books (subir PDFs + seed, marcando `desbloqueia_sos` no produto certo)
-- (Opcional) preencher `VITE_LOJA_URL` com o link da loja/página de vendas
-  na Hotmart, para aparecer um botão na Biblioteca
-- Verificar o domínio no **Resend** e agendar o cron
-- Preencher e-mail/data na política de privacidade
-- Revisar o conteúdo do SOS com o Dr. Eduardo (já é o material real dele,
-  mas vale uma conferida antes de publicar)
-- Definir Site URL e confirmação de e-mail em Authentication
+- [ ] Preencher `VITE_LOJA_URL` com o link da página de vendas própria (com
+      VSL) da Gabriela, para ativar o botão "Loja" na Biblioteca. Requer um
+      rebuild + reenvio do `dist/` para o Hostinger depois de definido.
 
 ## 🔜 Fica para a v2 (conforme o plano)
 
