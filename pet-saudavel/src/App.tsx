@@ -11,6 +11,7 @@ import PetDetail from "./pages/PetDetail"
 import EmergencyCard from "./pages/EmergencyCard"
 import SOS from "./pages/SOS"
 import SOSDetail from "./pages/SOSDetail"
+import GuiaDetail from "./pages/GuiaDetail"
 import Library from "./pages/Library"
 import Account from "./pages/Account"
 import Privacy from "./pages/Privacy"
@@ -51,6 +52,7 @@ export default function App() {
       <Route path="/pets/:id" element={<Protected><PetDetail /></Protected>} />
       <Route path="/pets/:id/cartao" element={<Protected><EmergencyCard /></Protected>} />
       <Route path="/sos" element={<Protected><SOS /></Protected>} />
+      <Route path="/sos/guia/:slug" element={<Protected><GuiaDetail /></Protected>} />
       <Route path="/sos/:slug" element={<Protected><SOSDetail /></Protected>} />
       <Route path="/biblioteca" element={<Protected><Library /></Protected>} />
       <Route path="/conta" element={<Protected><Account /></Protected>} />

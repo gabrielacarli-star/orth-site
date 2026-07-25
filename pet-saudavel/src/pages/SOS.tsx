@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { Layout } from "../components/Layout"
 import { Card } from "../components/ui"
 import { SOS_CARDS } from "../data/sosCards"
+import { GUIAS } from "../data/guias"
 import { checkSosAccess } from "../lib/sosAccess"
 
 export default function SOS() {
@@ -55,6 +56,30 @@ export default function SOS() {
               <div className="min-w-0 flex-1">
                 <p className="font-display font-semibold text-ink">{c.titulo}</p>
                 <p className="truncate text-xs text-muted">{c.resumo}</p>
+              </div>
+              {temAcesso ? (
+                <span className="text-gold">›</span>
+              ) : (
+                <span className="text-sm" title="Disponível para quem comprou o guia">
+                  🔒
+                </span>
+              )}
+            </Card>
+          </Link>
+        ))}
+      </div>
+
+      <p className="mt-6 font-display text-xs font-semibold uppercase tracking-wider text-muted">
+        Guias de prevenção
+      </p>
+      <div className="mt-2 space-y-2">
+        {GUIAS.map((g) => (
+          <Link key={g.slug} to={`/sos/guia/${g.slug}`} className="block">
+            <Card className="flex items-center gap-3 transition hover:border-gold">
+              <span className="text-2xl">{g.icone}</span>
+              <div className="min-w-0 flex-1">
+                <p className="font-display font-semibold text-ink">{g.titulo}</p>
+                <p className="truncate text-xs text-muted">{g.resumo}</p>
               </div>
               {temAcesso ? (
                 <span className="text-gold">›</span>
