@@ -18,7 +18,7 @@ export default function Library() {
   async function carregar() {
     setLoading(true)
     const [{ data: prods }, { data: compras }] = await Promise.all([
-      supabase.from("produtos").select("*").eq("ativo", true).eq("mostrar_biblioteca", true),
+      supabase.from("produtos").select("*").eq("ativo", true),
       supabase.from("compras").select("*").eq("status", "ativo"),
     ])
     setProdutos((prods ?? []) as Produto[])
