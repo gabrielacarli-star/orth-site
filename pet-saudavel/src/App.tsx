@@ -1,20 +1,23 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom"
-import type { ReactNode } from "react"
+import { Suspense, lazy, type ReactNode } from "react"
 import { useAuth } from "./context/AuthContext"
 import { Spinner } from "./components/ui"
 
+// Login e Home carregam de imediato (são as primeiras telas que a pessoa vê).
+// O resto só baixa quando a pessoa realmente navega até lá, então a
+// abertura do app fica mais rápida.
 import Login from "./pages/Login"
 import Home from "./pages/Home"
-import Pets from "./pages/Pets"
-import PetForm from "./pages/PetForm"
-import PetDetail from "./pages/PetDetail"
-import EmergencyCard from "./pages/EmergencyCard"
-import SOS from "./pages/SOS"
-import SOSDetail from "./pages/SOSDetail"
-import GuiaDetail from "./pages/GuiaDetail"
-import Library from "./pages/Library"
-import Account from "./pages/Account"
-import Privacy from "./pages/Privacy"
+const Pets = lazy(() => import("./pages/Pets"))
+const PetForm = lazy(() => import("./pages/PetForm"))
+const PetDetail = lazy(() => import("./pages/PetDetail"))
+const EmergencyCard = lazy(() => import("./pages/EmergencyCard"))
+const SOS = lazy(() => import("./pages/SOS"))
+const SOSDetail = lazy(() => import("./pages/SOSDetail"))
+const GuiaDetail = lazy(() => import("./pages/GuiaDetail"))
+const Library = lazy(() => import("./pages/Library"))
+const Account = lazy(() => import("./pages/Account"))
+const Privacy = lazy(() => import("./pages/Privacy"))
 
 function FullscreenLoader() {
   return (
@@ -36,6 +39,7 @@ export default function App() {
   const { session, loading } = useAuth()
 
   return (
+    <Suspense fallback={<FullscreenLoader />}>
     <Routes>
       {/* Público */}
       <Route
@@ -59,5 +63,6 @@ export default function App() {
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </Suspense>
   )
 }

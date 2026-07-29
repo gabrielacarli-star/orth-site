@@ -1,3 +1,9 @@
+# Comprime texto antes de enviar pro navegador (deixa o carregamento
+# bem mais rápido, principalmente em conexão de celular).
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml application/manifest+json
+</IfModule>
+
 # SPA routing para hospedagem Apache (Hostinger).
 # Redireciona qualquer rota inexistente para o index.html, deixando o
 # React Router cuidar das rotas (/pets, /sos, /biblioteca, etc.).
