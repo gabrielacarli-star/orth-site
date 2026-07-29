@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router-dom"
-import type { ReactNode } from "react"
+import { useState, type ReactNode } from "react"
 import { Seal } from "./ui"
 import { InstallPrompt } from "./InstallPrompt"
+import { NIVEIS_TEXTO, iniciarTamanhoTexto, proximoNivelTexto } from "../lib/fontScale"
 
 const NAV = [
   { to: "/", label: "Início", icon: "🏠", end: true },
@@ -13,6 +14,8 @@ const NAV = [
 
 export function Layout({ children, title }: { children: ReactNode; title?: string }) {
   const navigate = useNavigate()
+  const [nivelTexto, setNivelTexto] = useState(() => iniciarTamanhoTexto())
+  const rotuloAtual = NIVEIS_TEXTO.find((n) => n.id === nivelTexto)?.rotulo ?? "A"
   return (
     <div className="mx-auto flex min-h-full max-w-[560px] flex-col bg-parchment shadow-xl">
       {/* Top bar */}
@@ -27,6 +30,14 @@ export function Layout({ children, title }: { children: ReactNode; title?: strin
             </p>
             <p className="text-[11px] text-muted">Dr. Eduardo Sebastião · CRMV-MT</p>
           </div>
+          <button
+            onClick={() => setNivelTexto(proximoNivelTexto(nivelTexto))}
+            aria-label="Aumentar tamanho do texto"
+            title="Tamanho do texto"
+            className="ml-auto shrink-0 rounded-lg border border-gold px-2.5 py-1.5 font-display text-xs font-bold text-ink"
+          >
+            {rotuloAtual}
+          </button>
         </div>
       </header>
 
