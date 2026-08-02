@@ -11,6 +11,10 @@ verify_jwt = false
 [functions.send-reminders]
 verify_jwt = false
 
+# aviso de novo cadastro: chamada pelo gatilho do banco (protegida por CRON_SECRET).
+[functions.notify-cadastro]
+verify_jwt = false
+
 # funções chamadas pelo app logado: o gateway valida o JWT do usuário.
 [functions.claim-purchase]
 verify_jwt = true
