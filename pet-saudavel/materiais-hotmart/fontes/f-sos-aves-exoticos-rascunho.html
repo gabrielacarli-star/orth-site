@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="_shared.css">
+<style>
+  .checklist { list-style:none; margin:0 0 14px; padding:0; }
+  .checklist li { padding:8px 0 8px 28px; position:relative; border-bottom:1px solid #E3D7BE; font-size:13px; }
+  .checklist li::before { content:"☐"; position:absolute; left:0; top:8px; font-size:15px; color:#B2925A; }
+  .checklist li .obs { display:block; color:#6F5B3E; font-size:11.5px; font-style:italic; margin-top:2px; }
+  .campo { border:1px dashed #B2925A; border-radius:6px; padding:10px 12px; margin-bottom:9px; }
+  .campo .rot { font-family:'Cinzel', Georgia, serif; font-weight:600; font-size:10.5px; letter-spacing:0.1em;
+    text-transform:uppercase; color:#6F5B3E; margin-bottom:6px; display:block; }
+  .linha-vazia { border-bottom:1px solid #C9BA9C; height:16px; margin-bottom:6px; }
+  .pergunta { background:#F8F2E6; border:1px solid #E3D7BE; border-radius:6px; padding:11px 13px; margin-bottom:10px; }
+  .pergunta .q { font-family:'Cinzel', Georgia, serif; font-weight:600; font-size:12px; color:#3A2A1A; margin-bottom:4px; }
+</style>
+</head><body>
+
+<div class="cover">
+  <div class="seal"><span>ES</span></div>
+  <div class="kicker">Rascunho para revisão do Dr. Eduardo</div>
+  <h1 class="title">SOS Aves e Animais Exóticos</h1>
+  <p class="tagline">Proposta de estrutura para o app Pet Saudável. Nada aqui é conteúdo final —
+  é só o esqueleto pra você confirmar, ajustar ou riscar o que não fizer sentido.</p>
+</div>
+
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">O que muda no cadastro do pet</span></div>
+  <p class="body">Hoje, ao cadastrar um pet no app, só existem três opções: Cão, Gato ou Outro. A ideia é
+  abrir mais opções, pra quem tem outro tipo de bicho já poder marcar a espécie certa. Proposta:</p>
+  <ul class="checklist">
+    <li>Cão <span class="obs">já existe</span></li>
+    <li>Gato <span class="obs">já existe</span></li>
+    <li>Ave <span class="obs">calopsita, periquito, canário, papagaio...</span></li>
+    <li>Coelho</li>
+    <li>Roedor <span class="obs">hamster, porquinho-da-índia, chinchila...</span></li>
+    <li>Réptil <span class="obs">tartaruga, iguana, jabuti...</span></li>
+    <li>Outro <span class="obs">continua existindo, pra qualquer coisa fora da lista</span></li>
+  </ul>
+  <p class="body">Essa lista está certa? Falta alguma espécie que aparece bastante na sua clínica?</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Como apareceria no app</span></div>
+  <div class="feature">
+    <div class="feature-name">Novo produto: "SOS Aves e Animais Exóticos"</div>
+    <div class="feature-desc">Vendido separado do SOS Pet (cães e gatos), do mesmo jeito que os outros
+    produtos hoje: aparece na Biblioteca, quem compra destrava o conteúdo, quem não compra vê com
+    cadeado.</div>
+  </div>
+  <div class="feature">
+    <div class="feature-name">Onde aparece dentro do app</div>
+    <div class="feature-desc">Ficha por ficha, no mesmo formato do SOS atual (sinais de alerta, o que
+    fazer passo a passo, nunca faça, levar ao veterinário), só que numa aba própria pra não misturar
+    com o conteúdo de cães e gatos.</div>
+  </div>
+
+  <div class="pergunta">
+    <div class="q">Pra decidir com a Gabriela</div>
+    <p class="body" style="margin-bottom:0">Esse produto vende separado, ou entra junto com o SOS Pet
+    (todo mundo que compra o principal já leva aves e exóticos também)? E qual preço faz sentido?</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Pauta sugerida — Aves</span></div>
+  <p class="body">Lista de emergências que costumam aparecer com aves. Marca as que fazem sentido
+  manter, risca as que não, e escreve embaixo qualquer uma que estiver faltando.</p>
+  <ul class="checklist">
+    <li>Fratura de asa ou pata</li>
+    <li>Sangramento de pena em crescimento ("pena de sangue")</li>
+    <li>Dificuldade respiratória / asfixia</li>
+    <li>Bicagem ou briga entre aves</li>
+    <li>Intoxicação <span class="obs">alimento, fumaça, produto de limpeza, teflon superaquecido...</span></li>
+    <li>Choque térmico <span class="obs">frio ou calor excessivo</span></li>
+    <li>Queda do poleiro / trauma</li>
+    <li>Convulsão ou desmaio</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Pauta sugerida — Coelhos e roedores</span></div>
+  <ul class="checklist">
+    <li>Estase gastrointestinal <span class="obs">parada do intestino</span></li>
+    <li>Fratura ou luxação de membro/coluna</li>
+    <li>Golpe de calor</li>
+    <li>Queda de altura</li>
+    <li>Diarreia aguda</li>
+    <li>Queimadura</li>
+    <li>Convulsão</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><span class="sec-title">Pauta sugerida — Répteis</span></div>
+  <ul class="checklist">
+    <li>Prolapso</li>
+    <li>Queimadura térmica <span class="obs">lâmpada, pedra quente</span></li>
+    <li>Impactação / constipação</li>
+    <li>Ferimento por queda ou briga</li>
+    <li>Letargia / hipotermia por temperatura inadequada no terrário</li>
+  </ul>
+  <p class="body">Répteis variam bastante entre si (tartaruga não é igual iguana). Faz sentido juntar
+  tudo numa categoria só, ou separar em mais de uma?</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">06</span><span class="sec-title">Formato de cada ficha (exemplo em branco)</span></div>
+  <p class="body">Depois de fechar a lista acima, cada emergência confirmada vira uma ficha nesse
+  formato — igual o guia de cães e gatos já tem. Pode escrever direto nesse modelo, à mão ou digitado:</p>
+
+  <div class="feature" style="margin-bottom:14px;">
+    <div class="feature-name">Nome da emergência: <span class="linha-vazia" style="display:inline-block;width:220px;"></span></div>
+  </div>
+
+  <div class="campo">
+    <span class="rot">Sinais de alerta</span>
+    <div class="linha-vazia"></div>
+    <div class="linha-vazia"></div>
+    <div class="linha-vazia"></div>
+  </div>
+  <div class="campo">
+    <span class="rot">O que fazer — passo a passo</span>
+    <div class="linha-vazia"></div>
+    <div class="linha-vazia"></div>
+    <div class="linha-vazia"></div>
+    <div class="linha-vazia"></div>
+  </div>
+  <div class="campo">
+    <span class="rot">Nunca faça</span>
+    <div class="linha-vazia"></div>
+    <div class="linha-vazia"></div>
+  </div>
+  <div class="campo">
+    <span class="rot">Levar ao veterinário</span>
+    <div class="linha-vazia"></div>
+    <div class="linha-vazia"></div>
+  </div>
+</section>
+
+<div class="foot">
+  <div class="name">Pet Saudável · Rascunho interno</div>
+  <div class="crmv">Não é material final, não vai pro app nem pra Hotmart neste formato.</div>
+  <p class="aviso">Depois que o Dr. Eduardo confirmar a lista e preencher o conteúdo, a Gabriela passa
+  pra Claude organizar tudo dentro do app, do mesmo jeito que foi feito com o SOS de cães e gatos.</p>
+</div>
+
+</body></html>
