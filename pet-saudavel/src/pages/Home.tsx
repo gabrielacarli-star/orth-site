@@ -5,16 +5,20 @@ import { Layout } from "../components/Layout"
 import { Badge, Button, Card, EmptyState, SectionTitle, Spinner } from "../components/ui"
 import type { Cuidado, Pet } from "../lib/types"
 import { diasAte, formatarData, rotuloPrazo } from "../lib/dates"
+import { checkSosAccess } from "../lib/sosAccess"
 
 const JANELA_DIAS = 30
+const LINK_CHECKOUT_SOS_PET = "https://pay.hotmart.com/L106879279A"
 
 export default function Home() {
   const [loading, setLoading] = useState(true)
   const [pets, setPets] = useState<Pet[]>([])
   const [cuidados, setCuidados] = useState<Cuidado[]>([])
+  const [temSos, setTemSos] = useState<boolean | null>(null)
 
   useEffect(() => {
     void carregar()
+    checkSosAccess().then(setTemSos)
   }, [])
 
   async function carregar() {
@@ -88,6 +92,26 @@ export default function Home() {
 
   return (
     <Layout title="Início">
+      {temSos === false && (
+        <a href={LINK_CHECKOUT_SOS_PET} target="_blank" rel="noopener noreferrer" className="mb-4 block">
+          <Card className="border-2 border-gold bg-dark text-parchment transition hover:opacity-90">
+            <p className="font-display text-xs font-semibold uppercase tracking-wider text-gold">
+              🚨 Você está no plano grátis
+            </p>
+            <p className="mt-1 font-display text-base font-bold">
+              Tenha o passo a passo completo de cada emergência
+            </p>
+            <p className="mt-1 text-sm text-parchment/80">
+              Engasgo, convulsão, intoxicação e mais 5 emergências, destravadas na hora. Por R$57,
+              pagamento único.
+            </p>
+            <p className="mt-3 font-display text-sm font-bold text-gold underline">
+              Desbloquear SOS Pet ↗
+            </p>
+          </Card>
+        </a>
+      )}
+
       {pets.length === 0 ? (
         <EmptyState
           icon="🐾"
