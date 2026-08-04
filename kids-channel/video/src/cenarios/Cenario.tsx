@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame, useVideoConfig } from "remotion";
-import { CORES, CONTORNO } from "../marca/paleta";
+import { CORES } from "../marca/paleta";
 import { NuvemPipoca, Coqueiro, Sol, Estrela } from "./elementos";
 import type { NomeCenario } from "../marca/tipos";
 
@@ -27,8 +27,20 @@ const Mar: React.FC<{ topo: number }> = ({ topo }) => {
 
   return (
     <svg viewBox={`0 0 ${L} ${A}`} style={{ position: "absolute", inset: 0 }}>
-      <path d={onda(0, 14)} fill={CORES.bolhaClaro} />
-      <path d={onda(2.2, 10)} fill={CORES.bolha} />
+      <defs>
+        <linearGradient id="cg-mar-raso" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#9EE0F5" />
+          <stop offset="100%" stopColor="#5FC0E8" />
+        </linearGradient>
+        <linearGradient id="cg-mar-fundo" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#41A9DC" />
+          <stop offset="100%" stopColor="#1F7FB8" />
+        </linearGradient>
+      </defs>
+      <path d={onda(0, 14)} fill="url(#cg-mar-raso)" />
+      <path d={onda(2.2, 10)} fill="url(#cg-mar-fundo)" />
+      {/* Faixa de espuma onde a onda quebra */}
+      <path d={onda(2.2, 10)} fill="none" stroke="#FFFFFF" strokeWidth={5} opacity={0.5} />
     </svg>
   );
 };
@@ -44,8 +56,8 @@ const Praia: React.FC = () => {
     ((inicio + s * velocidade) % (L + 400)) - 300;
 
   return (
-    <AbsoluteFill style={{ background: `linear-gradient(#C4EDFF, ${CORES.ceu})` }}>
-      <Sol x={1340} y={64} tamanho={260} giro={s * 6} />
+    <AbsoluteFill style={{ background: "linear-gradient(#BFEAFF 0%, #9BDCFB 46%, #7ACDF6 100%)" }}>
+      <Sol x={1340} y={44} tamanho={300} giro={s * 6} />
 
       <NuvemPipoca x={deriva(14, 120)} y={110} tamanho={300} opacidade={0.95} />
       <NuvemPipoca x={deriva(9, 780)} y={220} tamanho={220} opacidade={0.8} />
@@ -58,15 +70,28 @@ const Praia: React.FC = () => {
 
       {/* Areia */}
       <svg viewBox={`0 0 ${L} ${A}`} style={{ position: "absolute", inset: 0 }}>
-        <path
-          d={`M 0 780 C 400 740 1100 800 ${L} 750 L ${L} ${A} L 0 ${A} Z`}
-          fill={CORES.areia}
-        />
+        <defs>
+          <linearGradient id="cg-areia" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#FFF0CE" />
+            <stop offset="52%" stopColor={CORES.areia} />
+            <stop offset="100%" stopColor="#F3D191" />
+          </linearGradient>
+        </defs>
+        <path d={`M 0 780 C 400 740 1100 800 ${L} 750 L ${L} ${A} L 0 ${A} Z`} fill="url(#cg-areia)" />
+        {/* Areia molhada na beira, em vez de traço preto */}
         <path
           d={`M 0 780 C 400 740 1100 800 ${L} 750`}
           fill="none"
-          stroke={CORES.areiaEscuro}
-          strokeWidth={10}
+          stroke="#E9C489"
+          strokeWidth={16}
+          opacity={0.7}
+        />
+        <path
+          d={`M 0 786 C 400 746 1100 806 ${L} 756`}
+          fill="none"
+          stroke="#FFFFFF"
+          strokeWidth={5}
+          opacity={0.45}
         />
       </svg>
 
@@ -83,20 +108,31 @@ const Coqueiral: React.FC = () => {
   const s = frame / fps;
 
   return (
-    <AbsoluteFill style={{ background: `linear-gradient(${CORES.ceuClaro}, ${CORES.ceu})` }}>
+    <AbsoluteFill style={{ background: "linear-gradient(#CFF1FF 0%, #A6E1FC 55%, #86D2F7 100%)" }}>
       <NuvemPipoca x={((200 + s * 11) % 2300) - 300} y={90} tamanho={260} opacidade={0.9} />
       <NuvemPipoca x={((1100 + s * 7) % 2300) - 300} y={200} tamanho={200} opacidade={0.75} />
 
       {/* Colinas ao fundo */}
       <svg viewBox={`0 0 ${L} ${A}`} style={{ position: "absolute", inset: 0 }}>
-        <ellipse cx={420} cy={880} rx={620} ry={280} fill={CORES.verdeClaro} />
-        <ellipse cx={1500} cy={900} rx={700} ry={300} fill={CORES.verdeClaro} />
-        <path d={`M 0 800 C 500 760 1300 830 ${L} 780 L ${L} ${A} L 0 ${A} Z`} fill={CORES.verde} />
+        <defs>
+          <linearGradient id="cg-colina" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#A6E9C0" />
+            <stop offset="100%" stopColor="#63CC8C" />
+          </linearGradient>
+          <linearGradient id="cg-grama" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#5FD08C" />
+            <stop offset="100%" stopColor="#2E9954" />
+          </linearGradient>
+        </defs>
+        <ellipse cx={420} cy={880} rx={620} ry={280} fill="url(#cg-colina)" />
+        <ellipse cx={1500} cy={900} rx={700} ry={300} fill="url(#cg-colina)" />
+        <path d={`M 0 800 C 500 760 1300 830 ${L} 780 L ${L} ${A} L 0 ${A} Z`} fill="url(#cg-grama)" />
         <path
           d={`M 0 800 C 500 760 1300 830 ${L} 780`}
           fill="none"
-          stroke={CORES.verdeEscuro}
-          strokeWidth={10}
+          stroke="#8BE0AC"
+          strokeWidth={8}
+          opacity={0.6}
         />
       </svg>
 
@@ -109,31 +145,62 @@ const Coqueiral: React.FC = () => {
 
 /** Casa da árvore — cenário das músicas de rotina (banho, dentes, dormir). */
 const CasaDaArvore: React.FC = () => (
-  <AbsoluteFill style={{ background: `linear-gradient(${CORES.ceuClaro}, ${CORES.areia})` }}>
+  <AbsoluteFill style={{ background: "linear-gradient(#D6F2FF 0%, #AEE3FA 48%, #FFE9BD 100%)" }}>
     <svg viewBox={`0 0 ${L} ${A}`} style={{ position: "absolute", inset: 0 }}>
-      {/* Tronco da árvore que sustenta a casa */}
-      <path d="M 880 1080 L 880 420 L 1060 420 L 1060 1080 Z" fill="#A9762F" {...CONTORNO} strokeWidth={12} />
+      <defs>
+        <linearGradient id="cg-tronco-casa" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#C99457" />
+          <stop offset="45%" stopColor="#A9762F" />
+          <stop offset="100%" stopColor="#7C5320" />
+        </linearGradient>
+        <radialGradient id="cg-copa" cx="34%" cy="28%" r="80%">
+          <stop offset="0%" stopColor="#8DE3AD" />
+          <stop offset="55%" stopColor={CORES.verde} />
+          <stop offset="100%" stopColor="#249B52" />
+        </radialGradient>
+        <linearGradient id="cg-parede" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#FFF3D6" />
+          <stop offset="100%" stopColor="#F0D296" />
+        </linearGradient>
+        <linearGradient id="cg-telhado" x1="20%" y1="0%" x2="80%" y2="100%">
+          <stop offset="0%" stopColor="#FF9A9A" />
+          <stop offset="100%" stopColor="#DE4B4B" />
+        </linearGradient>
+        <linearGradient id="cg-chao" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#5FD08C" />
+          <stop offset="100%" stopColor="#2E9954" />
+        </linearGradient>
+      </defs>
+
+      {/* Tronco */}
+      <path d="M 880 1080 L 880 420 L 1060 420 L 1060 1080 Z" fill="url(#cg-tronco-casa)" />
+      <g fill="none" stroke="#7C5320" strokeWidth={5} opacity={0.35} strokeLinecap="round">
+        <path d="M 906 520 q 30 16 60 0" />
+        <path d="M 906 660 q 30 16 60 0" />
+        <path d="M 906 800 q 30 16 60 0" />
+        <path d="M 906 940 q 30 16 60 0" />
+      </g>
 
       {/* Copa */}
-      <g fill={CORES.verde} {...CONTORNO} strokeWidth={12}>
+      <g fill="url(#cg-copa)">
         <circle cx={760} cy={300} r={200} />
         <circle cx={1180} cy={280} r={220} />
         <circle cx={970} cy={200} r={230} />
       </g>
 
       {/* Piso da casinha */}
-      <rect x={520} y={620} width={900} height={40} rx={20} fill="#C98A3E" {...CONTORNO} strokeWidth={10} />
+      <rect x={520} y={620} width={900} height={40} rx={20} fill="#C98A3E" />
 
       {/* Parede + telhado */}
-      <rect x={600} y={380} width={740} height={250} rx={24} fill={CORES.areia} {...CONTORNO} strokeWidth={10} />
-      <path d="M 560 390 L 970 200 L 1380 390 Z" fill={CORES.coral} {...CONTORNO} strokeWidth={10} />
+      <rect x={600} y={380} width={740} height={250} rx={24} fill="url(#cg-parede)" />
+      <path d="M 560 390 L 970 200 L 1380 390 Z" fill="url(#cg-telhado)" />
 
       {/* Janela redonda */}
-      <circle cx={970} cy={490} r={78} fill={CORES.ceuClaro} {...CONTORNO} strokeWidth={10} />
-      <path d="M 892 490 L 1048 490 M 970 412 L 970 568" stroke={CORES.traco} strokeWidth={9} />
+      <circle cx={970} cy={490} r={78} fill="#CFEFFF" stroke="#E0BE84" strokeWidth={8} />
+      <path d="M 892 490 L 1048 490 M 970 412 L 970 568" stroke="#E0BE84" strokeWidth={8} />
 
       {/* Chão */}
-      <path d={`M 0 900 L ${L} 880 L ${L} ${A} L 0 ${A} Z`} fill={CORES.verde} />
+      <path d={`M 0 900 L ${L} 880 L ${L} ${A} L 0 ${A} Z`} fill="url(#cg-chao)" />
     </svg>
   </AbsoluteFill>
 );

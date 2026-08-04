@@ -105,15 +105,26 @@ custo de produção que cai a cada episódio.
 
 ## 4. Identidade visual
 
-Vetor plano, formas grandes e arredondadas, contorno grosso. Sem textura,
-sem realismo, sem sombra dura. Tudo desenhado pra ser legível numa
-miniatura de 120px na TV da sala.
+Vetor plano, formas grandes e arredondadas. Sem textura, sem realismo, sem
+sombra dura. Tudo desenhado pra ser legível numa miniatura de 120px na TV
+da sala.
+
+Três regras de acabamento, sem as quais o desenho vira clipart (a versão
+original dos personagens caiu nessa — ver Fase 4):
+
+- **Traço de duas espessuras**: 8px na silhueta, 4px no detalhe interno.
+  Nunca espessura única no desenho todo.
+- **Sombra de um lado** em todo volume grande, recortada pela própria forma.
+- **Pálpebra em todo olho** — traço grosso por cima. É o que separa
+  personagem de boneco de plástico, e é o que faz o elenco parecer da mesma
+  mão.
 
 | Cor | Hex | Uso |
 |---|---|---|
-| Pele Maria | `#FFD9BC` | protagonista |
+| Pele Maria | `#FFDCC0` | protagonista |
 | Cabelo Maria | `#FFD772` | protagonista |
 | Vestido Maria | `#FF6B6B` | protagonista, laços, acentos |
+| Olhos Maria | `#7A4A28` | protagonista |
 | Amarelo Pipo | `#FFC93C` | Pipo, destaque, sol |
 | Roxo Nina | `#9B5DE5` | Nina, elementos de apoio |
 | Azul Bolha | `#4EA8DE` | água, Bolha |

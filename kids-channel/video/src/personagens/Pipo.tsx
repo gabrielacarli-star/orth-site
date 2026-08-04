@@ -1,5 +1,5 @@
 import React from "react";
-import { CORES, CONTORNO } from "../marca/paleta";
+import { CORES } from "../marca/paleta";
 
 type Props = {
   /** 0 = bico fechado, 1 = bico totalmente aberto (usado pra cantar). */
@@ -9,83 +9,189 @@ type Props = {
 };
 
 /**
- * Pipo — passarinho amarelo, protagonista.
+ * Contorno "fofo": um círculo com o perímetro ondulado, feito de arcos
+ * quadráticos que saem e voltam.
  *
- * Desenhado de frente, corpo e cabeça num círculo só (formato "bolinha"),
- * que é o que dá a silhueta reconhecível em miniatura pequena.
- * O bico é dividido em duas metades pra poder abrir quando ele canta.
+ * É o truque que faz um pintinho parecer PENUGEM em vez de uma bola lisa
+ * amarela. Sem isso ele vira um emoji. Determinístico (mesmo path em todo
+ * frame), então não treme entre um frame e outro.
+ */
+const contornoFofo = (
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  pontas: number,
+  bico: number,
+) => {
+  const ponto = (i: number) => {
+    const a = (i / pontas) * Math.PI * 2 - Math.PI / 2;
+    return [cx + Math.cos(a) * rx, cy + Math.sin(a) * ry];
+  };
+  const [x0, y0] = ponto(0);
+  let d = `M ${x0.toFixed(1)} ${y0.toFixed(1)}`;
+  for (let i = 1; i <= pontas; i++) {
+    const a = ((i - 0.5) / pontas) * Math.PI * 2 - Math.PI / 2;
+    const ctrlX = cx + Math.cos(a) * (rx + bico);
+    const ctrlY = cy + Math.sin(a) * (ry + bico);
+    const [x, y] = ponto(i);
+    d += ` Q ${ctrlX.toFixed(1)} ${ctrlY.toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)}`;
+  }
+  return `${d} Z`;
+};
+
+const CORPO = contornoFofo(120, 138, 76, 74, 22, 7);
+
+/**
+ * Pipo — pintinho amarelo, melhor amigo da Maria.
+ *
+ * Mesmo acabamento da Maria (ver o comentário longo em Maria.tsx): nenhum
+ * contorno preto, gradiente em todas as formas, sombra desfocada e olho em
+ * camadas. É essa receita repetida que faz o elenco parecer da mesma mão em
+ * vez de três desenhos de origens diferentes.
  */
 export const Pipo: React.FC<Props> = ({ abertura = 0, asas = 0 }) => {
-  // O bico de baixo gira pra baixo conforme "abertura".
-  const giroBico = abertura * 22;
-  // As asas sobem e giram um pouco.
-  const giroAsa = asas * 30;
+  const giroBico = abertura * 20;
+  const giroAsa = asas * 26;
 
   return (
-    <svg viewBox="0 0 200 210" width="100%" height="100%">
-      {/* Pés — desenhados primeiro pra ficarem atrás do corpo */}
-      <g {...CONTORNO} fill={CORES.bico}>
-        <path d="M 82 168 L 82 186 M 70 192 L 94 192" strokeWidth={9} />
-        <path d="M 118 168 L 118 186 M 106 192 L 130 192" strokeWidth={9} />
+    <svg viewBox="0 0 240 260" width="100%" height="100%">
+      <defs>
+        <radialGradient id="pg-corpo" cx="34%" cy="26%" r="82%">
+          <stop offset="0%" stopColor="#FFEFA8" />
+          <stop offset="52%" stopColor={CORES.pipo} />
+          <stop offset="100%" stopColor={CORES.pipoEscuro} />
+        </radialGradient>
+        <linearGradient id="pg-asa" x1="20%" y1="0%" x2="80%" y2="100%">
+          <stop offset="0%" stopColor={CORES.pipo} />
+          <stop offset="100%" stopColor="#D98F14" />
+        </linearGradient>
+        <linearGradient id="pg-bico" x1="20%" y1="0%" x2="70%" y2="100%">
+          <stop offset="0%" stopColor="#FFC078" />
+          <stop offset="55%" stopColor={CORES.bico} />
+          <stop offset="100%" stopColor="#E07B22" />
+        </linearGradient>
+        <radialGradient id="pg-iris" cx="42%" cy="34%" r="72%">
+          <stop offset="0%" stopColor={CORES.olhosClaro} />
+          <stop offset="52%" stopColor={CORES.olhos} />
+          <stop offset="100%" stopColor={CORES.olhosEscuro} />
+        </radialGradient>
+        <linearGradient id="pg-esclera" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#DCD5D0" />
+          <stop offset="45%" stopColor="#FFFFFF" />
+          <stop offset="100%" stopColor="#F6EEE9" />
+        </linearGradient>
+        <filter id="pg-suave" x="-45%" y="-45%" width="190%" height="190%">
+          <feGaussianBlur stdDeviation="8" />
+        </filter>
+        <clipPath id="pg-clip-corpo">
+          <path d={CORPO} />
+        </clipPath>
+      </defs>
+
+      {/* Pezinhos de três dedos */}
+      <g fill="none" stroke="#D97B1E" strokeWidth={8} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M 96 200 L 96 226 M 82 236 L 96 226 L 110 236 M 96 226 L 96 240" />
+        <path d="M 144 200 L 144 226 M 130 236 L 144 226 L 158 236 M 144 226 L 144 240" />
       </g>
 
-      {/* Asas — atrás do corpo, presas bem abaixo da linha dos olhos.
-          Se a asa sobe até a altura do olho, o cérebro lê como ORELHA e o
-          Pipo vira um bichinho genérico em vez de passarinho. Por isso o
-          topo da asa fica em y=118, já abaixo dos olhos (y=94), e o giro
-          acontece em torno do ponto onde ela se prende ao corpo. */}
-      <g fill={CORES.pipoEscuro} {...CONTORNO}>
-        <ellipse
-          cx={38}
-          cy={150}
-          rx={18}
-          ry={32}
-          transform={`rotate(${24 + giroAsa} 38 122)`}
-        />
-        <ellipse
-          cx={162}
-          cy={150}
-          rx={18}
-          ry={32}
-          transform={`rotate(${-24 - giroAsa} 162 122)`}
+      {/* Asa de trás, mais escura — dá profundidade sem custar nada */}
+      <g transform={`rotate(${-20 - giroAsa} 186 128)`}>
+        <path
+          d="M 186 118 C 210 122 222 146 216 170 C 210 190 190 194 182 178 C 176 164 178 136 186 118 Z"
+          fill="#D08610"
+          stroke="#B0700C"
+          strokeWidth={3}
         />
       </g>
 
       {/* Corpo */}
-      <circle cx={100} cy={112} r={60} fill={CORES.pipo} {...CONTORNO} />
-
-      {/* Barriga mais clara — sem contorno, é só uma mancha de cor */}
-      <ellipse cx={100} cy={138} rx={38} ry={30} fill={CORES.pipoClaro} />
+      <path d={CORPO} fill="url(#pg-corpo)" stroke="#D89416" strokeWidth={3} />
+      <g clipPath="url(#pg-clip-corpo)">
+        {/* Sombra do lado direito */}
+        <ellipse cx={216} cy={158} rx={78} ry={80} fill="#C97F0E" opacity={0.42} filter="url(#pg-suave)" />
+        {/* Barriga clara */}
+        <ellipse cx={112} cy={176} rx={48} ry={40} fill="#FFF0AE" opacity={0.75} filter="url(#pg-suave)" />
+      </g>
 
       {/* Topete de três penas */}
-      <g {...CONTORNO} strokeWidth={9} fill="none">
-        <path d="M 100 54 C 96 34 84 28 78 26" />
-        <path d="M 100 52 C 100 32 100 26 100 20" />
-        <path d="M 100 54 C 104 34 116 28 122 26" />
+      <g fill="none" stroke="#E6A61C" strokeWidth={10} strokeLinecap="round">
+        <path d="M 120 68 C 114 46 100 38 92 34" />
+        <path d="M 120 66 C 120 44 120 34 120 26" />
+        <path d="M 120 68 C 126 46 140 38 148 34" />
+      </g>
+
+      {/* Asa da frente, com penas desenhadas por dentro. Fica no mesmo grupo
+          do transform pra as penas girarem junto quando a asa bate. */}
+      <g transform={`rotate(${24 + giroAsa} 56 130)`}>
+        <path
+          d="M 56 120 C 30 126 18 152 26 176 C 34 196 56 198 64 180 C 70 164 66 138 56 120 Z"
+          fill="url(#pg-asa)"
+          stroke="#C88A12"
+          strokeWidth={3}
+        />
+        <g fill="none" stroke="#B87C0E" strokeWidth={3} opacity={0.55} strokeLinecap="round">
+          <path d="M 46 134 C 34 148 30 164 34 178" />
+          <path d="M 56 140 C 46 154 44 168 48 182" />
+        </g>
       </g>
 
       {/* Bico — metade de cima fixa, metade de baixo gira pra abrir */}
-      <g fill={CORES.bico} {...CONTORNO}>
-        <path d="M 84 114 L 116 114 L 100 126 Z" />
+      <g stroke="#D2701C" strokeWidth={2.5} strokeLinejoin="round">
+        <path d="M 100 148 L 140 148 L 120 164 Z" fill="url(#pg-bico)" />
         <path
-          d="M 84 114 L 116 114 L 100 130 Z"
-          transform={`rotate(${giroBico} 100 114)`}
+          d="M 100 148 L 140 148 L 120 170 Z"
+          fill="#E68A2E"
+          transform={`rotate(${giroBico} 120 148)`}
         />
       </g>
 
-      {/* Olhos grandes — proporção de filhote, é o que lê como "fofo" */}
-      <g>
-        <circle cx={78} cy={94} r={15} fill={CORES.branco} {...CONTORNO} strokeWidth={6} />
-        <circle cx={122} cy={94} r={15} fill={CORES.branco} {...CONTORNO} strokeWidth={6} />
-        <circle cx={80} cy={96} r={8} fill={CORES.traco} />
-        <circle cx={124} cy={96} r={8} fill={CORES.traco} />
-        <circle cx={77} cy={92} r={3.2} fill={CORES.branco} />
-        <circle cx={121} cy={92} r={3.2} fill={CORES.branco} />
-      </g>
+      {/* Olhos — mesma receita em camadas usada na Maria */}
+      {[
+        { cx: 92, lado: -1 },
+        { cx: 148, lado: 1 },
+      ].map(({ cx, lado }) => (
+        <g key={cx}>
+          <ellipse cx={cx} cy={120} rx={20} ry={22} fill="url(#pg-esclera)" />
+          <circle cx={cx + lado * 2} cy={121} r={15} fill="url(#pg-iris)" />
+          <path
+            d={`M ${cx + lado * 2 - 10} 126 A 11 11 0 0 0 ${cx + lado * 2 + 10} 126`}
+            fill={CORES.olhosClaro}
+            opacity={0.55}
+          />
+          <circle
+            cx={cx + lado * 2}
+            cy={121}
+            r={15}
+            fill="none"
+            stroke={CORES.olhosEscuro}
+            strokeWidth={2.5}
+            opacity={0.8}
+          />
+          <circle cx={cx + lado * 2} cy={121} r={7} fill="#241C1A" />
+          <circle cx={cx + lado * 2 - 5} cy={115} r={5} fill="#FFFFFF" />
+          <circle cx={cx + lado * 2 + 6} cy={128} r={2.6} fill="#FFFFFF" opacity={0.85} />
+          {/* Pálpebra + cílio, no tom do próprio bicho e não em preto */}
+          <path
+            d={`M ${cx - 20} 118 A 20 22 0 0 1 ${cx + 20} 118`}
+            fill="none"
+            stroke="#B87C0E"
+            strokeWidth={6}
+            strokeLinecap="round"
+          />
+          <path
+            d={`M ${cx + lado * 19} 106 C ${cx + lado * 26} 100 ${cx + lado * 30} 97 ${cx + lado * 33} 95`}
+            fill="none"
+            stroke="#B87C0E"
+            strokeWidth={4}
+            strokeLinecap="round"
+          />
+        </g>
+      ))}
 
       {/* Bochechas */}
-      <ellipse cx={58} cy={118} rx={11} ry={7} fill={CORES.coral} opacity={0.5} />
-      <ellipse cx={142} cy={118} rx={11} ry={7} fill={CORES.coral} opacity={0.5} />
+      <ellipse cx={64} cy={150} rx={17} ry={11} fill={CORES.vestidoMeio} opacity={0.5} filter="url(#pg-suave)" />
+      <ellipse cx={176} cy={150} rx={17} ry={11} fill={CORES.vestidoMeio} opacity={0.5} filter="url(#pg-suave)" />
     </svg>
   );
 };

@@ -133,8 +133,67 @@ primeira versão.
 **A silhueta é o personagem.** A tromba da Nina não é um detalhe, é o motivo
 de ela existir: sem tromba visível ela é mais um hipopótamo roxo. Asa do
 Pipo acima da linha do olho lê como orelha, e ele deixa de ser passarinho.
-Essas duas coisas foram consertadas depois de olhar o primeiro render — vale
-sempre renderizar um frame e olhar antes de seguir.
+Chiquinha da Maria na altura dos olhos lê como orelha de bichinho. As três
+coisas foram consertadas depois de olhar o render — vale sempre renderizar
+um frame e olhar antes de seguir.
+
+---
+
+## Estilo: por que saiu do "vetor chapado"
+
+A primeira versão dos personagens era funcional e feia — "parece um desenho
+que uma criança fez". O diagnóstico foi formas geométricas chapadas com
+contorno preto uniforme. A virada de estilo tem cinco itens, e eles valem
+pra qualquer personagem ou cenário novo do canal:
+
+**1. Nenhum contorno preto.** Este é o item nº 1. Cada forma é contornada
+por uma versão escura da PRÓPRIA COR — `peleTraco` na pele, `cabeloTraco` no
+cabelo, roxo escuro na Nina, verde escuro na folha. Contorno preto uniforme
+em tudo é o que faz qualquer desenho parecer adesivo, e nenhuma ilustração
+infantil boa usa isso.
+
+**2. Gradiente em toda forma grande.** Pele, cabelo, vestido, corpo dos
+bichos, céu, mar, areia, tronco, folha. Sempre com a luz vindo do mesmo
+canto (alto/esquerda) — coerência de iluminação é o que faz as partes
+parecerem o mesmo desenho e não recortes colados.
+
+**3. Sombra desfocada (`feGaussianBlur`).** Um punhado de formas de sombra
+borradas, recortadas pelo contorno da forma com `clipPath`, faz o trabalho
+que na arte pintada é feito com pincel macio.
+
+**4. Olho em camadas.** Formato amendoado (não círculo), esclera com
+gradiente, íris com gradiente, anel límbico escuro, luz refletida no fundo
+da íris, dois brilhos de tamanhos diferentes, pálpebra grossa por cima e
+cílio só no canto de fora. É onde mora 80% da simpatia de um personagem
+infantil, e é a receita que se repete nos quatro — é isso que faz o elenco
+parecer da mesma mão.
+
+**5. Textura barata onde importa.** Penugem do Pipo (o contorno do corpo é
+ondulado, não um círculo liso), anéis no tronco do coqueiro, nervura na
+folha, ondas no cabelo, espuma na beira do mar, três reflexos na bolha do
+Bolha. Cada um custa três linhas e some sozinho; juntos são a diferença
+entre forma e objeto.
+
+### O teto desta técnica
+
+Vale registrar honestamente: **isto não chega em arte pintada.** Textura de
+pelo, luz volumétrica e pincelada saem de modelo de imagem, não de código
+SVG. O que dá pra alcançar aqui é "ilustração vetorial moderna bem
+acabada" — e é o que está no repo agora.
+
+Se um dia a decisão for ir pro estilo pintado, o caminho **não** é gerar uma
+imagem por cena (personagem muda entre imagens, e vídeo virando slideshow é
+exatamente o que a política de conteúdo inautêntico persegue). O caminho é
+recorte articulado: cada personagem desenhado uma vez, separado em partes
+(cabeça, corpo, braços, e um jogo de bocas), cada parte um PNG com fundo
+transparente, e o Remotion animando as partes como um boneco. Aí se ganha
+qualidade pintada COM consistência e movimento de verdade.
+
+### Cuidado de implementação
+
+Detalhe desenhado dentro de uma parte que gira tem que estar no mesmo grupo
+do `transform`. As penas do Pipo já ficaram soltas no ar batendo fora da asa
+porque estavam desenhadas depois do grupo que girava.
 
 ---
 

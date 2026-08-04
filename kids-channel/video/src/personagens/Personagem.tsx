@@ -14,8 +14,8 @@ import type { PersonagemEmCena } from "../marca/tipos";
 // enxergar a expressão do rosto. Personagem pequeno num cenário bonito é
 // erro clássico de quem vem de design e não de animação infantil.
 const TAMANHO_BASE: Record<PersonagemEmCena["quem"], { largura: number; altura: number }> = {
-  maria: { largura: 400, altura: 550 },
-  pipo: { largura: 470, altura: 494 },
+  maria: { largura: 420, altura: 588 },
+  pipo: { largura: 400, altura: 434 },
   nina: { largura: 620, altura: 494 },
   bolha: { largura: 340, altura: 340 },
 };

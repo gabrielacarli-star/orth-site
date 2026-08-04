@@ -34,13 +34,13 @@ export const Legenda: React.FC<{ texto: string }> = ({ texto }) => {
     >
       <div
         style={{
-          background: CORES.branco,
-          border: `8px solid ${CORES.traco}`,
+          background: "linear-gradient(#FFFFFF, #FFF4E2)",
+          border: "6px solid #FFFFFF",
           borderRadius: 999,
           padding: "22px 64px",
           maxWidth: 1500,
           textAlign: "center",
-          boxShadow: `0 10px 0 ${CORES.traco}22`,
+          boxShadow: "0 8px 24px rgba(60,45,35,0.28), 0 2px 0 rgba(255,255,255,0.9) inset",
         }}
       >
         <span
@@ -49,7 +49,7 @@ export const Legenda: React.FC<{ texto: string }> = ({ texto }) => {
             fontWeight: 800,
             fontSize: 62,
             lineHeight: 1.1,
-            color: CORES.traco,
+            color: "#5C4432",
             letterSpacing: "-0.01em",
           }}
         >
