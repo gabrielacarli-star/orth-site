@@ -18,8 +18,8 @@ por três motivos que não têm contorno:
 
 O [Remotion](https://remotion.dev) é o contrário disso: vídeo feito com
 React. Cada personagem é um componente, cada cenário é um componente, e o
-episódio é montado a partir de um arquivo de dados. O Pipo do episódio 200
-vai ser rigorosamente o mesmo Pipo do episódio 1, porque é o mesmo código.
+episódio é montado a partir de um arquivo de dados. A Maria do episódio 200
+vai ser rigorosamente a mesma Maria do episódio 1, porque é o mesmo código.
 
 Licença: gratuito pra pessoa física e empresa de até 3 pessoas, uso
 comercial liberado.
@@ -37,7 +37,7 @@ por episódio.
   "cenario": "praia",
   "legenda": "Olha a cor, olha a cor",
   "personagens": [
-    { "quem": "pipo", "x": 0.34, "y": 0.82, "cantando": true },
+    { "quem": "maria", "x": 0.34, "y": 0.82, "cantando": true },
     { "quem": "nina", "x": 0.68, "y": 0.83, "espelhado": true, "cantando": true }
   ]
 }
@@ -67,6 +67,7 @@ video/src/
     fonte.ts           Baloo 2 embutida em base64
     tipos.ts           o formato do episodio.json
   personagens/
+    Maria.tsx          SVG da protagonista
     Pipo.tsx           SVG do passarinho
     Nina.tsx           SVG da anta
     Bolha.tsx          SVG do peixinho

@@ -5,7 +5,7 @@
 // lê ele. Mudou o JSON, mudou o vídeo — não precisa mexer em código.
 
 /** Personagens disponíveis. Adicionar um novo = criar o componente e listar aqui. */
-export type NomePersonagem = "pipo" | "nina" | "bolha";
+export type NomePersonagem = "maria" | "pipo" | "nina" | "bolha";
 
 /** Cenários fixos da Ilha Pipoca (Fase 2, seção 3). */
 export type NomeCenario = "praia" | "coqueiral" | "casa-da-arvore" | "ceu-noturno";

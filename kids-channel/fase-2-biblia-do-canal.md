@@ -14,16 +14,17 @@ depende de nenhuma escolha específica daqui.
 
 ## 1. Marca
 
-**Canal:** `Pipo e Amigos`
+**Canal:** `Maria e Amigos`
 **Mundo:** Ilha Pipoca
-**Internacional:** `Pipo & Friends` · `Pipo y Amigos` (o nome próprio não se traduz)
+**Internacional:** `Maria & Friends` · `María y Amigos` (o nome próprio não se traduz)
 
 Por que nomear pelo personagem e não pelo mundo: licenciamento (boneco,
 livro, app) sempre gira em torno de um personagem. Bluey, Peppa, Blippi —
-todos são o nome do protagonista. "Pipo" tem duas sílabas, consoante
-plosiva e vogais abertas: é o formato das primeiras palavras que uma criança
-de 1 a 2 anos consegue repetir. E funciona foneticamente em português,
-espanhol, inglês, hindi e indonésio sem adaptação.
+todos são o nome do protagonista. "Maria" tem o mesmo formato que funciona
+pra criança de 1 a 2 anos (sílabas abertas, fácil de repetir) e é um dos
+poucos nomes que existe praticamente igual em português, espanhol, inglês,
+italiano e árabe — não precisa de adaptação em nenhum mercado do plano
+multi-idioma.
 
 O trocadilho "Pipo → Pipoca" dá o nome do mundo em português de graça, e as
 nuvens da ilha são desenhadas em formato de pipoca — vira assinatura visual
@@ -33,20 +34,36 @@ reconhecível em miniatura de 120px.
 
 ## 2. Elenco
 
-Quatro personagens. Poucos, de propósito: criança pequena precisa de
+Cinco personagens. Poucos, de propósito: criança pequena precisa de
 repetição e reconhecimento, não de elenco grande. Personagens novos entram
 como visitantes, nunca como fixos.
 
-### Pipo — passarinho amarelo
-Protagonista. Idade emocional ~3 anos. É o "eu" da criança que assiste:
-curioso, se empolga fácil, erra, fica frustrado por 2 segundos, tenta de
-novo e consegue. **Nunca é o mais esperto da cena** — a criança precisa
-poder saber a resposta antes dele.
-Silhueta: círculo com bico triangular e um tufo de três penas na cabeça.
+### Maria — menininha loira
+Protagonista, ~3 anos. É o "eu" da criança que assiste: curiosa, se empolga
+fácil, erra, fica frustrada por 2 segundos, tenta de novo e consegue.
+**Nunca é a mais esperta da cena** — a criança precisa poder saber a
+resposta antes dela.
+
+Protagonista humana de propósito: criança pequena se identifica com criança,
+não com bichinho. É por isso que o protagonista do CoComelon é o JJ e não os
+animais — os bichos são os amigos, e é o menino que carrega a marca.
+
+Silhueta: cabeça grande (~45% da altura), marias-chiquinhas com laço,
+vestido coral.
 Voz: aguda, rápida, ofegante de empolgação.
 
+**A Maria é uma personagem original, desenhada do zero.** O nome vem da
+filha da Gabriela; a aparência não vem de ninguém. Ver a seção 8.
+
+### Pipo — passarinho amarelo
+Melhor amigo da Maria e alívio de cena. Bobo, entusiasmado, sempre erra
+primeiro pra ela poder corrigir — é o mecanismo que faz a criança se sentir
+esperta.
+Silhueta: círculo com bico triangular e um tufo de três penas na cabeça.
+Voz: aguda e esganiçada, mais rápida que a da Maria.
+
 ### Nina — anta roxa
-Irmã mais velha / cuidadora. Calma, paciente, explica sem corrigir com
+Irmã mais velha / cuidadora da turma. Calma, paciente, explica sem corrigir com
 dureza. É quem canta a parte "ensino" das músicas.
 A anta é uma escolha deliberada: é um bicho brasileiro com silhueta única
 (a tromba curta) e praticamente ninguém usa em desenho infantil — o
@@ -94,7 +111,10 @@ miniatura de 120px na TV da sala.
 
 | Cor | Hex | Uso |
 |---|---|---|
-| Amarelo Pipo | `#FFC93C` | protagonista, destaque |
+| Pele Maria | `#FFD9BC` | protagonista |
+| Cabelo Maria | `#FFD772` | protagonista |
+| Vestido Maria | `#FF6B6B` | protagonista, laços, acentos |
+| Amarelo Pipo | `#FFC93C` | Pipo, destaque, sol |
 | Roxo Nina | `#9B5DE5` | Nina, elementos de apoio |
 | Azul Bolha | `#4EA8DE` | água, Bolha |
 | Verde ilha | `#43BF6D` | vegetação, chão |
@@ -144,11 +164,11 @@ personagem por episódio.
 | Trecho | Tempo | O que acontece |
 |---|---|---|
 | Vinheta | 0:00–0:08 | logo + jingle de 4 notas, idêntico sempre |
-| Gancho | 0:08–0:25 | Pipo encontra o "problema" do episódio |
+| Gancho | 0:08–0:25 | Maria encontra o "problema" do episódio |
 | Refrão 1 | 0:25–0:50 | a música entra, o refrão apresenta a ideia |
 | Verso 1 | 0:50–1:20 | Nina explica cantando |
 | Momento Bolha | 1:20–1:35 | interrupção cômica, sem letra |
-| Verso 2 | 1:35–2:05 | Pipo tenta, erra, tenta de novo |
+| Verso 2 | 1:35–2:05 | Maria tenta, erra, tenta de novo |
 | Refrão final | 2:05–2:45 | todo mundo junto, versão mais cheia |
 | Encerramento | 2:45–3:00 | tchau + próximo episódio |
 
@@ -187,7 +207,15 @@ Spotify. Um trabalho, dois produtos.
 - Melodias de domínio público podem ser usadas, mas **arranjo e letra sempre originais** — e nunca prompt de IA citando artista, música ou letra de terceiros (violaria os termos da ElevenLabs Music e criaria risco de direito autoral).
 - Nada de comida-chatarra, marcas, telas dentro do desenho, ou qualquer coisa que pareça publicidade.
 - Nenhum conteúdo de "desafio", "surpresa" ou unboxing — categorias marcadas pelo YouTube.
-- Nenhuma criança real, voz de criança real, ou imagem de pessoa real.
+- **Nenhuma criança real, voz de criança real, ou imagem de pessoa real.**
+  Isso vale principalmente pra Maria. Batizar a personagem com o nome de uma
+  filha é ótimo e é o que metade das IPs infantis faz — Bluey, Peppa e o JJ
+  do CoComelon vieram todos de filho de alguém. Desenhar o **rosto** de uma
+  criança real é outra coisa: é um canal público e monetizado, o vídeo fica
+  na internet pra sempre, potencialmente com milhões de visualizações, e
+  associado ao nome verdadeiro dela. A Maria do canal é original e continua
+  original. Pra mudar a aparência dela, mexa em `pele`, `cabelo` e `vestido`
+  em `video/src/marca/paleta.ts` — não em uma foto.
 
 ---
 

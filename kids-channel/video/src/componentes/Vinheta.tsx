@@ -3,7 +3,7 @@ import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } fr
 import { CORES } from "../marca/paleta";
 import { FONTE } from "../marca/fonte";
 import { NuvemPipoca } from "../cenarios/elementos";
-import { Pipo } from "../personagens/Pipo";
+import { Maria } from "../personagens/Maria";
 
 /**
  * Vinheta de abertura — 8 segundos, IDÊNTICA em todo episódio.
@@ -38,18 +38,18 @@ export const Vinheta: React.FC = () => {
       <NuvemPipoca x={1420} y={180} tamanho={240} opacidade={0.85} />
       <NuvemPipoca x={760} y={60} tamanho={200} opacidade={0.7} />
 
-      {/* Pipo entra pulando */}
+      {/* Maria entra pulando */}
       <div
         style={{
           position: "absolute",
           left: "50%",
-          top: 300,
-          width: 360,
-          height: 378,
+          top: 108,
+          width: 470,
+          height: 646,
           transform: `translateX(-50%) scale(${pulo}) rotate(${interpolate(pulo, [0, 1], [-25, 0])}deg)`,
         }}
       >
-        <Pipo abertura={0.35} asas={1} />
+        <Maria abertura={0.35} />
       </div>
 
       {/* Nome do canal */}
@@ -75,7 +75,7 @@ export const Vinheta: React.FC = () => {
             letterSpacing: "-0.02em",
           }}
         >
-          Pipo e Amigos
+          Maria e Amigos
         </div>
         <div
           style={{

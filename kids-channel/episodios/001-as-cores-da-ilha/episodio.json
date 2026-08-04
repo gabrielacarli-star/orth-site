@@ -12,7 +12,7 @@
       "legenda": "Olha quanta cor na ilha!",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.5,
           "y": 0.82
         }
@@ -25,7 +25,7 @@
       "legenda": "Nina, que cor é essa?",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.32,
           "y": 0.82,
           "cantando": true
@@ -42,10 +42,10 @@
       "de": 17,
       "ate": 21,
       "cenario": "praia",
-      "legenda": "Vem que eu te ensino, Pipo!",
+      "legenda": "Vem que eu te ensino, Maria!",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.32,
           "y": 0.82
         },
@@ -65,7 +65,7 @@
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.34,
           "y": 0.82,
           "cantando": true
@@ -86,7 +86,7 @@
       "legenda": "Que cor é essa aqui?",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.34,
           "y": 0.82,
           "cantando": true
@@ -107,19 +107,25 @@
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.3,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "cantando": true
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.52,
+          "x": 0.55,
           "y": 0.76
         },
         {
           "quem": "nina",
-          "x": 0.74,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true,
           "cantando": true
@@ -133,19 +139,25 @@
       "legenda": "Vem cantar comigo assim!",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.3,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "cantando": true
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.52,
+          "x": 0.55,
           "y": 0.76
         },
         {
           "quem": "nina",
-          "x": 0.74,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true,
           "cantando": true
@@ -166,7 +178,7 @@
           "cantando": true
         },
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.28,
           "y": 0.83,
           "escala": 0.9
@@ -187,7 +199,7 @@
           "cantando": true
         },
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.28,
           "y": 0.83,
           "escala": 0.9
@@ -208,7 +220,7 @@
           "cantando": true
         },
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.28,
           "y": 0.83,
           "escala": 0.9,
@@ -230,7 +242,7 @@
           "cantando": true
         },
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.28,
           "y": 0.83,
           "escala": 1.05,
@@ -245,13 +257,19 @@
       "personagens": [
         {
           "quem": "bolha",
-          "x": 0.5,
+          "x": 0.55,
           "y": 0.74,
           "escala": 1.3
         },
         {
           "quem": "pipo",
-          "x": 0.2,
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "escala": 0.85
         }
@@ -264,7 +282,7 @@
       "legenda": "A fruta é verde? Não, não, não!",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.45,
           "y": 0.83,
           "cantando": true
@@ -278,7 +296,7 @@
       "legenda": "A fruta é vermelha, sim!",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.38,
           "y": 0.83,
           "cantando": true
@@ -298,7 +316,7 @@
       "legenda": "Vermelha como o meu coração",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.38,
           "y": 0.83,
           "cantando": true
@@ -319,7 +337,7 @@
       "legenda": "Vermelha assim, assim!",
       "personagens": [
         {
-          "quem": "pipo",
+          "quem": "maria",
           "x": 0.38,
           "y": 0.83,
           "cantando": true
@@ -340,19 +358,25 @@
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.26,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "cantando": true
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.5,
+          "x": 0.55,
           "y": 0.75
         },
         {
           "quem": "nina",
-          "x": 0.76,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true,
           "cantando": true
@@ -366,19 +390,25 @@
       "legenda": "Que cor é essa aqui?",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.26,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "cantando": true
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.5,
+          "x": 0.55,
           "y": 0.75
         },
         {
           "quem": "nina",
-          "x": 0.76,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true,
           "cantando": true
@@ -392,19 +422,25 @@
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.26,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "cantando": true
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.5,
+          "x": 0.55,
           "y": 0.75
         },
         {
           "quem": "nina",
-          "x": 0.76,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true,
           "cantando": true
@@ -418,19 +454,25 @@
       "legenda": "Cantou tudo até o fim!",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.26,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "cantando": true
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.5,
+          "x": 0.55,
           "y": 0.75
         },
         {
           "quem": "nina",
-          "x": 0.76,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true,
           "cantando": true
@@ -444,19 +486,25 @@
       "legenda": "Tchau, tchau! Até amanhã!",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.3,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82,
           "cantando": true
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.52,
+          "x": 0.55,
           "y": 0.75
         },
         {
           "quem": "nina",
-          "x": 0.74,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true,
           "cantando": true
@@ -469,18 +517,24 @@
       "cenario": "praia",
       "personagens": [
         {
-          "quem": "pipo",
-          "x": 0.3,
+          "quem": "maria",
+          "x": 0.19,
           "y": 0.82
         },
         {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
           "quem": "bolha",
-          "x": 0.52,
+          "x": 0.55,
           "y": 0.75
         },
         {
           "quem": "nina",
-          "x": 0.74,
+          "x": 0.8,
           "y": 0.83,
           "espelhado": true
         }

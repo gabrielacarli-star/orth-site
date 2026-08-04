@@ -15,6 +15,16 @@ export const CORES = {
   bolhaEscuro: "#2E7FB5",
   bolhaClaro: "#A8D9F5",
 
+  // Maria — a protagonista. "pele" e "cabelo" são as duas cores que você
+  // pode querer trocar; é literalmente uma linha cada, e o desenho inteiro
+  // acompanha.
+  pele: "#FFD9BC",
+  peleSombra: "#F0BC98",
+  cabelo: "#FFD772",
+  cabeloEscuro: "#E3AE38",
+  vestido: "#FF6B6B",
+  vestidoEscuro: "#E24E4E",
+
   verde: "#43BF6D",
   verdeEscuro: "#2E9954",
   verdeClaro: "#7BD99A",

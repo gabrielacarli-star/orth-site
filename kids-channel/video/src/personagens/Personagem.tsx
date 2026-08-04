@@ -1,5 +1,6 @@
 import React from "react";
 import { useCurrentFrame, useVideoConfig, interpolate } from "remotion";
+import { Maria } from "./Maria";
 import { Pipo } from "./Pipo";
 import { Nina } from "./Nina";
 import { Bolha } from "./Bolha";
@@ -13,12 +14,13 @@ import type { PersonagemEmCena } from "../marca/tipos";
 // enxergar a expressão do rosto. Personagem pequeno num cenário bonito é
 // erro clássico de quem vem de design e não de animação infantil.
 const TAMANHO_BASE: Record<PersonagemEmCena["quem"], { largura: number; altura: number }> = {
+  maria: { largura: 400, altura: 550 },
   pipo: { largura: 470, altura: 494 },
   nina: { largura: 620, altura: 494 },
   bolha: { largura: 340, altura: 340 },
 };
 
-const COMPONENTES = { pipo: Pipo, nina: Nina, bolha: Bolha };
+const COMPONENTES = { maria: Maria, pipo: Pipo, nina: Nina, bolha: Bolha };
 
 /**
  * Coloca um personagem em cena e cuida de toda a animação "de vida":

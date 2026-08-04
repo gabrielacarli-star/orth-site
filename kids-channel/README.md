@@ -1,4 +1,4 @@
-# Pipo e Amigos — canal infantil feito por IA
+# Maria e Amigos — canal infantil feito por IA
 
 Pipeline completo de um canal de YouTube infantil: música, animação,
 legenda sincronizada e renderização. Tudo automatizado, tudo em código.
@@ -87,7 +87,7 @@ kids-channel/
 
   video/                       projeto Remotion (npm separado)
     src/marca/                 paleta, fonte, tipos
-    src/personagens/           Pipo, Nina, Bolha
+    src/personagens/           Maria, Pipo, Nina, Bolha
     src/cenarios/              praia, coqueiral, casa da árvore, céu noturno
     src/componentes/           vinheta, legenda
     src/Episodio.tsx           monta o vídeo a partir do JSON
@@ -105,7 +105,7 @@ streaming. (Fase 1, seção 2.1)
 
 **2. O vídeo não é gerado por IA — é desenhado em código.**
 Personagem gerado por modelo de vídeo muda de episódio pra episódio, e canal
-infantil vive de reconhecimento. Aqui o Pipo do episódio 200 é literalmente o
+infantil vive de reconhecimento. Aqui a Maria do episódio 200 é literalmente o
 mesmo componente React do episódio 1. De quebra, isso é o oposto do perfil
 que a política de conteúdo inautêntico do YouTube persegue. (Fase 4)
 
