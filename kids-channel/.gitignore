@@ -10,3 +10,7 @@ video/public/sfx/
 
 # Backup automático do sincronizar_legenda.py
 episodios/*/episodio.json.bak
+
+# Cache de bytecode do Python, gerado ao importar scripts/comum.py
+__pycache__/
+*.pyc
