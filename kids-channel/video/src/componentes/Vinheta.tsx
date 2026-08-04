@@ -1,5 +1,13 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, useVideoConfig, spring, interpolate } from "remotion";
+import {
+  AbsoluteFill,
+  Audio,
+  staticFile,
+  useCurrentFrame,
+  useVideoConfig,
+  spring,
+  interpolate,
+} from "remotion";
 import { CORES } from "../marca/paleta";
 import { FONTE } from "../marca/fonte";
 import { NuvemPipoca } from "../cenarios/elementos";
@@ -34,6 +42,12 @@ export const Vinheta: React.FC = () => {
         opacity: saida,
       }}
     >
+      {/* Jingle da marca — gerado uma vez pelo gerar_sfx.py e igual em todo
+          episódio. Sem ele a abertura ficava 8 segundos de silêncio, o que
+          é péssimo: som é justamente o que faz a criança largar o que está
+          fazendo e olhar pra tela. */}
+      <Audio src={staticFile("sfx/vinheta-jingle.mp3")} volume={0.85} />
+
       <NuvemPipoca x={180} y={120} tamanho={280} opacidade={0.9} />
       <NuvemPipoca x={1420} y={180} tamanho={240} opacidade={0.85} />
       <NuvemPipoca x={760} y={60} tamanho={200} opacidade={0.7} />
