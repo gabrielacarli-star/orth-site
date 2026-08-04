@@ -102,6 +102,14 @@ na horizontal. É o princípio mais antigo da animação e custa três linhas.
 personagem se afasta dela. Sem isso, o personagem parece colado por cima do
 cenário em vez de apoiado nele.
 
+**Câmera nunca parada.** Cada cena tem um zoom lento de 4% mais um
+deslocamento lateral de 14px, alternando a direção a cada cena. É quase
+imperceptível de propósito — o objetivo não é ninguém notar a câmera, é a
+imagem nunca congelar. Cena estática é literalmente o critério que a
+política de conteúdo inautêntico do YouTube descreve ("pouca ou nenhuma
+variação"). A legenda fica de fora do movimento: texto que escorrega junto
+com a câmera é difícil de acompanhar, e quem lê é o pai cantando junto.
+
 ---
 
 ## Detalhes de desenho que importam
@@ -180,8 +188,6 @@ REMOTION_CHROME=/caminho/para/chrome npm run render
 - **Objetos em cena** (a fruta que cai, o coco, a bolha de sabão): hoje só
   dá pra colocar personagem, não objeto solto. Precisa de um tipo `objetos`
   no `episodio.json`.
-- **Movimento de câmera.** Tudo é câmera parada. Um zoom lento de 3% ao longo
-  da cena já daria bastante vida — e é literalmente uma linha.
 - **Compilações** (Fase 1, seção 2.2): montar 45–60 min a partir de vários
   `episodio.json` seguidos. É a peça que mais rende no YouTube e é fácil,
   porque a estrutura já é orientada a dados.
