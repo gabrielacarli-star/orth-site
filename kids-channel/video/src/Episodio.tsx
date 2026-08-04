@@ -56,6 +56,16 @@ const useCamera = (indice: number, duracaoEmFrames: number) => {
   return { transform: `scale(${zoom}) translateX(${desloca}px)` };
 };
 
+/**
+ * Duração da vinheta de abertura, em segundos.
+ *
+ * Este número precisa ser o mesmo que o `--vinheta` do
+ * `sincronizar_legenda.py` (que tem 8 como padrão). Se os dois
+ * discordarem, a legenda sai fora do tempo da música — e o erro é
+ * exatamente do tamanho da diferença.
+ */
+export const SEGUNDOS_DE_VINHETA = 8;
+
 const UmaCena: React.FC<{ cena: Cena; indice: number; duracaoEmFrames: number }> = ({
   cena,
   indice,
@@ -86,12 +96,24 @@ export const Episodio: React.FC<{ episodio: TipoEpisodio }> = ({ episodio }) => 
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#000" }}>
-      {/* A música cobre o episódio inteiro. Sem arquivo, renderiza mudo —
-          é assim que dá pra ver a animação antes de gerar o áudio. */}
-      {episodio.audio ? <Audio src={staticFile(episodio.audio)} /> : null}
+      {/* A música começa DEPOIS da vinheta, não no frame 0.
+          Isto já foi um bug: com o áudio começando em zero, a música ficava
+          8 segundos adiantada em relação à legenda, porque o
+          sincronizar_legenda.py soma a duração da vinheta aos tempos que o
+          forced alignment devolve (que são relativos ao começo do arquivo
+          de áudio, não ao começo do vídeo). As duas pontas têm que
+          concordar sobre onde a música começa — e o lugar é aqui.
 
-      {/* Vinheta de marca, sempre nos primeiros 8 segundos */}
-      <Sequence durationInFrames={emFrames(8)}>
+          Sem arquivo de áudio, renderiza mudo: é assim que dá pra ver a
+          animação antes de gerar a música. */}
+      {episodio.audio ? (
+        <Sequence from={emFrames(SEGUNDOS_DE_VINHETA)}>
+          <Audio src={staticFile(episodio.audio)} />
+        </Sequence>
+      ) : null}
+
+      {/* Vinheta de marca, sempre nos primeiros segundos */}
+      <Sequence durationInFrames={emFrames(SEGUNDOS_DE_VINHETA)}>
         <Vinheta />
       </Sequence>
 
