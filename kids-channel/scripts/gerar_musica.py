@@ -61,6 +61,17 @@ def gravar_wav(caminho: Path, pedacos) -> Path:
 # Descrição musical por pilar do canal (Fase 2, seção 5). É aqui que mora a
 # identidade sonora — ritmo brasileiro em vez do pop de teclado genérico que
 # todo canal kids de IA usa.
+# Tradução do ritmo do episodio.json pra descrição que o modelo entende.
+# É esta tabela que impede dez episódios de soarem iguais.
+RITMOS = {
+    "baião": "Brazilian baião, 104 BPM, triangle, zabumba and accordion leading",
+    "samba leve": "light Brazilian samba, 100 BPM, cavaquinho, pandeiro and surdo leading",
+    "xote": "Brazilian xote, 92 BPM, gentle swaying accordion and triangle leading",
+    "frevo": "playful slowed-down Brazilian frevo, 116 BPM, bright brass and snare leading",
+    "maracatu suave": "soft Brazilian maracatu, 96 BPM, alfaia drums played gently and shakers",
+    "viola": "fingerpicked Brazilian viola caipira, slow and tender",
+}
+
 ESTILOS = {
     "dia": (
         "Upbeat Brazilian baião for toddlers, 104 BPM, major key, warm and playful. "
@@ -80,8 +91,19 @@ ESTILOS = {
 
 
 def montar_prompt(episodio: dict) -> str:
-    """Junta estilo do pilar + letra + instruções de estrutura."""
+    """Junta estilo do pilar + ritmo do episódio + letra + estrutura."""
     estilo = ESTILOS[episodio["pilar"]]
+
+    # O ritmo do episódio substitui o ritmo padrão do pilar. Sem isso todo
+    # episódio sai com o mesmo baião.
+    ritmo = episodio.get("ritmo")
+    if ritmo and ritmo in RITMOS:
+        estilo = f"{RITMOS[ritmo]}. {estilo}"
+    elif ritmo:
+        raise SystemExit(
+            f"Ritmo '{ritmo}' não está na tabela RITMOS do gerar_musica.py. "
+            f"Conhecidos: {', '.join(RITMOS)}"
+        )
     letra = "\n".join(letra_do_episodio(episodio))
     return (
         f"{estilo}\n\n"

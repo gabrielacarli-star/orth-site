@@ -5,15 +5,13 @@ import { Vinheta } from "./componentes/Vinheta";
 import { Capa } from "./componentes/Capa";
 import { CapaStreaming } from "./componentes/CapaStreaming";
 import { carregarFonte } from "./marca/fonte";
-import type { Episodio as TipoEpisodio } from "./marca/tipos";
 
-// Catálogo de episódios. Pra adicionar o próximo, cria a pasta em
-// ../../episodios/, importa o JSON aqui e coloca na lista. Só isso.
-import ep001 from "../../episodios/001-as-cores-da-ilha/episodio.json";
+// Catálogo de episódios. Pra adicionar o próximo: escreva o roteiro em
+// scripts/roteiros.py e rode `python3 scripts/criar_episodio.py` — ele cria
+// a pasta e regenera este índice sozinho.
+import { EPISODIOS } from "./episodios";
 
 carregarFonte();
-
-const EPISODIOS = [ep001] as unknown as TipoEpisodio[];
 
 export const RemotionRoot: React.FC = () => {
   return (

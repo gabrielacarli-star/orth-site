@@ -47,6 +47,16 @@ export type Episodio = {
   titulo: string;
   /** "dia" = música de aprendizado; "noite" = ninar (ver Fase 1, seção 3). */
   pilar: "dia" | "noite";
+  /**
+   * Ritmo brasileiro deste episódio: "baião", "samba leve", "xote",
+   * "frevo", "maracatu suave", "viola".
+   *
+   * Existe pra que dez episódios não saiam com a mesma música. Ritmo
+   * repetido é o que a política de conteúdo inautêntico do YouTube
+   * descreve como "pouca ou nenhuma variação" — e é o oposto do que a
+   * Fase 2 define como identidade sonora do canal.
+   */
+  ritmo?: string;
   fps: number;
   duracaoSegundos: number;
   /** Nome do arquivo de áudio dentro de public/. Vazio = renderiza mudo. */

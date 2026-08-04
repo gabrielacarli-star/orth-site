@@ -1,0 +1,438 @@
+{
+  "id": "010",
+  "titulo": "Boa Noite, Ilha",
+  "pilar": "noite",
+  "ritmo": "viola",
+  "fps": 30,
+  "duracaoSegundos": 134.0,
+  "cenas": [
+    {
+      "de": 8.0,
+      "ate": 13.0,
+      "cenario": "ceu-noturno",
+      "legenda": "O sol foi dormir no mar",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.5,
+          "y": 0.82
+        }
+      ]
+    },
+    {
+      "de": 13.0,
+      "ate": 18.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Chegou a noite na ilha",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    },
+    {
+      "de": 18.0,
+      "ate": 23.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Boa noite, boa noite",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 23.0,
+      "ate": 28.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Fecha o olhinho devagar",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 28.0,
+      "ate": 33.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Boa noite, boa noite",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 33.0,
+      "ate": 38.0,
+      "cenario": "ceu-noturno",
+      "legenda": "A lua vem te ninar",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 38.0,
+      "ate": 45.0,
+      "cenario": "ceu-noturno",
+      "legenda": "O passarinho dormiu",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 45.0,
+      "ate": 52.0,
+      "cenario": "ceu-noturno",
+      "legenda": "O peixinho dormiu",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 52.0,
+      "ate": 59.0,
+      "cenario": "ceu-noturno",
+      "legenda": "A antinha já ressona",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 59.0,
+      "ate": 66.0,
+      "cenario": "ceu-noturno",
+      "legenda": "E a ilha adormeceu",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 66.0,
+      "ate": 78.0,
+      "cenario": "ceu-noturno",
+      "personagens": [
+        {
+          "quem": "bolha",
+          "x": 0.55,
+          "y": 0.74,
+          "escala": 1.3
+        },
+        {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
+          "quem": "maria",
+          "x": 0.19,
+          "y": 0.82,
+          "escala": 0.85
+        }
+      ]
+    },
+    {
+      "de": 78.0,
+      "ate": 85.0,
+      "cenario": "ceu-noturno",
+      "legenda": "A estrela pisca pra você",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    },
+    {
+      "de": 85.0,
+      "ate": 92.0,
+      "cenario": "ceu-noturno",
+      "legenda": "O vento canta baixinho",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    },
+    {
+      "de": 92.0,
+      "ate": 99.0,
+      "cenario": "ceu-noturno",
+      "legenda": "A ondinha faz shhh, shhh",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    },
+    {
+      "de": 99.0,
+      "ate": 106.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Dorme, dorme, meu carinho",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    },
+    {
+      "de": 106.0,
+      "ate": 113.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Boa noite, boa noite",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.19,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
+          "quem": "bolha",
+          "x": 0.55,
+          "y": 0.76
+        },
+        {
+          "quem": "nina",
+          "x": 0.8,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 113.0,
+      "ate": 120.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Fecha o olhinho devagar",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.19,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
+          "quem": "bolha",
+          "x": 0.55,
+          "y": 0.76
+        },
+        {
+          "quem": "nina",
+          "x": 0.8,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 120.0,
+      "ate": 127.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Boa noite, boa noite",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.19,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
+          "quem": "bolha",
+          "x": 0.55,
+          "y": 0.76
+        },
+        {
+          "quem": "nina",
+          "x": 0.8,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 127.0,
+      "ate": 134.0,
+      "cenario": "ceu-noturno",
+      "legenda": "Até amanhã, meu bem",
+      "personagens": [
+        {
+          "quem": "maria",
+          "x": 0.19,
+          "y": 0.82
+        },
+        {
+          "quem": "pipo",
+          "x": 0.37,
+          "y": 0.82,
+          "escala": 0.8
+        },
+        {
+          "quem": "bolha",
+          "x": 0.55,
+          "y": 0.76
+        },
+        {
+          "quem": "nina",
+          "x": 0.8,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    }
+  ]
+}
