@@ -3,11 +3,11 @@
   "titulo": "As Cores da Ilha",
   "pilar": "dia",
   "fps": 30,
-  "duracaoSegundos": 168,
+  "duracaoSegundos": 158.05,
   "cenas": [
     {
-      "de": 8,
-      "ate": 12.5,
+      "de": 8.58,
+      "ate": 22.36,
       "cenario": "praia",
       "legenda": "Olha quanta cor na ilha!",
       "personagens": [
@@ -19,8 +19,8 @@
       ]
     },
     {
-      "de": 12.5,
-      "ate": 17,
+      "de": 22.36,
+      "ate": 24.72,
       "cenario": "praia",
       "legenda": "Nina, que cor é essa?",
       "personagens": [
@@ -39,8 +39,8 @@
       ]
     },
     {
-      "de": 17,
-      "ate": 21,
+      "de": 24.72,
+      "ate": 27.58,
       "cenario": "praia",
       "legenda": "Vem que eu te ensino, Maria!",
       "personagens": [
@@ -59,8 +59,8 @@
       ]
     },
     {
-      "de": 21,
-      "ate": 27,
+      "de": 27.58,
+      "ate": 30.2,
       "cenario": "praia",
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
@@ -80,8 +80,8 @@
       ]
     },
     {
-      "de": 27,
-      "ate": 33,
+      "de": 30.2,
+      "ate": 32.2,
       "cenario": "praia",
       "legenda": "Que cor é essa aqui?",
       "personagens": [
@@ -101,8 +101,8 @@
       ]
     },
     {
-      "de": 33,
-      "ate": 39,
+      "de": 32.2,
+      "ate": 34.54,
       "cenario": "praia",
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
@@ -133,8 +133,8 @@
       ]
     },
     {
-      "de": 39,
-      "ate": 45,
+      "de": 34.54,
+      "ate": 39.44,
       "cenario": "praia",
       "legenda": "Vem cantar comigo assim!",
       "personagens": [
@@ -165,8 +165,8 @@
       ]
     },
     {
-      "de": 45,
-      "ate": 52,
+      "de": 39.44,
+      "ate": 44.06,
       "cenario": "coqueiral",
       "legenda": "O coco é marrom, marrom, marrom",
       "personagens": [
@@ -186,8 +186,8 @@
       ]
     },
     {
-      "de": 52,
-      "ate": 59,
+      "de": 44.06,
+      "ate": 48.72,
       "cenario": "coqueiral",
       "legenda": "O mar é azul, azul, azul",
       "personagens": [
@@ -207,8 +207,8 @@
       ]
     },
     {
-      "de": 59,
-      "ate": 66,
+      "de": 48.72,
+      "ate": 53.28,
       "cenario": "coqueiral",
       "legenda": "A folha é verde, verde, verde",
       "personagens": [
@@ -229,8 +229,8 @@
       ]
     },
     {
-      "de": 66,
-      "ate": 73,
+      "de": 53.28,
+      "ate": 56.34,
       "cenario": "coqueiral",
       "legenda": "E o sol é amarelo!",
       "personagens": [
@@ -251,8 +251,8 @@
       ]
     },
     {
-      "de": 73,
-      "ate": 88,
+      "de": 56.34,
+      "ate": 59.4,
       "cenario": "praia",
       "personagens": [
         {
@@ -276,8 +276,8 @@
       ]
     },
     {
-      "de": 88,
-      "ate": 95,
+      "de": 59.4,
+      "ate": 94.84,
       "cenario": "coqueiral",
       "legenda": "A fruta é verde? Não, não, não!",
       "personagens": [
@@ -290,8 +290,8 @@
       ]
     },
     {
-      "de": 95,
-      "ate": 102,
+      "de": 94.84,
+      "ate": 99.42,
       "cenario": "coqueiral",
       "legenda": "A fruta é vermelha, sim!",
       "personagens": [
@@ -310,8 +310,8 @@
       ]
     },
     {
-      "de": 102,
-      "ate": 109,
+      "de": 99.42,
+      "ate": 104.04,
       "cenario": "coqueiral",
       "legenda": "Vermelha como o meu coração",
       "personagens": [
@@ -331,8 +331,8 @@
       ]
     },
     {
-      "de": 109,
-      "ate": 116,
+      "de": 104.04,
+      "ate": 110.16,
       "cenario": "coqueiral",
       "legenda": "Vermelha assim, assim!",
       "personagens": [
@@ -352,8 +352,8 @@
       ]
     },
     {
-      "de": 116,
-      "ate": 125,
+      "de": 110.16,
+      "ate": 128.58,
       "cenario": "praia",
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
@@ -384,8 +384,8 @@
       ]
     },
     {
-      "de": 125,
-      "ate": 134,
+      "de": 128.58,
+      "ate": 138.36,
       "cenario": "praia",
       "legenda": "Que cor é essa aqui?",
       "personagens": [
@@ -416,8 +416,8 @@
       ]
     },
     {
-      "de": 134,
-      "ate": 143,
+      "de": 138.36,
+      "ate": 140.68,
       "cenario": "praia",
       "legenda": "Olha a cor, olha a cor",
       "personagens": [
@@ -448,8 +448,8 @@
       ]
     },
     {
-      "de": 143,
-      "ate": 152,
+      "de": 140.68,
+      "ate": 145.3,
       "cenario": "praia",
       "legenda": "Cantou tudo até o fim!",
       "personagens": [
@@ -480,8 +480,8 @@
       ]
     },
     {
-      "de": 152,
-      "ate": 160,
+      "de": 145.3,
+      "ate": 151.68,
       "cenario": "praia",
       "legenda": "Tchau, tchau! Até amanhã!",
       "personagens": [
@@ -512,8 +512,8 @@
       ]
     },
     {
-      "de": 160,
-      "ate": 168,
+      "de": 151.68,
+      "ate": 158.05,
       "cenario": "praia",
       "personagens": [
         {
@@ -540,5 +540,6 @@
         }
       ]
     }
-  ]
+  ],
+  "audio": "musica-001.mp3"
 }

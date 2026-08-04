@@ -5,8 +5,9 @@ video/out/
 # Áudio gerado pela ElevenLabs: é grande, custa centavos pra refazer e
 # muda a cada geração. Fica local.
 episodios/*/audio/
-video/public/musica/
 video/public/sfx/
+# A música escolhida é copiada pra public/ pelo sincronizar_legenda.py.
+video/public/musica-*.mp3
 
 # Backup automático do sincronizar_legenda.py
 episodios/*/episodio.json.bak
