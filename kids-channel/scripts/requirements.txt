@@ -1,0 +1,4 @@
+# Dependências dos scripts de áudio do pipeline.
+#   pip install -r scripts/requirements.txt
+elevenlabs>=2.60
+python-dotenv>=1.0

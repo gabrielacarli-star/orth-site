@@ -1,0 +1,12 @@
+# Dependências e saída de render do projeto Remotion
+video/node_modules/
+video/out/
+
+# Áudio gerado pela ElevenLabs: é grande, custa centavos pra refazer e
+# muda a cada geração. Fica local.
+episodios/*/audio/
+video/public/musica/
+video/public/sfx/
+
+# Backup automático do sincronizar_legenda.py
+episodios/*/episodio.json.bak

@@ -1,0 +1,490 @@
+{
+  "id": "001",
+  "titulo": "As Cores da Ilha",
+  "pilar": "dia",
+  "fps": 30,
+  "duracaoSegundos": 168,
+  "cenas": [
+    {
+      "de": 8,
+      "ate": 12.5,
+      "cenario": "praia",
+      "legenda": "Olha quanta cor na ilha!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.5,
+          "y": 0.82
+        }
+      ]
+    },
+    {
+      "de": 12.5,
+      "ate": 17,
+      "cenario": "praia",
+      "legenda": "Nina, que cor é essa?",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.32,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    },
+    {
+      "de": 17,
+      "ate": 21,
+      "cenario": "praia",
+      "legenda": "Vem que eu te ensino, Pipo!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.32,
+          "y": 0.82
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 21,
+      "ate": 27,
+      "cenario": "praia",
+      "legenda": "Olha a cor, olha a cor",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 27,
+      "ate": 33,
+      "cenario": "praia",
+      "legenda": "Que cor é essa aqui?",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.34,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.68,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 33,
+      "ate": 39,
+      "cenario": "praia",
+      "legenda": "Olha a cor, olha a cor",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.3,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "bolha",
+          "x": 0.52,
+          "y": 0.76
+        },
+        {
+          "quem": "nina",
+          "x": 0.74,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 39,
+      "ate": 45,
+      "cenario": "praia",
+      "legenda": "Vem cantar comigo assim!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.3,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "bolha",
+          "x": 0.52,
+          "y": 0.76
+        },
+        {
+          "quem": "nina",
+          "x": 0.74,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 45,
+      "ate": 52,
+      "cenario": "coqueiral",
+      "legenda": "O coco é marrom, marrom, marrom",
+      "personagens": [
+        {
+          "quem": "nina",
+          "x": 0.6,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        },
+        {
+          "quem": "pipo",
+          "x": 0.28,
+          "y": 0.83,
+          "escala": 0.9
+        }
+      ]
+    },
+    {
+      "de": 52,
+      "ate": 59,
+      "cenario": "coqueiral",
+      "legenda": "O mar é azul, azul, azul",
+      "personagens": [
+        {
+          "quem": "nina",
+          "x": 0.6,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        },
+        {
+          "quem": "pipo",
+          "x": 0.28,
+          "y": 0.83,
+          "escala": 0.9
+        }
+      ]
+    },
+    {
+      "de": 59,
+      "ate": 66,
+      "cenario": "coqueiral",
+      "legenda": "A folha é verde, verde, verde",
+      "personagens": [
+        {
+          "quem": "nina",
+          "x": 0.6,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        },
+        {
+          "quem": "pipo",
+          "x": 0.28,
+          "y": 0.83,
+          "escala": 0.9,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 66,
+      "ate": 73,
+      "cenario": "coqueiral",
+      "legenda": "E o sol é amarelo!",
+      "personagens": [
+        {
+          "quem": "nina",
+          "x": 0.6,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        },
+        {
+          "quem": "pipo",
+          "x": 0.28,
+          "y": 0.83,
+          "escala": 1.05,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 73,
+      "ate": 88,
+      "cenario": "praia",
+      "personagens": [
+        {
+          "quem": "bolha",
+          "x": 0.5,
+          "y": 0.74,
+          "escala": 1.3
+        },
+        {
+          "quem": "pipo",
+          "x": 0.2,
+          "y": 0.82,
+          "escala": 0.85
+        }
+      ]
+    },
+    {
+      "de": 88,
+      "ate": 95,
+      "cenario": "coqueiral",
+      "legenda": "A fruta é verde? Não, não, não!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.45,
+          "y": 0.83,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 95,
+      "ate": 102,
+      "cenario": "coqueiral",
+      "legenda": "A fruta é vermelha, sim!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.38,
+          "y": 0.83,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.72,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    },
+    {
+      "de": 102,
+      "ate": 109,
+      "cenario": "coqueiral",
+      "legenda": "Vermelha como o meu coração",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.38,
+          "y": 0.83,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.72,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 109,
+      "ate": 116,
+      "cenario": "coqueiral",
+      "legenda": "Vermelha assim, assim!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.38,
+          "y": 0.83,
+          "cantando": true
+        },
+        {
+          "quem": "nina",
+          "x": 0.72,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 116,
+      "ate": 125,
+      "cenario": "praia",
+      "legenda": "Olha a cor, olha a cor",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.26,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "bolha",
+          "x": 0.5,
+          "y": 0.75
+        },
+        {
+          "quem": "nina",
+          "x": 0.76,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 125,
+      "ate": 134,
+      "cenario": "praia",
+      "legenda": "Que cor é essa aqui?",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.26,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "bolha",
+          "x": 0.5,
+          "y": 0.75
+        },
+        {
+          "quem": "nina",
+          "x": 0.76,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 134,
+      "ate": 143,
+      "cenario": "praia",
+      "legenda": "Olha a cor, olha a cor",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.26,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "bolha",
+          "x": 0.5,
+          "y": 0.75
+        },
+        {
+          "quem": "nina",
+          "x": 0.76,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 143,
+      "ate": 152,
+      "cenario": "praia",
+      "legenda": "Cantou tudo até o fim!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.26,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "bolha",
+          "x": 0.5,
+          "y": 0.75
+        },
+        {
+          "quem": "nina",
+          "x": 0.76,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 152,
+      "ate": 160,
+      "cenario": "praia",
+      "legenda": "Tchau, tchau! Até amanhã!",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.3,
+          "y": 0.82,
+          "cantando": true
+        },
+        {
+          "quem": "bolha",
+          "x": 0.52,
+          "y": 0.75
+        },
+        {
+          "quem": "nina",
+          "x": 0.74,
+          "y": 0.83,
+          "espelhado": true,
+          "cantando": true
+        }
+      ]
+    },
+    {
+      "de": 160,
+      "ate": 168,
+      "cenario": "praia",
+      "personagens": [
+        {
+          "quem": "pipo",
+          "x": 0.3,
+          "y": 0.82
+        },
+        {
+          "quem": "bolha",
+          "x": 0.52,
+          "y": 0.75
+        },
+        {
+          "quem": "nina",
+          "x": 0.74,
+          "y": 0.83,
+          "espelhado": true
+        }
+      ]
+    }
+  ]
+}

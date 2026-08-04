@@ -1,0 +1,30 @@
+{
+  "name": "pipo-e-amigos-video",
+  "version": "1.0.0",
+  "description": "Animacao do canal Pipo e Amigos (Remotion)",
+  "main": "index.js",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "previa": "remotion render src/index.ts previa-001 out/previa-001.mp4",
+    "render": "remotion render src/index.ts ep-001 out/ep-001.mp4",
+    "capa": "remotion still src/index.ts capa-001 out/capa-001.png",
+    "vinheta": "remotion render src/index.ts vinheta out/vinheta.mp4",
+    "tipos": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "^4.0.505",
+    "@remotion/media-utils": "^4.0.505",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "remotion": "^4.0.505"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "typescript": "^5.9.3"
+  },
+  "private": true
+}
