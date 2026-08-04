@@ -17,8 +17,8 @@ em português, sem caixa-preta.
 |---|---|---|
 | [1 — Estratégia](./fase-1-estrategia.md) | de onde sai o dinheiro, e por que não é do anúncio do YouTube | ✅ |
 | [2 — Bíblia do canal](./fase-2-biblia-do-canal.md) | personagens, mundo, cores, som, regras de segurança | ✅ proposta |
-| [3 — Áudio](./fase-3-audio.md) | Eleven Music, efeitos, sincronia da legenda | ✅ código pronto, falta rodar com a chave |
-| [4 — Animação](./fase-4-animacao.md) | Remotion, arquitetura, decisões de desenho | ✅ renderizando |
+| [3 — Áudio](./fase-3-audio.md) | Eleven Music, efeitos, sincronia da legenda | ✅ validado com música real |
+| [4 — Animação](./fase-4-animacao.md) | Remotion, arquitetura, decisões de desenho | ✅ episódio completo renderizado |
 | 5 — Publicação | upload via API do YouTube, `madeForKids`, agendamento | pendente |
 | 6 — Streaming | distribuição das músicas (DistroKid) | pendente |
 | 7 — Compilações | montar 45–60 min a partir dos episódios | pendente |
@@ -49,7 +49,8 @@ python3 scripts/gerar_musica.py 001
 
 # 2. escute episodios/001-*/audio/ e escolha a melhor
 
-# 3. encaixa os tempos das cenas na música de verdade
+# 3. encaixa os tempos das cenas na música escolhida.
+#    Também ajusta a duração do episódio e copia o mp3 pra video/public/.
 python3 scripts/sincronizar_legenda.py 001 --audio musica-v1.mp3
 
 # 4. efeitos sonoros — uma vez só, valem pra todos os episódios
@@ -123,6 +124,6 @@ Registrado pra não parecer que está pronto:
 - Publicação no YouTube ainda é manual (Fase 5).
 - Vovó Jaci e o pilar Noite estão só na bíblia — o cenário existe, a
   personagem não.
-- Nenhuma música foi gerada de verdade ainda: o `gerar_musica.py` está
-  escrito e testado até o ponto onde precisa da chave da API.
-- A prévia renderizada é **muda** — a animação está pronta, o áudio não.
+- Compilações (Fase 7) e distribuição em streaming (Fase 6) ainda não
+  existem — são as duas peças que mais rendem, segundo a Fase 1.
+- Só existe um episódio. O formato ainda não foi validado com audiência.

@@ -18,9 +18,13 @@ python3 scripts/gerar_musica.py 001 --instrumental  # base sem voz
 A Eleven Music gera a música **já cantada**, com a letra que está no
 `episodio.json`. Não é TTS cantando por cima de uma base — é uma música só.
 
-**Custo:** US$ 0,15 por minuto gerado via API. Um episódio de 2:48 sai por
-~US$ 0,42 (~R$ 2,30) por variante. Gerar 2 ou 3 e escolher a melhor
-continua custando menos de R$ 7 por episódio.
+**Custo real medido** (episódio 001, duas variantes): **US$ 0,80 pelas
+duas**, ~R$ 4,30. Bate com a conta de US$ 0,15 por minuto gerado.
+
+**Duração**: a Eleven Music não devolve exatamente a duração pedida. Pedimos
+160s e vieram 150s (v1) e 160s (v2). Por isso o `sincronizar_legenda.py` lê
+a duração real do arquivo e ajusta o `duracaoSegundos` do episódio — sem
+isso sobra vídeo mudo no fim.
 
 **Direitos comerciais:** liberados. A ElevenLabs licenciou as bases com
 gravadoras e editoras, e o áudio gerado pode ser monetizado. O que os termos
@@ -28,6 +32,25 @@ gravadoras e editoras, e o áudio gerado pode ser monetizado. O que os termos
 terceiros. Por isso os prompts do script descrevem só ritmo, instrumento e
 clima — nunca "no estilo de fulano". Isso não é só conformidade: prompt
 descritivo dá resultado mais original do que prompt imitativo.
+
+### As duas variantes prestaram — e as duas têm uso
+
+No primeiro teste real as duas variantes ficaram boas. Isso resolve o maior
+desconhecido do projeto (se a Eleven Music entregaria vocal infantil
+convincente em português) e abre uma decisão útil:
+
+| Variante | Onde vai |
+|---|---|
+| A de melhor alinhamento | o **episódio** — é a que a legenda acompanha |
+| A outra | a **compilação** (Fase 1, seção 2.2) |
+
+Usar arranjos diferentes no episódio e na compilação não é capricho: a
+compilação deixa de ser áudio byte-a-byte idêntico ao que já está no canal,
+o que é materialmente melhor diante da política de conteúdo inautêntico, e
+dá algo levemente novo pra quem já assistiu o episódio solto. Custo zero,
+porque a segunda variante já foi paga.
+
+Guarde sempre as duas em `episodios/<id>/audio/`.
 
 **Onde mora a identidade sonora:** no dicionário `ESTILOS` dentro do script.
 É lá que está o baião a 104 BPM com triângulo, zabumba, sanfona e cavaquinho
@@ -67,6 +90,10 @@ python3 scripts/sincronizar_legenda.py 001
 
 **Este é o script que separa "vídeo de IA" de vídeo que parece feito por
 gente**, e é a peça que quase todo canal automatizado erra.
+
+No episódio 001 ele provou o valor na primeira execução: o refrão que eu
+tinha escrito à mão como começando aos 21s começa de fato aos **27,6s**.
+Seis segundos de legenda fora do lugar já na primeira linha.
 
 O problema: os tempos das cenas no `episodio.json` são escritos à mão, no
 chute ("o refrão começa aos 21 segundos"). A música gerada tem o timing dela,
