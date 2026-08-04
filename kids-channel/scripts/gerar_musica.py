@@ -19,15 +19,44 @@ clima, nunca "no estilo de fulano".
 from __future__ import annotations
 
 import argparse
+import wave
+from pathlib import Path
 
 from comum import (
     cliente,
-    gravar,
     letra_do_episodio,
     ler_episodio,
     pasta_do_episodio,
     tamanho_legivel,
 )
+
+# A Eleven Music devolve PCM cru a 44.1 kHz, 16 bits, estéreo (medido, não
+# suposto). Esses três números são o que o cabeçalho WAV precisa saber.
+PCM_TAXA = 44100
+PCM_BYTES_POR_AMOSTRA = 2
+PCM_CANAIS = 2
+
+
+def gravar_wav(caminho: Path, pedacos) -> Path:
+    """Grava o PCM cru da API como um WAV de verdade.
+
+    Por que WAV e não MP3: **a música é o produto** (Fase 1). MP3 é
+    compressão com perda, e o que se perde não volta — distribuidora de
+    streaming pede WAV justamente por isso. Como o Remotion toca WAV
+    direto, o mesmo arquivo serve pro vídeo e pra distribuição, sem
+    conversão no meio e sem perder nada.
+
+    Custa espaço (~26 MB por música contra ~3,5 MB), o que é irrelevante:
+    o áudio nem vai pro repositório.
+    """
+    caminho.parent.mkdir(parents=True, exist_ok=True)
+    with wave.open(str(caminho), "wb") as w:
+        w.setnchannels(PCM_CANAIS)
+        w.setsampwidth(PCM_BYTES_POR_AMOSTRA)
+        w.setframerate(PCM_TAXA)
+        for pedaco in pedacos:
+            w.writeframes(pedaco)
+    return caminho
 
 # Descrição musical por pilar do canal (Fase 2, seção 5). É aqui que mora a
 # identidade sonora — ritmo brasileiro em vez do pop de teclado genérico que
@@ -70,6 +99,11 @@ def main() -> None:
     ap.add_argument("--variantes", type=int, default=2, help="quantas versões gerar (padrão 2)")
     ap.add_argument("--modelo", default="music_v2")
     ap.add_argument(
+        "--mp3",
+        action="store_true",
+        help="gera MP3 em vez de WAV (menor, mas com perda — não use pro que vai pro Spotify)",
+    )
+    ap.add_argument(
         "--instrumental",
         action="store_true",
         help="gera só a base, sem voz (útil pra compilação e pra versão karaokê)",
@@ -97,15 +131,20 @@ def main() -> None:
             music_length_ms=duracao_ms,
             model_id=args.modelo,
             force_instrumental=args.instrumental,
-            output_format="mp3_44100_192",
+            output_format="mp3_44100_192" if args.mp3 else "pcm_44100",
         )
-        destino = pasta / f"musica-v{n}.mp3"
-        gravar(destino, audio)
+        if args.mp3:
+            from comum import gravar
+
+            destino = gravar(pasta / f"musica-v{n}.mp3", audio)
+        else:
+            destino = gravar_wav(pasta / f"musica-v{n}.wav", audio)
         print(f"  {destino.relative_to(pasta.parent.parent.parent)} ({tamanho_legivel(destino)})")
 
     print(
-        "\nEscute as variantes e copie a melhor pra video/public/ com o nome do\n"
-        "episódio, depois preencha o campo \"audio\" no episodio.json."
+        "\nEscute as variantes e rode o sincronizar_legenda.py com a que você\n"
+        "escolher — ele ajusta os tempos, a duração do episódio e copia o\n"
+        "arquivo pra video/public/ sozinho."
     )
 
 

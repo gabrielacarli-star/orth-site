@@ -9,7 +9,8 @@
     "render": "remotion render src/index.ts ep-001 out/ep-001.mp4",
     "capa": "remotion still src/index.ts capa-001 out/capa-001.png",
     "vinheta": "remotion render src/index.ts vinheta out/vinheta.mp4",
-    "tipos": "tsc --noEmit"
+    "tipos": "tsc --noEmit",
+    "capa-album": "remotion still src/index.ts capa-streaming out/capa-streaming.png"
   },
   "keywords": [],
   "author": "",

@@ -3,6 +3,7 @@ import { Composition, Still } from "remotion";
 import { Episodio } from "./Episodio";
 import { Vinheta } from "./componentes/Vinheta";
 import { Capa } from "./componentes/Capa";
+import { CapaStreaming } from "./componentes/CapaStreaming";
 import { carregarFonte } from "./marca/fonte";
 import type { Episodio as TipoEpisodio } from "./marca/tipos";
 
@@ -52,6 +53,16 @@ export const RemotionRoot: React.FC = () => {
           />
         </React.Fragment>
       ))}
+
+      {/* Capa quadrada do álbum, pra Spotify/Apple/Deezer (Fase 6).
+          Eles exigem 3000x3000 exatos. */}
+      <Still
+        id="capa-streaming"
+        component={CapaStreaming}
+        width={3000}
+        height={3000}
+        defaultProps={{ titulo: "Ilha Pipoca", artista: "Maria e Amigos" }}
+      />
 
       {/* A vinheta sozinha, pra conferir a marca sem abrir um episódio. */}
       <Composition

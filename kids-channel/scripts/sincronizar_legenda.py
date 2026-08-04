@@ -25,6 +25,7 @@ import argparse
 import json
 import shutil
 
+import wave
 from pathlib import Path
 
 from comum import PASTA_PUBLIC, cliente, ler_episodio, letra_do_episodio, pasta_do_episodio
@@ -35,7 +36,15 @@ _BITRATES = [0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, 0
 _AMOSTRAGENS = [44100, 48000, 32000, 0]
 
 
-def duracao_do_mp3(caminho: Path) -> float:
+def duracao_do_audio(caminho: Path) -> float:
+    """Duração em segundos, aceitando WAV ou MP3."""
+    if caminho.suffix.lower() == ".wav":
+        with wave.open(str(caminho), "rb") as w:
+            return round(w.getnframes() / w.getframerate(), 2)
+    return _duracao_do_mp3(caminho)
+
+
+def _duracao_do_mp3(caminho: Path) -> float:
     """Duração em segundos, lendo o primeiro cabeçalho de quadro do MP3.
 
     A Eleven Music devolve MP3 de taxa constante, então tamanho ÷ taxa de bit
@@ -86,8 +95,8 @@ def main() -> None:
     ap.add_argument("episodio", help="id do episódio, ex: 001")
     ap.add_argument(
         "--audio",
-        default="musica-v1.mp3",
-        help="qual variante usar (padrão musica-v1.mp3)",
+        default="musica-v1.wav",
+        help="qual variante usar (padrão musica-v1.wav)",
     )
     ap.add_argument(
         "--vinheta",
@@ -112,12 +121,12 @@ def main() -> None:
 
     # A duração do episódio passa a ser a da música escolhida + a vinheta.
     # Sem isso o vídeo termina antes ou depois da música e sobra silêncio.
-    duracao_musica = duracao_do_mp3(caminho_audio)
+    duracao_musica = duracao_do_audio(caminho_audio)
     episodio["duracaoSegundos"] = round(args.vinheta + duracao_musica, 2)
 
     # O Remotion lê o áudio de video/public/, então copiamos pra lá com um
     # nome estável por episódio.
-    nome_publico = f"musica-{episodio['id']}.mp3"
+    nome_publico = f"musica-{episodio['id']}{caminho_audio.suffix}"
     (PASTA_PUBLIC).mkdir(parents=True, exist_ok=True)
     shutil.copy(caminho_audio, PASTA_PUBLIC / nome_publico)
     episodio["audio"] = nome_publico

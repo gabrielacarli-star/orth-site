@@ -20,7 +20,7 @@ em português, sem caixa-preta.
 | [3 — Áudio](./fase-3-audio.md) | Eleven Music, efeitos, sincronia da legenda | ✅ validado com música real |
 | [4 — Animação](./fase-4-animacao.md) | Remotion, arquitetura, decisões de desenho | ✅ episódio completo renderizado |
 | 5 — Publicação | upload via API do YouTube, `madeForKids`, agendamento | pendente |
-| 6 — Streaming | distribuição das músicas (DistroKid) | pendente |
+| [6 — Streaming](./fase-6-streaming.md) | distribuição das músicas (DistroKid) | ✅ documentado, falta catálogo |
 | 7 — Compilações | montar 45–60 min a partir dos episódios | pendente |
 | 8 — Multi-idioma | dublagem ElevenLabs, um canal por idioma | pendente |
 
