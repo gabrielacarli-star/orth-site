@@ -7,8 +7,8 @@
   "duracaoSegundos": 134.0,
   "cenas": [
     {
-      "de": 8.0,
-      "ate": 13.0,
+      "de": 22.5,
+      "ate": 26.74,
       "cenario": "ceu-noturno",
       "legenda": "O sol foi dormir no mar",
       "personagens": [
@@ -20,8 +20,8 @@
       ]
     },
     {
-      "de": 13.0,
-      "ate": 18.0,
+      "de": 26.74,
+      "ate": 30.52,
       "cenario": "ceu-noturno",
       "legenda": "Chegou a noite na ilha",
       "personagens": [
@@ -40,8 +40,8 @@
       ]
     },
     {
-      "de": 18.0,
-      "ate": 23.0,
+      "de": 30.52,
+      "ate": 34.46,
       "cenario": "ceu-noturno",
       "legenda": "Boa noite, boa noite",
       "personagens": [
@@ -61,8 +61,8 @@
       ]
     },
     {
-      "de": 23.0,
-      "ate": 28.0,
+      "de": 34.46,
+      "ate": 37.16,
       "cenario": "ceu-noturno",
       "legenda": "Fecha o olhinho devagar",
       "personagens": [
@@ -82,8 +82,8 @@
       ]
     },
     {
-      "de": 28.0,
-      "ate": 33.0,
+      "de": 37.16,
+      "ate": 43.24,
       "cenario": "ceu-noturno",
       "legenda": "Boa noite, boa noite",
       "personagens": [
@@ -103,8 +103,8 @@
       ]
     },
     {
-      "de": 33.0,
-      "ate": 38.0,
+      "de": 43.24,
+      "ate": 44.98,
       "cenario": "ceu-noturno",
       "legenda": "A lua vem te ninar",
       "personagens": [
@@ -124,8 +124,8 @@
       ]
     },
     {
-      "de": 38.0,
-      "ate": 45.0,
+      "de": 44.98,
+      "ate": 49.02,
       "cenario": "ceu-noturno",
       "legenda": "O passarinho dormiu",
       "personagens": [
@@ -144,8 +144,8 @@
       ]
     },
     {
-      "de": 45.0,
-      "ate": 52.0,
+      "de": 49.02,
+      "ate": 52.88,
       "cenario": "ceu-noturno",
       "legenda": "O peixinho dormiu",
       "personagens": [
@@ -164,8 +164,8 @@
       ]
     },
     {
-      "de": 52.0,
-      "ate": 59.0,
+      "de": 52.88,
+      "ate": 56.58,
       "cenario": "ceu-noturno",
       "legenda": "A antinha já ressona",
       "personagens": [
@@ -184,8 +184,8 @@
       ]
     },
     {
-      "de": 59.0,
-      "ate": 66.0,
+      "de": 56.58,
+      "ate": 61.07,
       "cenario": "ceu-noturno",
       "legenda": "E a ilha adormeceu",
       "personagens": [
@@ -204,8 +204,8 @@
       ]
     },
     {
-      "de": 66.0,
-      "ate": 78.0,
+      "de": 61.07,
+      "ate": 65.56,
       "cenario": "ceu-noturno",
       "personagens": [
         {
@@ -229,8 +229,8 @@
       ]
     },
     {
-      "de": 78.0,
-      "ate": 85.0,
+      "de": 65.56,
+      "ate": 91.44,
       "cenario": "ceu-noturno",
       "legenda": "A estrela pisca pra você",
       "personagens": [
@@ -249,8 +249,8 @@
       ]
     },
     {
-      "de": 85.0,
-      "ate": 92.0,
+      "de": 91.44,
+      "ate": 95.66,
       "cenario": "ceu-noturno",
       "legenda": "O vento canta baixinho",
       "personagens": [
@@ -269,8 +269,8 @@
       ]
     },
     {
-      "de": 92.0,
-      "ate": 99.0,
+      "de": 95.66,
+      "ate": 100.88,
       "cenario": "ceu-noturno",
       "legenda": "A ondinha faz shhh, shhh",
       "personagens": [
@@ -289,8 +289,8 @@
       ]
     },
     {
-      "de": 99.0,
-      "ate": 106.0,
+      "de": 100.88,
+      "ate": 107.66,
       "cenario": "ceu-noturno",
       "legenda": "Dorme, dorme, meu carinho",
       "personagens": [
@@ -309,8 +309,8 @@
       ]
     },
     {
-      "de": 106.0,
-      "ate": 113.0,
+      "de": 107.66,
+      "ate": 115.36,
       "cenario": "ceu-noturno",
       "legenda": "Boa noite, boa noite",
       "personagens": [
@@ -341,8 +341,8 @@
       ]
     },
     {
-      "de": 113.0,
-      "ate": 120.0,
+      "de": 115.36,
+      "ate": 124.16,
       "cenario": "ceu-noturno",
       "legenda": "Fecha o olhinho devagar",
       "personagens": [
@@ -373,8 +373,8 @@
       ]
     },
     {
-      "de": 120.0,
-      "ate": 127.0,
+      "de": 124.16,
+      "ate": 126.84,
       "cenario": "ceu-noturno",
       "legenda": "Boa noite, boa noite",
       "personagens": [
@@ -405,7 +405,7 @@
       ]
     },
     {
-      "de": 127.0,
+      "de": 126.84,
       "ate": 134.0,
       "cenario": "ceu-noturno",
       "legenda": "Até amanhã, meu bem",
@@ -434,5 +434,6 @@
         }
       ]
     }
-  ]
+  ],
+  "audio": "musica-010.wav"
 }

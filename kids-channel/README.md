@@ -44,14 +44,19 @@ cd video && npm install
 ### Produzir um episódio
 
 ```bash
-# 1. música — gera 2 variantes, ~R$ 5 no total
+# 0. escreva a letra em scripts/roteiros.py e gere o episodio.json
+python3 scripts/criar_episodio.py
+
+# 1. música — gera 2 variantes em WAV, ~R$ 4 no total
 python3 scripts/gerar_musica.py 001
 
-# 2. escute episodios/001-*/audio/ e escolha a melhor
+# 2. sincroniza. Com --auto ele escolhe a variante de melhor alinhamento;
+#    sem --auto você indica qual (--audio musica-v2.wav).
+#    Também ajusta a duração do episódio e copia o áudio pra video/public/.
+python3 scripts/sincronizar_legenda.py 001 --auto
 
-# 3. encaixa os tempos das cenas na música escolhida.
-#    Também ajusta a duração do episódio e copia o mp3 pra video/public/.
-python3 scripts/sincronizar_legenda.py 001 --audio musica-v1.mp3
+# 3. confere tudo antes de gastar 16 minutos de render
+python3 scripts/conferir_episodios.py
 
 # 4. efeitos sonoros — uma vez só, valem pra todos os episódios
 python3 scripts/gerar_sfx.py
@@ -76,6 +81,9 @@ kids-channel/
 
   scripts/
     comum.py                   .env, caminhos, leitura do episodio.json
+    roteiros.py                letra e ritmo de cada episódio (arquivo criativo)
+    criar_episodio.py          roteiro -> episodio.json + índice do Remotion
+    conferir_episodios.py      valida tudo antes de renderizar
     gerar_musica.py            Eleven Music (a música já vem cantada)
     gerar_sfx.py               efeitos sonoros do canal
     sincronizar_legenda.py     forced alignment: encaixa legenda na música
@@ -126,4 +134,6 @@ Registrado pra não parecer que está pronto:
   personagem não.
 - Compilações (Fase 7) e distribuição em streaming (Fase 6) ainda não
   existem — são as duas peças que mais rendem, segundo a Fase 1.
-- Só existe um episódio. O formato ainda não foi validado com audiência.
+- Nada foi publicado ainda: o formato não foi validado com audiência.
+- O áudio do episódio 001 é MP3 (foi gerado antes de o pipeline passar a
+  usar WAV). Serve pro YouTube; antes de mandar pro streaming, regerar.
