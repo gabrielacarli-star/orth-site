@@ -99,6 +99,11 @@ def main() -> None:
         help="qual variante usar (padrão musica-v1.wav)",
     )
     ap.add_argument(
+        "--auto",
+        action="store_true",
+        help="testa todas as variantes e fica com a de melhor alinhamento",
+    )
+    ap.add_argument(
         "--vinheta",
         type=float,
         default=8.0,
@@ -107,7 +112,34 @@ def main() -> None:
     args = ap.parse_args()
 
     pasta = pasta_do_episodio(args.episodio)
-    caminho_audio = pasta / "audio" / args.audio
+
+    if args.auto:
+        # Alinha cada variante e fica com a de menor "loss".
+        #
+        # A loss do forced alignment mede o quanto o que foi CANTADO bate
+        # com a letra que a gente escreveu. É exatamente a pergunta que
+        # importa num vídeo com legenda na tela: menor loss = o vocal
+        # pronunciou a letra do jeito que está escrita. Não substitui você
+        # escutar, mas escolhe melhor que moeda quando são 18 arquivos.
+        el_ = cliente()
+        episodio_ = ler_episodio(args.episodio)
+        linhas_ = letra_do_episodio(episodio_)
+        candidatas = sorted((pasta / "audio").glob("musica-v*.*"))
+        if not candidatas:
+            raise SystemExit(f"Nenhuma música em {pasta / 'audio'}")
+
+        placar = []
+        for cand in candidatas:
+            with open(cand, "rb") as f:
+                al_ = el_.forced_alignment.create(file=f, text="\n".join(linhas_))
+            placar.append((al_.loss, cand))
+            print(f"  {cand.name}: alinhamento {al_.loss:.3f}")
+        placar.sort()
+        caminho_audio = placar[0][1]
+        print(f"  -> escolhida: {caminho_audio.name}\n")
+    else:
+        caminho_audio = pasta / "audio" / args.audio
+
     if not caminho_audio.exists():
         raise SystemExit(
             f"Não achei {caminho_audio}.\n"

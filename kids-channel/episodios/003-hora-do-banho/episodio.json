@@ -7,8 +7,8 @@
   "duracaoSegundos": 141.0,
   "cenas": [
     {
-      "de": 8.0,
-      "ate": 13.0,
+      "de": 18.5,
+      "ate": 21.22,
       "cenario": "casa-da-arvore",
       "legenda": "Ó a água quentinha!",
       "personagens": [
@@ -20,8 +20,8 @@
       ]
     },
     {
-      "de": 13.0,
-      "ate": 18.0,
+      "de": 21.22,
+      "ate": 24.26,
       "cenario": "casa-da-arvore",
       "legenda": "Vem tomar banho, Maria",
       "personagens": [
@@ -40,8 +40,8 @@
       ]
     },
     {
-      "de": 18.0,
-      "ate": 23.0,
+      "de": 24.26,
+      "ate": 26.92,
       "cenario": "casa-da-arvore",
       "legenda": "Splash, splash na banheira",
       "personagens": [
@@ -61,8 +61,8 @@
       ]
     },
     {
-      "de": 23.0,
-      "ate": 28.0,
+      "de": 26.92,
+      "ate": 29.5,
       "cenario": "casa-da-arvore",
       "legenda": "Lava, lava a mãozinha",
       "personagens": [
@@ -82,8 +82,8 @@
       ]
     },
     {
-      "de": 28.0,
-      "ate": 33.0,
+      "de": 29.5,
+      "ate": 32.14,
       "cenario": "casa-da-arvore",
       "legenda": "Splash, splash na banheira",
       "personagens": [
@@ -103,8 +103,8 @@
       ]
     },
     {
-      "de": 33.0,
-      "ate": 38.0,
+      "de": 32.14,
+      "ate": 38.62,
       "cenario": "casa-da-arvore",
       "legenda": "Lava toda a criancinha",
       "personagens": [
@@ -124,8 +124,8 @@
       ]
     },
     {
-      "de": 38.0,
-      "ate": 45.0,
+      "de": 38.62,
+      "ate": 42.1,
       "cenario": "praia",
       "legenda": "Lava o pé, lava o pé",
       "personagens": [
@@ -144,8 +144,8 @@
       ]
     },
     {
-      "de": 45.0,
-      "ate": 52.0,
+      "de": 42.1,
+      "ate": 46.46,
       "cenario": "praia",
       "legenda": "Lava a barriga também",
       "personagens": [
@@ -164,8 +164,8 @@
       ]
     },
     {
-      "de": 52.0,
-      "ate": 59.0,
+      "de": 46.46,
+      "ate": 49.1,
       "cenario": "praia",
       "legenda": "Lava a orelha devagar",
       "personagens": [
@@ -184,8 +184,8 @@
       ]
     },
     {
-      "de": 59.0,
-      "ate": 66.0,
+      "de": 49.1,
+      "ate": 53.46,
       "cenario": "praia",
       "legenda": "E o cabelo pra ficar bem",
       "personagens": [
@@ -204,8 +204,8 @@
       ]
     },
     {
-      "de": 66.0,
-      "ate": 78.0,
+      "de": 53.46,
+      "ate": 57.82,
       "cenario": "casa-da-arvore",
       "personagens": [
         {
@@ -229,8 +229,8 @@
       ]
     },
     {
-      "de": 78.0,
-      "ate": 85.0,
+      "de": 57.82,
+      "ate": 86.46,
       "cenario": "praia",
       "legenda": "Espuma na cabecinha!",
       "personagens": [
@@ -249,8 +249,8 @@
       ]
     },
     {
-      "de": 85.0,
-      "ate": 92.0,
+      "de": 86.46,
+      "ate": 90.9,
       "cenario": "praia",
       "legenda": "Bolha, bolha, quanta bolha",
       "personagens": [
@@ -269,8 +269,8 @@
       ]
     },
     {
-      "de": 92.0,
-      "ate": 99.0,
+      "de": 90.9,
+      "ate": 93.78,
       "cenario": "praia",
       "legenda": "O patinho vem nadar",
       "personagens": [
@@ -289,8 +289,8 @@
       ]
     },
     {
-      "de": 99.0,
-      "ate": 106.0,
+      "de": 93.78,
+      "ate": 99.68,
       "cenario": "praia",
       "legenda": "E fica aqui comigo",
       "personagens": [
@@ -309,8 +309,8 @@
       ]
     },
     {
-      "de": 106.0,
-      "ate": 113.0,
+      "de": 99.68,
+      "ate": 123.4,
       "cenario": "casa-da-arvore",
       "legenda": "Splash, splash na banheira",
       "personagens": [
@@ -341,8 +341,8 @@
       ]
     },
     {
-      "de": 113.0,
-      "ate": 120.0,
+      "de": 123.4,
+      "ate": 127.64,
       "cenario": "casa-da-arvore",
       "legenda": "Lava, lava a mãozinha",
       "personagens": [
@@ -373,8 +373,8 @@
       ]
     },
     {
-      "de": 120.0,
-      "ate": 127.0,
+      "de": 127.64,
+      "ate": 131.26,
       "cenario": "casa-da-arvore",
       "legenda": "Splash, splash na banheira",
       "personagens": [
@@ -405,8 +405,8 @@
       ]
     },
     {
-      "de": 127.0,
-      "ate": 134.0,
+      "de": 131.26,
+      "ate": 134.52,
       "cenario": "casa-da-arvore",
       "legenda": "Limpa toda a criancinha",
       "personagens": [
@@ -437,7 +437,7 @@
       ]
     },
     {
-      "de": 134.0,
+      "de": 134.52,
       "ate": 141.0,
       "cenario": "casa-da-arvore",
       "legenda": "Tchau, tchau! Até amanhã!",
@@ -466,5 +466,6 @@
         }
       ]
     }
-  ]
+  ],
+  "audio": "musica-003.wav"
 }

@@ -7,8 +7,8 @@
   "duracaoSegundos": 141.0,
   "cenas": [
     {
-      "de": 8.0,
-      "ate": 13.0,
+      "de": 8.38,
+      "ate": 11.8,
       "cenario": "praia",
       "legenda": "Escuta, escuta o som!",
       "personagens": [
@@ -20,8 +20,8 @@
       ]
     },
     {
-      "de": 13.0,
-      "ate": 18.0,
+      "de": 11.8,
+      "ate": 16.02,
       "cenario": "praia",
       "legenda": "Que bicho será que é?",
       "personagens": [
@@ -40,8 +40,8 @@
       ]
     },
     {
-      "de": 18.0,
-      "ate": 23.0,
+      "de": 16.02,
+      "ate": 18.54,
       "cenario": "praia",
       "legenda": "Que bicho é esse, que bicho é?",
       "personagens": [
@@ -61,8 +61,8 @@
       ]
     },
     {
-      "de": 23.0,
-      "ate": 28.0,
+      "de": 18.54,
+      "ate": 20.86,
       "cenario": "praia",
       "legenda": "Faz assim, faz assim!",
       "personagens": [
@@ -82,8 +82,8 @@
       ]
     },
     {
-      "de": 28.0,
-      "ate": 33.0,
+      "de": 20.86,
+      "ate": 25.48,
       "cenario": "praia",
       "legenda": "Que bicho é esse, que bicho é?",
       "personagens": [
@@ -103,8 +103,8 @@
       ]
     },
     {
-      "de": 33.0,
-      "ate": 38.0,
+      "de": 25.48,
+      "ate": 29.9,
       "cenario": "praia",
       "legenda": "Canta junto aqui comigo!",
       "personagens": [
@@ -124,8 +124,8 @@
       ]
     },
     {
-      "de": 38.0,
-      "ate": 45.0,
+      "de": 29.9,
+      "ate": 32.54,
       "cenario": "coqueiral",
       "legenda": "O passarinho faz piu-piu",
       "personagens": [
@@ -144,8 +144,8 @@
       ]
     },
     {
-      "de": 45.0,
-      "ate": 52.0,
+      "de": 32.54,
+      "ate": 34.92,
       "cenario": "coqueiral",
       "legenda": "O peixinho faz blub-blub",
       "personagens": [
@@ -164,8 +164,8 @@
       ]
     },
     {
-      "de": 52.0,
-      "ate": 59.0,
+      "de": 34.92,
+      "ate": 39.2,
       "cenario": "coqueiral",
       "legenda": "A antinha faz fon-fon",
       "personagens": [
@@ -184,8 +184,8 @@
       ]
     },
     {
-      "de": 59.0,
-      "ate": 66.0,
+      "de": 39.2,
+      "ate": 42.96,
       "cenario": "coqueiral",
       "legenda": "E o caranguejo, tec-tec!",
       "personagens": [
@@ -204,8 +204,8 @@
       ]
     },
     {
-      "de": 66.0,
-      "ate": 78.0,
+      "de": 42.96,
+      "ate": 46.72,
       "cenario": "praia",
       "personagens": [
         {
@@ -229,8 +229,8 @@
       ]
     },
     {
-      "de": 78.0,
-      "ate": 85.0,
+      "de": 46.72,
+      "ate": 76.8,
       "cenario": "coqueiral",
       "legenda": "A galinha faz có-có",
       "personagens": [
@@ -249,8 +249,8 @@
       ]
     },
     {
-      "de": 85.0,
-      "ate": 92.0,
+      "de": 76.8,
+      "ate": 79.18,
       "cenario": "coqueiral",
       "legenda": "O sapinho faz cuá-cuá",
       "personagens": [
@@ -269,8 +269,8 @@
       ]
     },
     {
-      "de": 92.0,
-      "ate": 99.0,
+      "de": 79.18,
+      "ate": 81.44,
       "cenario": "coqueiral",
       "legenda": "O grilinho faz cri-cri",
       "personagens": [
@@ -289,8 +289,8 @@
       ]
     },
     {
-      "de": 99.0,
-      "ate": 106.0,
+      "de": 81.44,
+      "ate": 84.62,
       "cenario": "coqueiral",
       "legenda": "E o ventinho faz uuuh",
       "personagens": [
@@ -309,8 +309,8 @@
       ]
     },
     {
-      "de": 106.0,
-      "ate": 113.0,
+      "de": 84.62,
+      "ate": 86.12,
       "cenario": "praia",
       "legenda": "Que bicho é esse, que bicho é?",
       "personagens": [
@@ -341,8 +341,8 @@
       ]
     },
     {
-      "de": 113.0,
-      "ate": 120.0,
+      "de": 86.12,
+      "ate": 89.38,
       "cenario": "praia",
       "legenda": "Faz assim, faz assim!",
       "personagens": [
@@ -373,8 +373,8 @@
       ]
     },
     {
-      "de": 120.0,
-      "ate": 127.0,
+      "de": 89.38,
+      "ate": 109.44,
       "cenario": "praia",
       "legenda": "Que bicho é esse, que bicho é?",
       "personagens": [
@@ -405,8 +405,8 @@
       ]
     },
     {
-      "de": 127.0,
-      "ate": 134.0,
+      "de": 109.44,
+      "ate": 135.86,
       "cenario": "praia",
       "legenda": "Acertamos tudo aqui!",
       "personagens": [
@@ -437,7 +437,7 @@
       ]
     },
     {
-      "de": 134.0,
+      "de": 135.86,
       "ate": 141.0,
       "cenario": "praia",
       "legenda": "Tchau, tchau! Até amanhã!",
@@ -466,5 +466,6 @@
         }
       ]
     }
-  ]
+  ],
+  "audio": "musica-004.wav"
 }

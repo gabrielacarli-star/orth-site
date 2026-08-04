@@ -7,6 +7,8 @@ video/out/
 episodios/*/audio/
 video/public/sfx/
 # A música escolhida é copiada pra public/ pelo sincronizar_legenda.py.
+# WAV desde a Fase 6 (master sem perda), mas a regra cobre os dois.
+video/public/musica-*.wav
 video/public/musica-*.mp3
 
 # Backup automático do sincronizar_legenda.py
