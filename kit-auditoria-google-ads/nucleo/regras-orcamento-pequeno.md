@@ -85,6 +85,28 @@ Alinhar expectativa com o cliente sobre o que é sucesso costuma valer mais que
 qualquer otimização. Um negócio local que recebe 4 contatos qualificados por
 semana com R$ 30 por dia está indo bem, mesmo que o cliente esperasse 40.
 
+## Quando a conta está fora do escopo do método
+
+**Mais de uma campanha ativa.** Nunca misture números de campanhas
+diferentes numa mesma análise. Decida em qual trabalhar antes de
+diagnosticar, e nomeie a campanha em toda instrução de alteração. Alterar a
+campanha errada é o erro mais caro que existe aqui. Se elas somam menos de
+R$ 100 por dia, concentrar em uma já é a primeira tarefa.
+
+**Performance Max em conta pequena de negócio local.** Em geral não vale.
+PMax distribui o orçamento entre vários canais, precisa de volume de
+conversão para aprender, e entrega pouca visibilidade sobre onde o dinheiro
+foi. Numa conta pequena isso cria exatamente o problema que a auditoria
+existe para resolver. Boa parte das 15 falhas nem é verificável em PMax,
+porque ele não expõe os mesmos dados.
+
+**Abaixo de R$ 20 por dia.** O volume de dados não sustenta leitura
+confiável de nada. A única prioridade é medição.
+
+**Acima de R$ 100 por dia.** As regras continuam válidas, mas várias são
+conservadoras de propósito para orçamento curto. Com mais verba dá para
+testar mais de uma campanha e migrar para lance automático mais cedo.
+
 ## Quando o problema não é a campanha
 
 Situações em que otimizar não resolve, e insistir queima a relação:

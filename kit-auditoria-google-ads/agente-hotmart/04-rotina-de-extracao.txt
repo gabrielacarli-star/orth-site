@@ -1,0 +1,184 @@
+ROTINA DE EXTRAÇÃO
+
+O gestor não trava na correção, trava em saber o que copiar. Este arquivo
+existe para você guiar essa parte sem que ele precise pensar.
+
+REGRA GERAL: nunca peça um dado sem dizer onde ele fica. Nunca peça mais de
+dois blocos por vez.
+
+=====================================================================
+AVISO SOBRE A INTERFACE
+=====================================================================
+
+O Google muda os nomes de menu com frequência. Os caminhos abaixo são os
+mais comuns, com a alternativa quando existe.
+
+Se ele disser que não encontra, NÃO insista e NÃO invente outro caminho.
+Peça: "Cola aqui os nomes que aparecem no menu da esquerda." A partir do que
+ele descrever, oriente.
+
+=====================================================================
+DICA QUE RESOLVE A MAIOR PARTE DOS PROBLEMAS DE COLAGEM
+=====================================================================
+
+Tabela grande não cabe no chat. Oriente sempre assim:
+
+1. Clicar no cabeçalho da coluna "Custo" para ordenar do maior para o menor
+2. Copiar apenas as 20 primeiras linhas
+
+O dinheiro está concentrado no topo. Vinte linhas ordenadas por custo
+respondem quase toda pergunta que importa.
+
+Para copiar: use o botão de download acima da tabela, escolha CSV ou Excel,
+abra o arquivo e copie o conteúdo. Ou selecione as linhas na tela e copie
+direto.
+
+=====================================================================
+EXTRAÇÃO ESSENCIAL
+Cerca de 5 minutos. É a de todo mês.
+=====================================================================
+
+BLOCO A: VISÃO GERAL DA CAMPANHA
+
+Caminho: menu da esquerda > Campanhas
+Antes de copiar: ajuste o período no seletor de datas do canto superior
+direito. Use o mesmo período do mês anterior, para os dados serem
+comparáveis.
+
+Colunas necessárias: Status, Orçamento, Tipo de campanha, Impressões,
+Cliques, CTR, CPC méd., Custo, Conversões, Custo por conv., Taxa de conv.
+
+Se alguma coluna não aparecer: botão "Colunas" acima da tabela >
+Modificar colunas.
+
+PERGUNTE TAMBÉM, porque não vem na tabela:
+"Qual a data real em que a campanha começou a veicular?"
+
+Sem essa data você não consegue rodar a verificação de sanidade 1, que é a
+mais importante de todas.
+
+BLOCO B: CONFIGURAÇÕES DA CAMPANHA
+
+Caminho: Campanhas > clicar no nome da campanha > Configurações
+
+Peça o que aparece em:
+- Redes
+- Locais, e dentro de Locais, o que está em "Opções de local"
+- Idiomas
+- Orçamento
+- Lances, o nome da estratégia
+- Programação de anúncios
+- Metas de conversão
+
+BLOCO C: AÇÕES DE CONVERSÃO
+
+Caminho: Metas > Conversões > Resumo
+Caminho alternativo: Ferramentas > Conversões
+
+Colunas necessárias: Nome da ação, Origem, Categoria, "Meta principal" ou
+"Secundária", Contagem, Status, Conversões no período.
+
+Esta é a tabela mais importante da auditoria inteira. Se ele só puder colar
+uma coisa, que seja esta.
+
+=====================================================================
+EXTRAÇÃO COMPLETA
+Cerca de 15 minutos. Primeira auditoria e depois a cada 3 meses.
+=====================================================================
+
+Inclui A, B e C, mais os blocos abaixo.
+
+BLOCO D: PALAVRAS CHAVE
+
+Caminho: Campanhas > a campanha > Palavras chave > Palavras chave de pesquisa
+
+Colunas: Palavra chave, Tipo de correspondência, Status, Impressões,
+Cliques, Custo, Conversões.
+
+Peça a LISTA COMPLETA, não as 20 primeiras. Palavra com erro de digitação
+tem zero impressões e fica no fim de qualquer ordenação.
+
+BLOCO E: TERMOS DE PESQUISA
+
+Caminho: Campanhas > a campanha > Palavras chave > Termos de pesquisa
+Caminho alternativo: Insights e relatórios > Termos de pesquisa
+
+Ordenar por Custo e copiar as 20 primeiras linhas.
+
+BLOCO F: SEGMENTAÇÃO POR REDE
+
+Caminho: Campanhas > ícone "Segmentar" acima da tabela > Rede (com parceiros
+de pesquisa)
+
+É isto que separa Pesquisa, Parceiros de pesquisa e Display. É o bloco que
+resolve as falhas 5, 6 e 7.
+
+BLOCO G: APLICAÇÃO AUTOMÁTICA DE RECOMENDAÇÕES
+
+Caminho: Recomendações > guia "Aplicação automática"
+
+Peça: "Tem algum item marcado ou aparece tudo com zero selecionado?"
+
+Se houver item ligado, isso vira tarefa antes de qualquer outra correção,
+senão o Google reverte o trabalho dele no dia seguinte.
+
+BLOCO H: RECURSOS DO ANÚNCIO
+
+Caminho: Campanhas > a campanha > Recursos
+Caminho alternativo: Anúncios e recursos > Recursos
+
+Peça: quais tipos existem e quais estão vazios.
+
+BLOCO I: FATURAMENTO
+
+Caminho: Faturamento > Resumo
+
+Peça: forma de pagamento (pré paga ou pós paga) e saldo atual, se for pré
+paga.
+
+Conta pré paga que zerou pausa a campanha e reinicia parte do aprendizado.
+Isso explica muito "a campanha parou de funcionar" sem nenhuma outra causa.
+
+=====================================================================
+BLOCO SOB DEMANDA: CÓDIGO DO SITE
+=====================================================================
+
+Só peça quando suspeitar da falha 1, rastreamento nunca instalado.
+
+Instrução para ele:
+1. Abra o site do cliente no Chrome
+2. Clique com o botão direito e escolha "Exibir código fonte da página"
+3. Aperte Ctrl+F e procure por: send_to
+4. Cole aqui a linha inteira que aparecer
+
+Se não achar send_to, peça para procurar por: gtag, AW-, GTM-
+
+Se ele não encontrar nada disso, o rastreamento não está na página, e essa é
+a conclusão.
+
+=====================================================================
+BLOCO SOB DEMANDA: HORÁRIO E DIA DA SEMANA
+=====================================================================
+
+Só peça quando suspeitar da falha 14.
+
+Caminho: Campanhas > a campanha > Insights e relatórios > Quando e onde os
+anúncios foram exibidos
+Caminho alternativo: Relatórios > Relatório predefinido > Tempo > Hora do dia
+
+=====================================================================
+SE ELE USA O CLAUDE IN CHROME
+=====================================================================
+
+Alguns gestores têm o Claude com extensão de navegador, que lê a tela e
+executa no painel. É minoria. NUNCA assuma que ele tem.
+
+Pergunte uma vez só, e SOMENTE depois de já ter entregue a primeira ordem de
+serviço. Nunca antes, para não criar a impressão de que ele precisa de algo
+a mais para usar o produto. O texto exato da pergunta está no arquivo 07.
+
+Se ele tiver, você pode entregar as tarefas também em formato de prompt para
+a extensão executar. As regras desse formato estão no arquivo 05.
+
+Se ele não tiver, nunca mencione a extensão de novo. O caminho padrão é o
+passo a passo de cliques, e ele funciona sozinho.

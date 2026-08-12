@@ -1,0 +1,352 @@
+MÉTODO DE AUDITORIA
+
+=====================================================================
+PARTE 1: VERIFICAÇÕES DE SANIDADE
+=====================================================================
+
+Rode antes de concluir qualquer coisa. Sempre. Sem exceção.
+
+Se duas informações se contradizem, aponte a contradição em vez de escolher
+uma e seguir.
+
+VERIFICAÇÃO 1: A JANELA DO RELATÓRIO CONTÉM A DATA DE INÍCIO?
+
+O erro mais comum de todos. Filtro de "últimos 30 dias" numa campanha que
+começou há 5 dias mostra 5 dias de dados com cara de 30.
+
+Pergunte a data real de início da campanha. Janela de filtro não é tempo de
+veiculação.
+
+Confirmação independente:
+    custo total / orçamento diário = dias reais de veiculação
+
+Se a conta gastou R$ 150 com orçamento de R$ 30 por dia, ela rodou cerca de
+5 dias, não importa o que o filtro diga.
+
+VERIFICAÇÃO 2: OS TOTAIS FECHAM?
+
+Some os cliques de todas as palavras chave e compare com o total de cliques
+da campanha.
+
+Sobra até 20 por cento: normal, o Google oculta termos de baixo volume.
+Sobra acima de 20 por cento: há tráfego vindo de outro lugar. Investigue
+Display, Parceiros de pesquisa e DSA, nesta ordem.
+
+Faça a mesma conta com o custo, não só com os cliques. É comum a sobra de
+cliques parecer aceitável e a de custo ser enorme.
+
+VERIFICAÇÃO 3: O GASTO BATE COM O ORÇAMENTO?
+
+    custo total / dias de veiculação = gasto médio diário
+
+Muito abaixo do orçamento diário: campanha pausada em algum momento, saldo
+zerado em conta pré paga, baixo volume de busca, ou lance insuficiente.
+
+Acima do orçamento diário: normal. O Google pode gastar até o dobro num dia
+e compensa nos outros, respeitando a média mensal.
+
+VERIFICAÇÃO 4: EXISTE CONVERSÃO REGISTRADA NO PERÍODO?
+
+Criada e ativa são estados diferentes. Ação nova que nunca recebeu disparo
+fica "Inativa" ou "Não verificada", e isso é normal, não é falha.
+
+O que importa: houve registro de conversão no período? Se não houve e a
+campanha usa lance automático baseado em conversão, esse é o único problema
+que importa até ser resolvido.
+
+VERIFICAÇÃO 5: QUANTAS CONVERSÕES EXISTEM?
+
+Com 1 a 5 conversões, o custo por conversão não tem significado estatístico
+e vai oscilar muito. Diga isso antes que o número suba e pareça uma piora
+que não existe.
+
+VERIFICAÇÃO 6: HOUVE ALTERAÇÃO NOS ÚLTIMOS 5 A 7 DIAS?
+
+Se houve, os números misturam dois cenários e a comparação fica
+comprometida. Consulte a ficha. Se não houver ficha, pergunte.
+
+VERIFICAÇÃO 7: OS PERÍODOS SÃO COMPARÁVEIS?
+
+Só compare períodos de mesma duração. Se o anterior teve 12 dias e este teve
+30, compare médias diárias, nunca totais.
+
+=====================================================================
+PARTE 2: AS 15 FALHAS
+=====================================================================
+
+Audite na ordem dos blocos. Não vá para o bloco 3 com problema aberto no
+bloco 1.
+
+GRAVIDADE
+Crítica: invalida os dados ou queima orçamento em volume. Corrigir primeiro.
+Alta: desperdício relevante ou decisão sendo tomada com sinal errado.
+Média: perda de eficiência. Corrigir com o básico já de pé.
+
+---------------------------------------------------------------------
+BLOCO 1: MEDIÇÃO
+Enquanto houver falha aberta aqui, nenhum número é confiável.
+---------------------------------------------------------------------
+
+FALHA 1: RASTREAMENTO NUNCA INSTALADO. Gravidade crítica.
+
+Sinal: conversões zeradas desde o início, com cliques acumulando normal. A
+conta parece não converter quando na verdade ela não mede.
+
+Confirmar: procurar no código do site por send_to, gtag, AW-, G-, GTM-. O
+caso clássico é o texto de exemplo que nunca foi substituído:
+    'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL'
+
+Ação: substituir pelo ID e rótulo reais, que ficam em Metas > Conversões >
+a ação > Configurar tag.
+
+Atenção: tag instalada não é conversão configurada. A tag identifica o
+visitante. A ação de conversão é o evento. O site pode ter a tag perfeita e
+nenhuma conversão registrada.
+
+FALHA 2: CONVERSÃO DE CARREGAMENTO DE PÁGINA COMO PRINCIPAL. Crítica.
+
+Sinal: conversões muito próximas do número de cliques, taxa de conversão
+acima de 40 por cento, custo por conversão baixo demais para o nicho.
+
+Confirmar: Metas > Conversões. Ação do tipo "Visualização de página" ou
+"Carregamento de página" marcada como Principal.
+
+Ação: mudar para Secundária. Com ela como Principal, toda visita vira
+conversão e o Maximizar conversões passa a caçar clique barato em vez de
+contato.
+
+Atenção: ao mover a única ação de uma categoria para Secundária, a categoria
+fica sem Principal. Veja a falha 4.
+
+FALHA 3: CONVERSÕES DUPLICADAS. Gravidade alta.
+
+Sinal: o cliente relata metade dos contatos que o painel mostra. Ou o mesmo
+evento medido duas vezes, por gtag e por Google Tag Manager.
+
+Confirmar: Metas > Conversões. Duas ações medindo o mesmo evento. Confira
+também a coluna "Contagem": para geração de contato o correto costuma ser
+"Uma", não "Todas".
+
+Ação: uma ação por evento como Principal, as demais como Secundárias.
+Ajustar a contagem para "Uma".
+
+FALHA 4: CATEGORIA DE META SEM AÇÃO PRINCIPAL. Gravidade alta.
+
+Sinal: a campanha para de otimizar depois de um ajuste em conversões, sem
+que mais nada tenha mudado.
+
+Confirmar: Configurações da campanha > Metas de conversão. Ver quais
+categorias estão listadas e se a ação desejada aparece entre elas.
+
+Ação: apontar a campanha para a categoria que contém a ação Principal
+correta, ou promover a ação certa dentro da categoria em uso.
+
+---------------------------------------------------------------------
+BLOCO 2: VAZAMENTO DE ORÇAMENTO
+Dinheiro saindo por lugar que ninguém escolheu.
+---------------------------------------------------------------------
+
+FALHA 5: REDE DE DISPLAY ATIVADA EM CAMPANHA DE PESQUISA. Crítica.
+
+Sinal: impressões desproporcionais, CPC médio muito baixo, CTR despencando,
+cliques que não aparecem no relatório de palavras chave.
+
+Confirmar: Configurações da campanha > Redes. Ou segmentar a tabela por
+"Rede (com parceiros de pesquisa)".
+
+Ação: desligar. Em conta pequena isso quase sempre está certo.
+
+FALHA 6: PARCEIROS DE PESQUISA ATIVADOS. Gravidade alta.
+
+Sinal: cliques que não aparecem em termos de pesquisa, CTR abaixo do resto
+da campanha.
+
+Confirmar: Configurações da campanha > Redes > "Incluir parceiros de
+pesquisa do Google".
+
+Ação: desligar em orçamento pequeno e observar por 7 dias.
+
+FALHA 7: ANÚNCIOS DINÂMICOS DE PESQUISA SEM CONTROLE. Gravidade alta.
+
+Sinal: tráfego consumindo orçamento sem palavra chave correspondente. Nos
+casos piores, mais de 80 por cento do gasto.
+
+Confirmar: Configurações da campanha, procurar segmentação dinâmica, grupo
+de anúncios dinâmico ou segmentação expandida.
+
+Ação: desligar, ou restringir a páginas específicas e acompanhar os termos
+toda semana.
+
+COMO SEPARAR AS FALHAS 5, 6 E 7: some os cliques por palavra chave e compare
+com o total. A sobra vem de uma das três. Segmentar por rede separa. O
+Google oculta termos de baixo volume por privacidade, mas isso explica uma
+fatia pequena. Quando some 80 por cento, é uma dessas três.
+
+FALHA 8: SEGMENTAÇÃO DE LOCAL EM "PRESENÇA OU INTERESSE". Gravidade alta.
+
+Sinal: termos de pesquisa com nome de outras cidades, contatos de fora da
+área de atendimento.
+
+Confirmar: Configurações da campanha > Locais > Opções de local. O padrão do
+Google é "Presença ou interesse", que exibe para quem apenas demonstrou
+interesse na região, mesmo estando longe.
+
+Ação: mudar para "Presença". Para negócio local que atende presencialmente,
+essa é quase sempre a opção correta.
+
+FALHA 9: NENHUMA PALAVRA CHAVE NEGATIVA. Gravidade alta.
+
+Sinal: termos de pesquisa com "grátis", "como fazer", "salário", "curso",
+"vagas", nomes de cidade fora da área.
+
+Confirmar: Palavras chave > Negativas. Lista vazia em conta com mais de duas
+semanas de veiculação é falha.
+
+Ação: revisar termos de pesquisa toda semana e negativar o que não tem
+intenção de compra. Comece pelos que já gastaram sem converter.
+
+Atenção: NÃO negativar nome de concorrente. Quem busca a concorrência quer
+comprar o produto, e é oportunidade barata.
+
+FALHA 10: CORRESPONDÊNCIA AMPLA EM ORÇAMENTO PEQUENO. Gravidade alta.
+
+Sinal: termos muito distantes da palavra cadastrada, gasto pulverizado em
+muitos termos com um clique cada.
+
+Confirmar: coluna "Tipo de correspondência" na aba de palavras chave.
+
+Ação: migrar para frase nos termos que já converteram ou que têm intenção
+clara. Ampla exige volume de dados que uma conta de R$ 30 por dia não gera.
+
+Atenção: o aviso "você está segmentando menos pesquisas" é esperado e não é
+motivo para reverter.
+
+---------------------------------------------------------------------
+BLOCO 3: ESTRUTURA E EFICIÊNCIA
+---------------------------------------------------------------------
+
+FALHA 11: MAXIMIZAR CONVERSÕES SEM CONVERSÃO CONFIGURADA. Crítica.
+
+Sinal: estratégia de lance automática com zero conversões no histórico.
+
+Confirmar: Configurações da campanha > Lances, cruzando com Metas >
+Conversões.
+
+Ação: enquanto não houver sinal, a estratégia gasta às cegas. Usar
+"Maximizar cliques" com limite de CPC até o rastreamento funcionar. Só
+trocar depois de confirmar que existe medição, nunca antes.
+
+FALHA 12: ORÇAMENTO DIVIDIDO ENTRE CAMPANHAS DEMAIS. Gravidade média.
+
+Sinal: três ou mais campanhas ativas somando menos de R$ 100 por dia, todas
+com poucos cliques.
+
+Ação: concentrar em uma campanha. Dividir R$ 30 por dia entre três impede
+todas de saírem do aprendizado.
+
+FALHA 13: PALAVRA CHAVE COM ERRO DE DIGITAÇÃO. Gravidade média.
+
+Sinal: palavra com status "Não qualificada" ou "Baixo volume de pesquisas" e
+zero impressões desde sempre.
+
+Confirmar: ler a lista completa com atenção. Uma letra faltando faz a
+palavra nunca rodar, e passa despercebida por meses.
+
+Ação: corrigir a grafia.
+
+FALHA 14: VEICULAÇÃO EM HORÁRIO SEM ATENDIMENTO. Gravidade média.
+
+Sinal: cliques de madrugada ou em domingo num negócio que atende em horário
+comercial.
+
+Confirmar: relatório por hora do dia e por dia da semana.
+
+Ação: restringir a programação ao horário de atendimento, ou reduzir o lance
+fora dele. Contato que chega e não é atendido vira cliente do concorrente.
+
+Atenção: só cortar horário com pelo menos duas semanas de dados.
+
+FALHA 15: RECURSOS DO ANÚNCIO VAZIOS. Gravidade média.
+
+Sinal: CTR abaixo da média, anúncio ocupando pouco espaço na tela.
+
+Confirmar: aba Recursos. Sitelinks, frases de destaque, snippets, chamada,
+localização, logo, imagem.
+
+Ação: completar. É a melhoria de maior retorno por esforço, não custa nada e
+aumenta a área ocupada no resultado de busca.
+
+---------------------------------------------------------------------
+VERIFICAÇÕES EXTRAS
+---------------------------------------------------------------------
+
+Saldo e forma de pagamento: conta pré paga que zera pausa a campanha e
+reinicia parte do aprendizado. Ver em Faturamento antes de concluir que a
+campanha parou de performar.
+
+Página de destino genérica: anúncio de um serviço apontando para a home
+perde conversão. Apontar para a página do serviço anunciado.
+
+Aplicação automática de recomendações: Recomendações > Aplicação automática.
+Se houver itens ligados, o Google altera a conta sozinho. Desligar antes de
+auditar, senão ele reverte a correção no dia seguinte.
+
+Anúncio único no grupo: sem alternativa não há comparação. Dois anúncios
+responsivos por grupo é o mínimo.
+
+Idioma da campanha: Configurações > Idiomas. Campanha em inglês num negócio
+brasileiro restringe entrega sem ninguém perceber.
+
+=====================================================================
+PARTE 3: REGRAS DE DECISÃO PARA ORÇAMENTO PEQUENO
+=====================================================================
+
+ESTRATÉGIA DE LANCE POR ESTÁGIO
+
+Sem rastreamento funcionando:
+    Maximizar cliques com limite de CPC
+
+Rastreamento novo, menos de 15 conversões no mês:
+    Maximizar cliques com limite de CPC, ou Maximizar conversões observando
+
+A partir de 15 a 30 conversões por mês:
+    Maximizar conversões
+
+Volume estável e custo por conversão previsível:
+    CPA desejado
+
+UMA CAMPANHA POR VEZ. Poucos grupos, separados por intenção.
+
+ESPERAR 5 A 7 DIAS ENTRE ALTERAÇÕES. Máximo de 2 a 3 mudanças por rodada.
+
+ORDEM DE PRIORIDADE QUANDO O CLIENTE COBRA RESULTADO
+
+Não comece por ajuste técnico. A ordem é:
+
+1. Perguntar ao cliente se o volume de contatos aumentou desde o início.
+   Muita conversão real acontece sem rastreamento e ninguém contou.
+2. Verificar se existe rastreamento funcionando.
+3. Cortar desperdício óbvio: redes erradas, termos fora do nicho, horários
+   sem atendimento, localização errada.
+4. Completar os recursos do anúncio.
+5. Só então mexer em lances.
+
+Alinhar expectativa costuma valer mais que qualquer otimização. Um negócio
+local que recebe 4 contatos qualificados por semana com R$ 30 por dia está
+indo bem, mesmo que o cliente esperasse 40.
+
+QUANDO O PROBLEMA NÃO É A CAMPANHA
+
+Diga isso quando for o caso, mesmo que não seja o que ele quer ouvir:
+
+Oferta sem diferencial e preço acima do mercado. O anúncio entrega o clique,
+a página não converte, e nenhum ajuste de lance conserta.
+
+Ninguém atende. Contato que não recebe resposta em minutos vira cliente do
+concorrente. Vale medir isso antes de mexer na conta.
+
+Orçamento incompatível com o nicho. Existem segmentos em que o CPC torna
+R$ 30 por dia inviável. Dizer isso cedo é mais profissional que gastar três
+meses provando.
+
+Site quebrado no celular. Verificar antes de qualquer diagnóstico.
