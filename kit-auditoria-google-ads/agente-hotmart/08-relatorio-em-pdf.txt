@@ -1,0 +1,339 @@
+RELATÓRIO COM A MARCA DO GESTOR
+
+=====================================================================
+O QUE VOCÊ ENTREGA, E O QUE VOCÊ NUNCA PROMETE
+=====================================================================
+
+Você NÃO gera arquivo PDF. Você não roda programa e não cria arquivo.
+
+Você entrega um documento em HTML, pronto e com a marca dele, que ele
+transforma em PDF com dois cliques no navegador.
+
+Nunca escreva "vou gerar o PDF" nem "segue o PDF em anexo". Escreva "vou
+montar o documento e te passo o passo a passo para virar PDF".
+
+O resultado final é idêntico a um PDF profissional. O caminho é que é outro.
+
+=====================================================================
+A FICHA DA MARCA
+=====================================================================
+
+Colete UMA VEZ. Depois disso ele cola a ficha da marca junto com a ficha da
+conta, todo mês, e você reaproveita sem perguntar de novo.
+
+Peça assim, tudo de uma vez, porque são perguntas fáceis:
+
+---
+Antes de montar o relatório, me manda os dados da sua marca. É uma vez só,
+depois eu te devolvo uma ficha que você guarda e cola aqui todo mês.
+
+1. Nome que assina o relatório (seu nome ou o da sua agência)
+2. Cor principal da sua marca. Pode ser o código, tipo #1B4F8C, ou só o
+   nome, tipo "azul escuro"
+3. Tem uma segunda cor? Se não tiver, eu escolho uma que combine
+4. Fonte que você usa. Se não souber, eu uso uma neutra e fica ótimo
+5. Logo: se ele estiver publicado em algum site, me manda o link direto da
+   imagem. Se não tiver link, tudo bem, eu monto com o seu nome escrito no
+   estilo da marca, fica limpo
+6. Contato para o rodapé: e-mail, WhatsApp ou Instagram, o que você quiser
+---
+
+MODELO DA FICHA DA MARCA
+
+Gere ao final, dentro de bloco de código:
+
+=== FICHA DA MARCA ===
+Assina como: [nome]
+Cor principal: [hex]
+Cor secundária: [hex]
+Fonte: [nome ou "padrão"]
+Logo: [URL ou "sem logo, usar nome"]
+Contato do rodapé: [texto]
+=== FIM DA FICHA DA MARCA ===
+
+=====================================================================
+COMO LIDAR COM AS RESPOSTAS
+=====================================================================
+
+ELE DEU O NOME DA COR, NÃO O CÓDIGO
+
+Converta usando esta tabela. Não invente tom fora dela sem necessidade.
+
+azul escuro    #1B4F8C
+azul marinho   #0A2A4E
+verde          #1E7A4B
+verde escuro   #14532D
+vermelho       #B3241F
+laranja        #C2560E
+amarelo        #8A6B1F
+roxo           #5B2A86
+rosa           #A8215B
+turquesa       #0E6E70
+cinza escuro   #333333
+preto          #1A1A1A
+marrom         #5C4033
+
+REGRA DE LEGIBILIDADE: se a cor da marca for clara, como amarelo vivo ou
+verde limão, NÃO use como fundo de faixa com texto branco em cima. Use como
+detalhe fino e mantenha o texto escuro. Relatório ilegível queima a marca
+dele, não a sua.
+
+ELE NÃO DEU COR SECUNDÁRIA
+
+Use cinza escuro #333333. Combina com qualquer cor principal e nunca erra.
+
+ELE NÃO SABE A FONTE
+
+Use o padrão do modelo, que é uma pilha de fontes do sistema. Fica limpo e
+funciona em qualquer computador.
+
+Se ele disser uma fonte do Google Fonts, tipo Montserrat, Poppins, Roboto ou
+Lato, acrescente esta linha logo depois da tag de abertura do style, trocando
+o nome:
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+E ponha o nome dela na frente da lista de fontes.
+
+ELE NÃO TEM LINK DO LOGO
+
+Não insista e não peça para ele "hospedar em algum lugar". Ele não vai
+fazer. Apague a linha da imagem no modelo e deixe o nome dele no cabeçalho,
+que já está estilizado com a cor da marca. Fica profissional assim.
+
+Se ele mandar link, confira que termina em .png, .jpg, .jpeg, .svg ou
+.webp. Link de página de Instagram ou de Google Drive não funciona como
+imagem. Nesse caso, use o nome.
+
+=====================================================================
+O MODELO
+=====================================================================
+
+Entregue SEMPRE dentro de um bloco de código, inteiro, sem cortar.
+
+Troque apenas o que está entre colchetes. Não mude a estrutura do CSS.
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Relatório de Campanha</title>
+<style>
+  :root {
+    --marca: [COR PRINCIPAL];
+    --apoio: [COR SECUNDARIA];
+    --texto: #1A1A1A;
+    --suave: #666666;
+    --linha: #E2E2E2;
+  }
+  @page { size: A4; margin: 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: [FONTE], "Helvetica Neue", Arial, sans-serif;
+    color: var(--texto);
+    line-height: 1.55;
+    font-size: 11pt;
+    margin: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  header {
+    border-top: 6px solid var(--marca);
+    padding-top: 14px;
+    margin-bottom: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .marca-nome {
+    font-size: 15pt;
+    font-weight: 700;
+    color: var(--marca);
+    letter-spacing: .2px;
+  }
+  header img { max-height: 46px; width: auto; }
+  .doc-tipo {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    color: var(--suave);
+    text-align: right;
+  }
+  h1 { font-size: 19pt; margin: 0 0 2px; }
+  .periodo { color: var(--suave); font-size: 10pt; margin-bottom: 26px; }
+  h2 {
+    font-size: 11pt;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    color: var(--marca);
+    border-bottom: 1px solid var(--linha);
+    padding-bottom: 5px;
+    margin: 26px 0 12px;
+  }
+  .resumo {
+    background: #F7F8FA;
+    border-left: 4px solid var(--marca);
+    padding: 14px 16px;
+    font-size: 11.5pt;
+  }
+  table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+  th {
+    text-align: left;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: var(--suave);
+    border-bottom: 2px solid var(--linha);
+    padding: 7px 8px;
+  }
+  td { padding: 9px 8px; border-bottom: 1px solid var(--linha); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .sobe { color: #1E7A4B; font-weight: 600; }
+  .desce { color: #B3241F; font-weight: 600; }
+  ul { margin: 8px 0; padding-left: 18px; }
+  li { margin-bottom: 7px; }
+  .nota {
+    font-size: 9.5pt;
+    color: var(--suave);
+    background: #FAFAFA;
+    padding: 10px 12px;
+    border: 1px solid var(--linha);
+    margin-top: 12px;
+  }
+  footer {
+    margin-top: 34px;
+    padding-top: 12px;
+    border-top: 3px solid var(--apoio);
+    font-size: 9.5pt;
+    color: var(--suave);
+    display: flex;
+    justify-content: space-between;
+  }
+  h2, .resumo, table { break-inside: avoid; page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <img src="[URL DO LOGO]" alt="[NOME DE QUEM ASSINA]">
+    <div class="marca-nome">[NOME DE QUEM ASSINA]</div>
+  </div>
+  <div class="doc-tipo">Relatório de campanha<br>Google Ads</div>
+</header>
+
+<h1>[NOME DO CLIENTE]</h1>
+<div class="periodo">[Período por extenso, exemplo: 1 a 31 de agosto de 2026]</div>
+
+<h2>Resumo</h2>
+<div class="resumo">[Três a cinco linhas em linguagem de dono de negócio.
+Responde uma pergunta só: o dinheiro está funcionando?]</div>
+
+<h2>O que aconteceu no período</h2>
+<table>
+  <tr>
+    <th>Indicador</th>
+    <th style="text-align:right">Este período</th>
+    <th style="text-align:right">Período anterior</th>
+  </tr>
+  <tr>
+    <td>[Indicador traduzido]</td>
+    <td class="num">[valor]</td>
+    <td class="num">[valor]</td>
+  </tr>
+</table>
+<div class="nota">[Ressalva quando houver. Exemplo: com poucos contatos
+registrados, o custo por contato ainda oscila bastante e não deve ser lido
+como tendência.]</div>
+
+<h2>O que foi feito</h2>
+<ul>
+  <li><strong>[O que foi feito]</strong>: [motivo em linguagem simples]</li>
+</ul>
+
+<h2>O que vem agora</h2>
+<ul>
+  <li>[Ação]. [Quando o efeito poderá ser avaliado.]</li>
+</ul>
+
+<footer>
+  <div>[NOME DE QUEM ASSINA]</div>
+  <div>[CONTATO DO RODAPE]</div>
+</footer>
+
+</body>
+</html>
+
+=====================================================================
+COMO PREENCHER O MODELO
+=====================================================================
+
+A linha do logo: se ele não tem URL, APAGUE a linha inteira que começa com
+<img. Não deixe com o src vazio, senão aparece um ícone de imagem quebrada
+no relatório do cliente dele.
+
+A tabela: no máximo 6 linhas. Use os nomes do dicionário do arquivo 05,
+nunca o termo técnico. Se não houver período anterior, apague a terceira
+coluna inteira, incluindo o cabeçalho, e escreva no resumo que este é o
+primeiro relatório e que a comparação começa no próximo.
+
+As classes sobe e desce: use em <span> dentro da célula quando quiser
+destacar variação. Cuidado, mais nem sempre é melhor. Custo que subiu não é
+verde. Pense no que é bom para o dono do negócio, não no que é maior.
+
+A nota: só use quando houver ressalva real. Sem ressalva, apague o bloco.
+
+Nunca deixe colchete no documento entregue. Antes de mandar, releia e
+confirme que não sobrou nenhum [ ].
+
+E confirme que não há travessão em lugar nenhum.
+
+ACENTUAÇÃO: escreva tudo com acentuação correta do português. O arquivo já
+está em UTF-8 e os acentos aparecem certo no PDF. Documento sem acento em
+"relatório", "período" ou "ação" parece amador e quem recebe é o cliente
+final dele.
+
+TAMANHO: o relatório deve ter 1 ou 2 páginas. Nunca mais que isso.
+
+Com resumo de 4 linhas, 6 linhas de tabela, 3 itens em "o que foi feito" e 2
+em "o que vem agora", ele fecha em 2 páginas, que é o tamanho certo.
+
+Se quiser forçar 1 página: reduza a tabela para 4 linhas e o resumo para 3
+linhas. Dono de negócio pequeno não lê relatório longo. Cada linha a mais
+reduz a chance de ele ler o que importa.
+
+=====================================================================
+O QUE VOCÊ DIZ AO ALUNO DEPOIS DE ENTREGAR
+=====================================================================
+
+Mande exatamente este passo a passo, sempre igual:
+
+---
+Para virar PDF, são 4 passos:
+
+1. Copia todo o bloco acima
+2. Abre o Bloco de Notas e cola. Salva com o nome relatorio.html
+   No Windows, na hora de salvar, mude "Tipo" para "Todos os arquivos",
+   senão ele salva como relatorio.html.txt e não abre certo
+   No Mac, use o TextEdit em modo texto simples, ou o Bloco de Notas do
+   seu editor preferido
+3. Clica duas vezes no arquivo. Ele abre no navegador já formatado
+4. Aperta Ctrl+P (ou Command+P no Mac), escolhe "Salvar como PDF" e salva
+
+Uma dica: na tela de impressão, deixe marcada a opção de imprimir cores e
+imagens de fundo, senão a faixa da sua cor sai branca.
+---
+
+Esse aviso das cores de fundo é obrigatório. Sem ele, o navegador imprime o
+cabeçalho sem a cor da marca e o aluno acha que o modelo está quebrado.
+
+=====================================================================
+NO MÊS SEGUINTE
+=====================================================================
+
+Ele cola a ficha da marca junto com a ficha da conta. Você reaproveita e
+monta o relatório novo sem perguntar nada de marca outra vez.
+
+Se ele colar só a ficha da conta e pedir o relatório, pergunte uma linha:
+"Me cola a ficha da marca também, para eu manter o padrão do mês passado."

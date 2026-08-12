@@ -4,7 +4,7 @@ Este arquivo é para você. **Não suba ele** junto com os outros.
 
 ## O que subir
 
-Suba os sete arquivos `.txt` desta pasta como material de treinamento do
+Suba os oito arquivos `.txt` desta pasta como material de treinamento do
 Agente de IA, nesta ordem:
 
 ```
@@ -15,6 +15,7 @@ Agente de IA, nesta ordem:
 05-formatos-de-saida.txt        ordem de serviço, relatório, dicionário
 06-respostas-dificeis.txt       situações delicadas
 07-mensagem-de-abertura.txt     a primeira mensagem e o tom
+08-relatorio-em-pdf.txt         o relatório com a marca do aluno
 ```
 
 A ordem importa porque o arquivo 01 estabelece as regras que os outros
@@ -48,7 +49,7 @@ campo de boas vindas.
 | Anual | R$ 1.297 |
 | Licenciamento para curso ou agência | R$ 2.500 a R$ 5.000 |
 
-## Os 15 testes antes de vender
+## Os 19 testes antes de vender
 
 Rode todos antes de liberar para qualquer pessoa. Cada um testa uma falha
 que quebra o produto na mão do aluno. Anote o que falhar.
@@ -126,6 +127,40 @@ Falhou se: misturou os números das duas ou não disse em qual mexer.
 **Teste 15, print.** Mande um print de tela em vez de texto.
 Esperado: se não conseguir ler, diz isso e pede o texto ou o CSV.
 Falhou se: fingiu ter lido e descreveu um conteúdo que não estava lá.
+
+**Teste 16, promessa de PDF.** Peça "me manda o PDF do relatório".
+Esperado: explica que entrega o documento pronto e o passo a passo para
+virar PDF no navegador.
+Falhou se: prometeu anexar arquivo, ou disse "segue o PDF".
+
+**Teste 17, cor sem código.** Diga que sua cor é "azul escuro", sem dar hex.
+Esperado: converte para um código e segue, sem travar.
+Falhou se: exigiu o código hexadecimal ou escolheu uma cor aleatória.
+
+**Teste 18, sem logo.** Diga que não tem link do logo.
+Esperado: apaga a linha da imagem e usa seu nome no cabeçalho.
+Falhou se: deixou a tag de imagem com endereço vazio, o que gera um ícone de
+imagem quebrada no relatório que vai para o cliente.
+
+**Teste 19, colchetes e acentos.** Gere o relatório completo e leia o
+documento inteiro.
+Esperado: nenhum `[ ]` sobrando e acentuação correta em tudo.
+Falhou se: sobrou placeholder, ou saiu "relatorio" e "periodo" sem acento.
+
+## O relatório com a marca
+
+O formato é um documento HTML que vira PDF no navegador, porque o agente da
+Hotmart é um chat: ele não roda código nem cria arquivo. O resultado final é
+um PDF A4 profissional, e o caminho é copiar, salvar como `.html`, abrir e
+apertar Ctrl+P.
+
+Isso foi testado. O modelo renderiza com acentuação correta e fecha em 2
+páginas com o volume de conteúdo recomendado.
+
+Um aviso que o agente sempre dá e que você precisa conhecer: na tela de
+impressão, o aluno precisa deixar marcada a opção de imprimir cores e
+imagens de fundo. Sem isso o navegador remove a faixa da cor da marca e o
+cabeçalho sai branco.
 
 ## Depois de subir
 

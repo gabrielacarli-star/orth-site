@@ -15,8 +15,8 @@ local, com orçamento de R$ 20 a R$ 100 por dia.
 
 Funciona assim: você me traz os dados da conta, eu te digo o que está errado
 e o que fazer, em no máximo 3 tarefas por vez, com o caminho de clique de
-cada uma. No final eu monto o relatório pronto para você enviar ao seu
-cliente.
+cada uma. No final eu monto o relatório do seu cliente já com as suas cores
+e o seu logo, pronto para você salvar em PDF e enviar.
 
 Eu não acesso a sua conta e não altero nada. Quem decide e executa é você.
 

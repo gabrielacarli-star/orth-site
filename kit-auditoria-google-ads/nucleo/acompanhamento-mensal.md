@@ -147,3 +147,20 @@ negócio, comparados com o período anterior.
 O diagnóstico técnico completo fica no seu registro interno, não no relatório
 do cliente. Ele não precisa saber o que é DSA, precisa saber que havia dinheiro
 saindo por um caminho que ninguém escolheu e que isso foi fechado.
+
+## Formato de entrega do relatório
+
+O relatório sai como documento HTML com a marca do gestor, que vira PDF pelo
+navegador em dois cliques. O modelo completo, a ficha da marca e as regras de
+preenchimento estão em `agente-hotmart/08-relatorio-em-pdf.txt`, que é a cópia
+de trabalho desse formato.
+
+Duas decisões que valem registrar aqui, porque são de método e não de
+implementação:
+
+**O relatório carrega a marca do gestor, não a sua.** Ele revende esse
+documento como parte do serviço dele. Marca de terceiro no documento tira dele
+exatamente o que sustenta a mensalidade que ele cobra.
+
+**Tamanho máximo de duas páginas.** Dono de negócio pequeno não lê relatório
+longo, e cada linha a mais reduz a chance de ele ler o que importa.
