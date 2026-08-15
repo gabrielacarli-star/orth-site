@@ -4,8 +4,11 @@
 // - Compra aprovada  → grava/ativa o acesso (liga ao usuário se o e-mail já existir).
 // - Reembolso/chargeback/cancelamento → marca a compra como "reembolsado".
 //
-// Segurança: a Hotmart envia um token (hottok). Configuramos o mesmo valor
-// no segredo HOTMART_HOTTOK e recusamos qualquer requisição que não bata.
+// Segurança: a Hotmart envia um token (hottok) dentro do corpo da
+// notificação (body.hottok). Configuramos o mesmo valor no segredo
+// HOTMART_HOTTOK e recusamos qualquer requisição que não bata. Também
+// aceitamos header/querystring como alternativa, caso a Hotmart mude a
+// forma de envio.
 //
 // Esta função NÃO exige JWT do usuário → configure verify_jwt = false
 // (ver supabase/config.toml). Ela usa a SERVICE_ROLE e ignora o RLS.
@@ -32,18 +35,24 @@ const CANCELADAS = new Set([
 Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("Method not allowed", { status: 405 })
 
-  // Valida o token da Hotmart (header ou querystring).
-  const url = new URL(req.url)
-  const token = req.headers.get("x-hotmart-hottok") ?? url.searchParams.get("hottok") ?? ""
-  if (!HOTTOK || token !== HOTTOK) {
-    return new Response("Unauthorized", { status: 401 })
-  }
-
   let body: any
   try {
     body = await req.json()
   } catch {
     return new Response("Bad request", { status: 400 })
+  }
+
+  // Valida o token da Hotmart. Ela manda dentro do corpo (body.hottok);
+  // header/querystring ficam como alternativa.
+  const url = new URL(req.url)
+  const token =
+    body?.hottok ??
+    body?.data?.hottok ??
+    req.headers.get("x-hotmart-hottok") ??
+    url.searchParams.get("hottok") ??
+    ""
+  if (!HOTTOK || token !== HOTTOK) {
+    return new Response("Unauthorized", { status: 401 })
   }
 
   const evento: string = body?.event ?? body?.data?.event ?? ""
