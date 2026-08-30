@@ -16,6 +16,7 @@ const SOS = lazy(() => import("./pages/SOS"))
 const SOSDetail = lazy(() => import("./pages/SOSDetail"))
 const GuiaDetail = lazy(() => import("./pages/GuiaDetail"))
 const Library = lazy(() => import("./pages/Library"))
+const VetArea = lazy(() => import("./pages/VetArea"))
 const Account = lazy(() => import("./pages/Account"))
 const Privacy = lazy(() => import("./pages/Privacy"))
 
@@ -59,6 +60,7 @@ export default function App() {
       <Route path="/sos/guia/:slug" element={<Protected><GuiaDetail /></Protected>} />
       <Route path="/sos/:slug" element={<Protected><SOSDetail /></Protected>} />
       <Route path="/biblioteca" element={<Protected><Library /></Protected>} />
+      <Route path="/veterinario" element={<Protected><VetArea /></Protected>} />
       <Route path="/conta" element={<Protected><Account /></Protected>} />
 
       <Route path="*" element={<Navigate to="/" replace />} />

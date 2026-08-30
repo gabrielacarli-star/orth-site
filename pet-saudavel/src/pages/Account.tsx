@@ -1,13 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { supabase } from "../lib/supabase"
 import { useAuth } from "../context/AuthContext"
 import { Layout } from "../components/Layout"
 import { Button, Card, SectionTitle } from "../components/ui"
+import { checkVetAccess } from "../lib/vetAccess"
 
 export default function Account() {
   const { user, signOut } = useAuth()
   const [excluindo, setExcluindo] = useState(false)
+  const [ehVet, setEhVet] = useState(false)
+
+  useEffect(() => {
+    checkVetAccess().then(setEhVet)
+  }, [])
 
   async function excluirConta() {
     const txt = prompt(
@@ -38,6 +44,22 @@ export default function Account() {
           Sair
         </Button>
       </div>
+
+      {ehVet && (
+        <div className="mt-8">
+          <SectionTitle>Profissional</SectionTitle>
+          <Link to="/veterinario" className="block">
+            <Card className="flex items-center gap-3 border-gold transition hover:bg-gold/10">
+              <span className="text-2xl">🩺</span>
+              <div className="min-w-0 flex-1">
+                <p className="font-display font-semibold text-ink">Área do Veterinário</p>
+                <p className="text-xs text-muted">Registre vacinas e antiparasitários direto no pet do tutor</p>
+              </div>
+              <span className="text-gold">›</span>
+            </Card>
+          </Link>
+        </div>
+      )}
 
       <div className="mt-8">
         <SectionTitle>Privacidade</SectionTitle>

@@ -31,3 +31,9 @@ verify_jwt = true
 # aviso de novo pet: chamada pelo gatilho do banco (protegida por CRON_SECRET).
 [functions.notify-novo-pet]
 verify_jwt = false
+
+[functions.vet-buscar-pet]
+verify_jwt = true
+
+[functions.vet-registrar-cuidado]
+verify_jwt = true
