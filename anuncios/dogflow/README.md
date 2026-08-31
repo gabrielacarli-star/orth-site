@@ -1,4 +1,4 @@
-# Anúncio DogFlow (25s, vertical)
+# Anúncio DogFlow (22s, vertical)
 
 Localização de um criativo de 25s para o app **DogFlow**: narração nova em
 espanhol pela ElevenLabs, tela do app recriada e nome da marca trocado na
@@ -11,6 +11,23 @@ imagem.
 | áudio inteiro | narração + trilha originais | narração nova (voz Laura, ElevenLabs) + trilha nova (Eleven Music) |
 | 11,7s – 17,3s | gravação de tela de outro app | tela do DogFlow, recriada em código e rolando |
 | 18,1s – 20,3s | "¡SE LLAMA EVERYDOGGY!" queimado | "¡SE LLAMA DOGFLOW!" |
+| 22,1s – 25,1s | cartão final da EveryDoggy | cortado — o vídeo acaba em 22,1s |
+
+## Por que o vídeo acaba em 22,1s
+
+Os últimos 3 segundos do original são o cartão final da outra marca: logo,
+nome e botões de App Store e Google Play. É a única parte do vídeo que não
+dá pra localizar por cima — não é texto sobre imagem, é a marca inteira
+ocupando a tela. Então sai.
+
+22,10s é o último frame limpo; a partir de 22,15s o cartão já entra em
+fade. A última fala ("Toca abajo para probarla") vai de 20,30s a 21,92s,
+então cabe inteira. O corte fica em `FIM`, no `src/Root.tsx`.
+
+**O anúncio hoje termina sem cartão final.** Um anúncio de instalação
+costuma fechar com logo e botão de loja. Fazer um cartão do DogFlow é
+rápido — falta só saber o que vai nele (o app está publicado nas lojas?
+qual o destino do clique?).
 
 ## Como a narração ficou no tempo certo
 
