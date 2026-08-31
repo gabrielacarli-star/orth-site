@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="_doc.css">
+</head><body>
+
+<div class="cover">
+  <div class="kicker">Documentação Técnica</div>
+  <h1 class="title">Pet Saudável — Visão Geral do Sistema</h1>
+  <p class="tagline">Referência técnica do app "Pet Saudável / SOS Pet" para consulta ou migração de plataforma. Nenhuma chave/senha real está incluída aqui — só nomes de variáveis e onde ficam guardadas.</p>
+</div>
+
+<section>
+  <div class="sec-head"><span class="sec-num">01</span><span class="sec-title">Arquitetura geral</span></div>
+  <table>
+    <tr><th>Camada</th><th>Tecnologia</th></tr>
+    <tr><td>Frontend</td><td>Vite + React + TypeScript, Tailwind CSS v4, React Router</td></tr>
+    <tr><td>PWA</td><td>vite-plugin-pwa (instalável, ícone, manifest, service worker com precache)</td></tr>
+    <tr><td>Backend</td><td>Supabase — Postgres, Auth (email/senha), Storage, Edge Functions (Deno)</td></tr>
+    <tr><td>Hospedagem do app</td><td>Hostinger (arquivos estáticos, build do Vite), com <span class="mono">.htaccess</span> para SPA routing, compressão gzip e cache de assets</td></tr>
+    <tr><td>E-mail transacional</td><td>Resend (domínio verificado <span class="mono">medveteduardosebastiao.com</span>)</td></tr>
+    <tr><td>Pagamentos / vendas</td><td>Hotmart (checkout, webhook de notificação de compra)</td></tr>
+  </table>
+  <p class="body">Projeto Supabase: região São Paulo, ref <span class="mono">iqbrncszbkrmlgkmcixp</span>.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">02</span><span class="sec-title">Tabelas do banco (Postgres)</span></div>
+  <table>
+    <tr><th>Tabela</th><th>Função</th></tr>
+    <tr><td class="mono">pets</td><td>Um registro por pet (nome, espécie, raça, nascimento, alergias, foto). Dono via <span class="mono">user_id</span>.</td></tr>
+    <tr><td class="mono">vacinas</td><td>Histórico de vacinação por pet, com próxima dose.</td></tr>
+    <tr><td class="mono">antiparasitarios</td><td>Vermífugo/antipulgas/anticarrapato por pet, com intervalo e próxima dose.</td></tr>
+    <tr><td class="mono">pesos</td><td>Histórico de peso por pet.</td></tr>
+    <tr><td class="mono">produtos</td><td>Catálogo: título, descrição, capa, arquivo (PDF no Storage), link de checkout, se desbloqueia o SOS.</td></tr>
+    <tr><td class="mono">compras</td><td>Uma linha por (e-mail comprador × produto), status ativo/reembolsado. Alimentada pelo webhook da Hotmart e por vinculação manual.</td></tr>
+    <tr><td class="mono">sos_conteudo</td><td>Conteúdo protegido do SOS (sinais, passos, nunca faça, levar ao vet) por slug de emergência. RLS sem nenhuma policy — acesso só via Edge Function.</td></tr>
+    <tr><td class="mono">veterinarios</td><td>Lista de veterinários autorizados a usar a Área do Veterinário (busca/cadastra cuidados em qualquer pet).</td></tr>
+  </table>
+
+  <h3 class="sub">Segurança (Row Level Security)</h3>
+  <ul class="plain">
+    <li><span class="mono">pets</span>, <span class="mono">vacinas</span>, <span class="mono">antiparasitarios</span>, <span class="mono">pesos</span>: cada tutor só lê/escreve os próprios (via <span class="mono">auth.uid() = user_id</span>, direto ou pela relação com o pet)</li>
+    <li><span class="mono">compras</span>: o tutor só lê as próprias; inserção/atualização só pelas Edge Functions com <span class="mono">service_role</span> (nunca pelo cliente)</li>
+    <li><span class="mono">produtos</span>: catálogo público pra quem está logado</li>
+    <li><span class="mono">sos_conteudo</span>: RLS ativo sem nenhuma policy = acesso negado por padrão, mesmo autenticado; só a função <span class="mono">sos-conteudo</span> (com service_role) entrega, depois de conferir a compra</li>
+    <li><span class="mono">veterinarios</span>: cada vet só lê a própria linha (pra saber se tem acesso); toda escrita cross-usuário (buscar pet de outro tutor, cadastrar vacina) passa pelas Edge Functions <span class="mono">vet-buscar-pet</span> / <span class="mono">vet-registrar-cuidado</span>, nunca por RLS direto</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">03</span><span class="sec-title">Edge Functions (Deno, em supabase/functions/)</span></div>
+  <table>
+    <tr><th>Função</th><th>JWT</th><th>O que faz</th></tr>
+    <tr><td class="mono">hotmart-webhook</td><td>Não</td><td>Recebe notificação de compra/reembolso da Hotmart, grava em <span class="mono">compras</span>. Protegida pelo segredo <span class="mono">HOTMART_HOTTOK</span> — a Hotmart manda esse token dentro do corpo (<span class="mono">body.hottok</span>), não na URL.</td></tr>
+    <tr><td class="mono">claim-purchase</td><td>Sim</td><td>Usuário informa o e-mail usado no checkout (se for diferente do e-mail da conta) e a compra é vinculada.</td></tr>
+    <tr><td class="mono">ebook-url</td><td>Sim</td><td>Gera link assinado de curta duração pro PDF do produto, só se houver compra ativa.</td></tr>
+    <tr><td class="mono">sos-conteudo</td><td>Sim</td><td>Devolve o conteúdo de uma ficha de emergência, só se houver compra ativa de um produto com <span class="mono">desbloqueia_sos = true</span>.</td></tr>
+    <tr><td class="mono">delete-account</td><td>Sim</td><td>Apaga a conta do usuário e todos os dados relacionados.</td></tr>
+    <tr><td class="mono">send-reminders</td><td>Não*</td><td>Rotina diária (pg_cron) que envia e-mail (Resend) pra quem tem vacina/vermífugo vencendo hoje ou em 7 dias. Protegida por <span class="mono">CRON_SECRET</span> no header.</td></tr>
+    <tr><td class="mono">notify-cadastro</td><td>Não*</td><td>Avisa por e-mail quando alguém cria conta. Disparada por trigger do banco.</td></tr>
+    <tr><td class="mono">notify-novo-pet</td><td>Não*</td><td>Avisa por e-mail quando um pet é cadastrado. Disparada por trigger do banco.</td></tr>
+    <tr><td class="mono">vet-buscar-pet</td><td>Sim</td><td>Busca pets por nome e/ou e-mail do tutor — só funciona pra quem está em <span class="mono">veterinarios</span>.</td></tr>
+    <tr><td class="mono">vet-registrar-cuidado</td><td>Sim</td><td>Registra vacina/antiparasitário num pet de qualquer tutor — só pra veterinários cadastrados.</td></tr>
+  </table>
+  <p class="body">*Sem exigir JWT de usuário porque são chamadas por sistemas (Hotmart, cron do
+  banco), mas protegidas por segredo compartilhado.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">04</span><span class="sec-title">Integração com a Hotmart</span></div>
+  <ul class="plain">
+    <li>URL do webhook: <span class="mono">https://iqbrncszbkrmlgkmcixp.functions.supabase.co/hotmart-webhook</span></li>
+    <li>Eventos tratados como aprovação: <span class="mono">PURCHASE_APPROVED</span>, <span class="mono">PURCHASE_COMPLETE</span>, <span class="mono">PURCHASE_COMPLETED</span></li>
+    <li>Eventos tratados como cancelamento: <span class="mono">PURCHASE_REFUNDED</span>, <span class="mono">PURCHASE_CHARGEBACK</span>, <span class="mono">PURCHASE_CANCELED</span>, <span class="mono">PURCHASE_EXPIRED</span>, <span class="mono">PURCHASE_PROTEST</span></li>
+    <li>O join entre Hotmart e o app é o <span class="mono">hotmart_product_id</span> (ID do produto na Hotmart = coluna em <span class="mono">produtos</span>)</li>
+  </ul>
+  <div class="callout danger">
+    <strong>Atenção:</strong> a Hotmart envia o token de segurança (<span class="mono">hottok</span>)
+    dentro do corpo da notificação (<span class="mono">body.hottok</span>), não como parâmetro de URL.
+    A função já está ajustada pra isso; ao recriar em outra plataforma, replicar essa validação.
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">05</span><span class="sec-title">Variáveis de ambiente / segredos</span></div>
+  <table>
+    <tr><th>Nome</th><th>Onde fica</th><th>Uso</th></tr>
+    <tr><td class="mono">VITE_SUPABASE_URL</td><td>.env do frontend (build)</td><td>URL do projeto Supabase</td></tr>
+    <tr><td class="mono">VITE_SUPABASE_ANON_KEY</td><td>.env do frontend (build)</td><td>Chave pública anon (protegida pelo RLS)</td></tr>
+    <tr><td class="mono">VITE_LOJA_URL</td><td>.env do frontend (build)</td><td>Link opcional da loja, pra card na Biblioteca (ainda não configurado)</td></tr>
+    <tr><td class="mono">HOTMART_HOTTOK</td><td>Supabase → Edge Functions → Secrets</td><td>Valida notificação da Hotmart</td></tr>
+    <tr><td class="mono">RESEND_API_KEY</td><td>Supabase → Edge Functions → Secrets</td><td>Envio de e-mails transacionais</td></tr>
+    <tr><td class="mono">REMINDER_FROM</td><td>Supabase → Edge Functions → Secrets</td><td>Remetente dos e-mails</td></tr>
+    <tr><td class="mono">CRON_SECRET</td><td>Supabase → Edge Functions → Secrets</td><td>Protege as funções chamadas por cron/trigger</td></tr>
+  </table>
+  <p class="body"><span class="mono">SUPABASE_URL</span>, <span class="mono">SUPABASE_ANON_KEY</span> e
+  <span class="mono">SUPABASE_SERVICE_ROLE_KEY</span> já existem automaticamente no ambiente das
+  Edge Functions, não precisam ser cadastradas.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">06</span><span class="sec-title">Storage (arquivos)</span></div>
+  <ul class="plain">
+    <li><span class="mono">pet-fotos</span> (público) — fotos de pet e capas de produto</li>
+    <li><span class="mono">ebooks</span> (privado) — PDFs dos produtos, só acessíveis via link assinado gerado pela função <span class="mono">ebook-url</span></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">07</span><span class="sec-title">Telas do app (rotas)</span></div>
+  <table>
+    <tr><th>Rota</th><th>Tela</th></tr>
+    <tr><td class="mono">/login</td><td>Cadastro/login</td></tr>
+    <tr><td class="mono">/</td><td>Início — próximos cuidados, meus pets, banner de venda (se não tem SOS), atalho WhatsApp</td></tr>
+    <tr><td class="mono">/pets</td><td>Lista de pets</td></tr>
+    <tr><td class="mono">/pets/:id</td><td>Detalhe do pet — vacinas, antiparasitários, peso</td></tr>
+    <tr><td class="mono">/pets/:id/cartao</td><td>Cartão de emergência (imprimível)</td></tr>
+    <tr><td class="mono">/sos</td><td>Lista de emergências + guias de prevenção</td></tr>
+    <tr><td class="mono">/sos/:slug</td><td>Detalhe de uma emergência (travado por compra)</td></tr>
+    <tr><td class="mono">/sos/guia/:slug</td><td>Detalhe de um guia de prevenção (travado por compra)</td></tr>
+    <tr><td class="mono">/biblioteca</td><td>Catálogo de produtos/e-books</td></tr>
+    <tr><td class="mono">/veterinario</td><td>Área do Veterinário (só aparece pra quem está cadastrado)</td></tr>
+    <tr><td class="mono">/conta</td><td>Conta, tamanho de texto, excluir conta</td></tr>
+    <tr><td class="mono">/privacidade</td><td>Política de privacidade (pública)</td></tr>
+  </table>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-num">08</span><span class="sec-title">Funcionalidades já entregues</span></div>
+  <ul class="plain">
+    <li>Cadastro de pets (cão, gato, outro), com foto</li>
+    <li>Vacinas e antiparasitários com cálculo automático da próxima dose</li>
+    <li>Histórico de peso</li>
+    <li>SOS travado por compra (8 emergências + 2 guias de prevenção)</li>
+    <li>Cartão de emergência do pet, imprimível</li>
+    <li>Biblioteca de produtos com liberação automática por compra</li>
+    <li>Webhook da Hotmart (compra aprovada / reembolso)</li>
+    <li>"Já comprei e não apareceu" (vínculo manual por e-mail)</li>
+    <li>Lembretes por e-mail de vacina/vermífugo (Resend + cron diário)</li>
+    <li>Aviso por e-mail de novo cadastro e novo pet</li>
+    <li>Botão de WhatsApp direto pro Dr. Eduardo</li>
+    <li>Banner de venda do SOS Pet pra quem ainda não comprou</li>
+    <li>Controle de tamanho de texto (A/A+/A++), salvo por usuário</li>
+    <li>Área do Veterinário — busca pet por nome/e-mail e registra vacina/vermífugo sem precisar do celular do tutor</li>
+    <li>PWA instalável, com ícones e splash</li>
+  </ul>
+
+  <h3 class="sub">Pendências conhecidas</h3>
+  <ul class="plain">
+    <li><span class="mono">VITE_LOJA_URL</span> ainda não configurado (card da loja fica escondido até ter o link)</li>
+    <li>Confirmação de e-mail no cadastro está desativada (limite de envio do plano gratuito do Supabase Auth sem SMTP customizado)</li>
+  </ul>
+</section>
+
+<div class="foot">
+  <div class="name">Pet Saudável · Documentação técnica</div>
+  <div class="aviso">Gerado a partir do código-fonte do projeto. Não contém chaves ou senhas reais.</div>
+</div>
+
+</body></html>

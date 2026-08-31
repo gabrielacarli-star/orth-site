@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#FFFFFF; color:#241C14;
+  font-family:'EB Garamond', Georgia, 'Times New Roman', serif;
+  line-height:1.55; font-size:13px; -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+.font-display { font-family:'Cinzel', Georgia, serif; }
+.cover { padding:0 0 20px; border-bottom:2px solid #B2925A; margin-bottom:22px; }
+.kicker { font-family:'Cinzel', Georgia, serif; font-size:10px; font-weight:600; letter-spacing:0.2em;
+  text-transform:uppercase; color:#6F5B3E; margin-bottom:8px; }
+h1.title { font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:24px; color:#241C14; line-height:1.25; }
+.tagline { font-style:italic; color:#6F5B3E; font-size:13px; margin-top:8px; }
+section { margin-top:20px; page-break-inside:avoid; }
+.sec-head { display:flex; align-items:baseline; gap:9px; padding-bottom:5px; margin-bottom:10px; border-bottom:1px solid #B2925A; }
+.sec-num { font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:12px; color:#B2925A; }
+.sec-title { font-family:'Cinzel', Georgia, serif; font-weight:600; font-size:13px; letter-spacing:0.04em;
+  text-transform:uppercase; color:#241C14; }
+h3.sub { font-family:'Cinzel', Georgia, serif; font-weight:600; font-size:11.5px; color:#3A2A1A; margin:12px 0 5px; }
+p.body { font-size:13px; margin-bottom:8px; }
+ul.plain, ol.plain { margin:0 0 6px 18px; }
+ul.plain li, ol.plain li { margin-bottom:5px; }
+table { width:100%; border-collapse:collapse; font-size:11.5px; margin:6px 0 12px; }
+th { font-family:'Cinzel', Georgia, serif; font-size:9px; font-weight:600; letter-spacing:0.06em;
+  text-transform:uppercase; color:#6F5B3E; text-align:left; padding:6px 6px; border-bottom:1px solid #B2925A; background:#F8F2E6; }
+td { padding:7px 6px; border-bottom:1px solid #E3D7BE; vertical-align:top; }
+code, .mono { font-family:'Courier New', monospace; font-size:11px; background:#F1E7D2; padding:1px 5px; border-radius:3px; color:#3A2A1A; }
+pre { font-family:'Courier New', monospace; font-size:10.5px; background:#241C14; color:#F1E7D2; padding:10px 12px;
+  border-radius:6px; overflow-wrap:break-word; white-space:pre-wrap; margin:8px 0; }
+.callout { border-left:3px solid #B2925A; background:#F8F2E6; padding:9px 12px; margin:10px 0; page-break-inside:avoid; font-size:12.5px; }
+.callout.danger { border-left-color:#9a3412; background:#F4E2D8; }
+.callout strong { color:#9a3412; }
+.callout.tip strong { color:#6F5B3E; }
+.foot { margin-top:24px; border-top:1px solid #B2925A; padding-top:12px; page-break-inside:avoid; }
+.foot .name { font-family:'Cinzel', Georgia, serif; font-weight:700; font-size:11.5px; }
+.foot .aviso { margin-top:6px; font-size:9.5px; color:#6F5B3E; }
