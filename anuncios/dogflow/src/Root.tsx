@@ -40,6 +40,7 @@ export const RemotionRoot: React.FC = () => (
       height={1280}
     />
 
+    {/* Versão falada: narração frase a frase sobre trilha instrumental. */}
     <Composition
       id="anuncio-2"
       component={Anuncio2}
@@ -47,6 +48,18 @@ export const RemotionRoot: React.FC = () => (
       fps={30}
       width={720}
       height={1280}
+      defaultProps={{ cantado: false }}
+    />
+
+    {/* Versão cantada: o jingle da Eleven Music no lugar da narração. */}
+    <Composition
+      id="anuncio-2-cantado"
+      component={Anuncio2}
+      durationInFrames={Math.round(FIM_2 * 30)}
+      fps={30}
+      width={720}
+      height={1280}
+      defaultProps={{ cantado: true }}
     />
   </>
 );

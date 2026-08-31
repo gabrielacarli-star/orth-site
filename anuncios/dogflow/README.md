@@ -8,10 +8,12 @@ recriada e o nome da marca trocado na imagem.
 |---|---|---|---|---|
 | **Anúncio 1** | `anuncio` | 22,1s, 25 fps | depoimento sobre o app | áudio inteiro + tela do app + nome da marca + corte do cartão final |
 | **Anúncio 2** | `anuncio-2` | 27,2s, 30 fps | montagem de 5 ganchos | só o áudio: narração e trilha |
+| **Anúncio 2 cantado** | `anuncio-2-cantado` | 27,2s, 30 fps | o mesmo vídeo | jingle cantado no lugar da narração |
 
 ```bash
-REMOTION_CHROME=/caminho/chrome npx remotion render src/index.ts anuncio   out/dogflow.mp4
-REMOTION_CHROME=/caminho/chrome npx remotion render src/index.ts anuncio-2 out/dogflow-2.mp4
+REMOTION_CHROME=/caminho/chrome npx remotion render src/index.ts anuncio           out/dogflow.mp4
+REMOTION_CHROME=/caminho/chrome npx remotion render src/index.ts anuncio-2         out/dogflow-2.mp4
+REMOTION_CHROME=/caminho/chrome npx remotion render src/index.ts anuncio-2-cantado out/dogflow-2-cantado.mp4
 ```
 
 ---
@@ -75,6 +77,34 @@ decidir o fecho (ver *Pendente*).
 
 ---
 
+## A versão cantada
+
+Mesmo vídeo, jingle da Eleven Music no lugar da narração — a mesma técnica
+do canal infantil: a música já vem com a voz cantando a letra, não é uma
+base com voz colada depois.
+
+Letra em `scripts/gerar_jingle.py`. O nome do app é cantado oito vezes, o
+que resolve sozinho o buraco de o vídeo não mencionar a marca.
+
+**A letra não repete as perguntas queimadas na tela**, e isso é a decisão
+que sustenta a versão cantada. Na narração falada dá pra colocar cada frase
+no instante exato — foi assim que ela casou com o corte. Numa música não
+dá: quem decide o andamento é a melodia, e a letra cai onde ela mandar. Se
+a letra repetisse o texto da tela, qualquer descompasso viraria a voz
+cantando "muerde" enquanto a tela diz "orine". Falando da mensagem da marca
+em vez das perguntas, os dois se reforçam sem precisar bater palavra por
+palavra.
+
+Entre as variantes, escolhe a de menor `loss` do forced alignment — que
+mede o quanto o que foi *cantado* bate com a letra escrita. Num jingle de
+27 segundos é o que decide se dá pra entender o nome do app. A escolhida
+canta sem parar de 0,3s a 26,1s.
+
+**Falada ou cantada é uma escolha, não uma evolução.** A falada casa com o
+corte e explica; a cantada gruda e diz o nome. Vale testar as duas.
+
+---
+
 ## Como a narração fica no tempo certo
 
 Os dois vídeos foram transcritos com timestamps por palavra (speech-to-text
@@ -119,8 +149,11 @@ npm install
 python3 scripts/gerar_narracao.py 1
 python3 scripts/gerar_narracao.py 2
 
-# trilha: gera duas variantes e mostra o nível de cada uma
+# trilha instrumental: gera duas variantes e mostra o nível de cada uma
 python3 scripts/gerar_trilha.py 2
+
+# jingle cantado: gera três variantes e pontua cada uma pelo alinhamento
+python3 scripts/gerar_jingle.py 2
 
 npm run studio                    # editor visual
 REMOTION_CHROME=/caminho/chrome npx remotion render src/index.ts anuncio-2 out/dogflow-2.mp4
@@ -144,6 +177,10 @@ custam centavos pra refazer); os scripts é que estão.
   era de outra marca; o anúncio 2 nunca teve. Anúncio de instalação
   costuma fechar com logo e botão de loja. Fazer um do DogFlow é rápido —
   falta saber o que vai nele: o app está publicado nas lojas? qual o
-  destino do clique?
+  destino do clique? (A versão cantada ao menos diz o nome em voz alta;
+  cartão ela também não tem.)
+- Só o anúncio 2 tem versão cantada. Fazer uma do anúncio 1 é acrescentar
+  uma entrada em `JINGLES` no `gerar_jingle.py` — mas lá a narração falada
+  faz mais sentido, porque o vídeo é um depoimento.
 - A voz Laura tem sotaque americano — funciona em espanhol, mas uma voz
   nativa da Voice Library ficaria melhor.
