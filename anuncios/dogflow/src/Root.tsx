@@ -1,6 +1,7 @@
 import React from "react";
 import { Composition } from "remotion";
 import { Anuncio } from "./Anuncio";
+import { Anuncio2 } from "./Anuncio2";
 import { carregarFonte } from "./fonte";
 
 carregarFonte();
@@ -22,13 +23,30 @@ carregarFonte();
  */
 const FIM = 22.1;
 
+/**
+ * O segundo anúncio vai até o fim: 27,18s, 30 fps (o original é 30, não 25).
+ * Aqui não há cartão de outra marca pra cortar.
+ */
+const FIM_2 = 27.18;
+
 export const RemotionRoot: React.FC = () => (
-  <Composition
-    id="anuncio"
-    component={Anuncio}
-    durationInFrames={Math.round(FIM * 25)}
-    fps={25}
-    width={720}
-    height={1280}
-  />
+  <>
+    <Composition
+      id="anuncio"
+      component={Anuncio}
+      durationInFrames={Math.round(FIM * 25)}
+      fps={25}
+      width={720}
+      height={1280}
+    />
+
+    <Composition
+      id="anuncio-2"
+      component={Anuncio2}
+      durationInFrames={Math.round(FIM_2 * 30)}
+      fps={30}
+      width={720}
+      height={1280}
+    />
+  </>
 );
