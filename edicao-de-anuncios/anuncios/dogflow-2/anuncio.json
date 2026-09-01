@@ -1,0 +1,41 @@
+{
+  "id": "dogflow-2",
+  "video": "dogflow-2.mp4",
+  "fps": 30,
+  "duracaoSegundos": 27.18,
+
+  "audio": "jingle",
+
+  "voz": "FGY2WhTYpPnrIDTdsKH5",
+  "idioma": "es",
+  "falas": [
+    { "em": 0.10, "texto": "Gritar \"no\" nunca hará que tu perro reactivo sea obediente." },
+    { "em": 3.56, "texto": "¿Cómo entrenar para la jaula a un cachorro?" },
+    { "em": 8.96, "texto": "¿Cómo evitar que un cachorro orine en sólo un día?" },
+    { "em": 16.46, "texto": "¿Cómo evitar que un cachorro tire de la correa?" },
+    { "em": 21.26, "texto": "¿Cómo evitar que un cachorro muerda en sólo un día?" }
+  ],
+
+  "trilha": {
+    "arquivo": "dogflow-2-trilha.mp3",
+    "volume": 0.26,
+    "prompt": "Upbeat modern pop instrumental for a short vertical social ad about dog training. Bright plucked synth arpeggio, warm sub bass, crisp claps and shaker, steady four-on-the-floor at 112 BPM. Friendly and confident, a little curious, never dramatic. Consistent energy the whole way, no long intro and no big drop. Clean space in the midrange so a female voiceover sits clearly on top."
+  },
+
+  "jingle": {
+    "arquivo": "dogflow-2-jingle.mp3",
+    "volume": 0.9,
+    "titulo": "DogFlow",
+    "estilo": "Upbeat, catchy Latin pop advertising jingle in Spanish. One warm female voice singing lead, bright acoustic guitar, claps, shaker and a light four-on-the-floor beat around 112 BPM. Friendly and confident, the sound of a happy commercial. Clear diction — every word has to be understandable on a phone speaker. Straight into the first line, no long intro.",
+    "letra": [
+      "¿Tu perro ladra y no te escucha?",
+      "¿Muerde, tira de la correa?",
+      "No hace falta gritar que no,",
+      "no hace falta un adiestrador.",
+      "DogFlow, DogFlow,",
+      "paso a paso, desde casa.",
+      "DogFlow, DogFlow,",
+      "tu perro aprende hoy."
+    ]
+  }
+}

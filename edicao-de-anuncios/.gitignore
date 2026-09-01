@@ -1,0 +1,12 @@
+video/node_modules/
+video/out/
+
+# Áudio gerado e vídeo original: são grandes, custam centavos pra refazer
+# e não são nossos. Ficam locais.
+anuncios/*/bruto/
+video/public/*.mp4
+video/public/*.mp3
+
+# Cache de bytecode do Python
+__pycache__/
+*.pyc
