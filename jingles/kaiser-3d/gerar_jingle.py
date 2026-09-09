@@ -82,8 +82,8 @@ OPCOES = {
         "titulo": "Kaiser Impressões 3D — opção B",
         "estilo": ESTILO_PADRAO,
         "letra": [
-            "Brinde, troféu, protótipo, presente,",
-            "a Kaiser imprime o que você tem na mente.",
+            "Brinde, troféu, brinquedo, presente,",
+            "protótipo também? A Kaiser inventa!",
             "Quebrou uma peça? A gente repõe,",
             "sua ideia em 3D, é a Kaiser que compõe.",
             "Kaiser, Kaiser, impressão 3D,",
@@ -92,12 +92,16 @@ OPCOES = {
     },
     # Mesma letra da B — só o andamento muda. É a variação pedida depois
     # de ouvir a B e achar o ritmo devagar demais.
+    #
+    # "brinquedo" entrou na lista da primeira linha depois: a galeria do
+    # site é praticamente só brinquedo (hortinha sensorial, polvo
+    # articulado, fidget toy), e a letra original não mencionava nenhum.
     "B2": {
         "titulo": "Kaiser Impressões 3D — opção B (mais animada)",
         "estilo": ESTILO_ANIMADO,
         "letra": [
-            "Brinde, troféu, protótipo, presente,",
-            "a Kaiser imprime o que você tem na mente.",
+            "Brinde, troféu, brinquedo, presente,",
+            "protótipo também? A Kaiser inventa!",
             "Quebrou uma peça? A gente repõe,",
             "sua ideia em 3D, é a Kaiser que compõe.",
             "Kaiser, Kaiser, impressão 3D,",
