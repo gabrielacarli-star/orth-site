@@ -78,6 +78,13 @@ LINHAS = [
     "do desenho ao objeto, sob encomenda, é!",
 ]
 
+# Cartão final, depois que a música acaba. Fica em cima da mesma última
+# foto (o busto do cachorro), congelada mais alguns segundos — não é uma
+# foto nova, só um tempo a mais nela.
+CTA_SEGUNDOS = 2.2
+CTA_TITULO = "SIGA PRA MAIS"
+CTA_ARROBA = "@kaiserimpressoes3d"
+
 
 def dimensoes(caminho: Path) -> tuple[int, int]:
     saida = subprocess.run(
@@ -129,6 +136,7 @@ WrapStyle: 0
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 Style: Default,Baloo 2,84,&H00FFFFFF,&H00FFFFFF,&H00181818,&H00000000,-1,0,0,0,100,100,0,0,1,10,0,2,60,60,170,1
+Style: Encerramento,Baloo 2,88,&H00FFFFFF,&H00FFFFFF,&H00000000,&H99000000,-1,0,0,0,100,100,0,0,3,0,0,5,80,80,0,1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -138,8 +146,18 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         for ini, fim, texto in eventos
     )
 
+    # Cartão final: estilo à parte (caixa opaca, centralizado na tela) pra
+    # ler como um encerramento, não como mais uma linha de letra.
+    inicio_cta, fim_cta = duracao_total, duracao_total + CTA_SEGUNDOS
+    linha_cta = (
+        f"Dialogue: 1,{t(inicio_cta)},{t(fim_cta)},Encerramento,,0,0,0,,"
+        f"{CTA_TITULO}\\N{{\\fs60}}{CTA_ARROBA}"
+    )
+
     destino = RAIZ / "legenda.ass"
-    destino.write_text(cabecalho + linhas_evento + "\n", encoding="utf-8")
+    destino.write_text(
+        cabecalho + linhas_evento + "\n" + linha_cta + "\n", encoding="utf-8"
+    )
     return destino
 
 
@@ -147,18 +165,24 @@ def main() -> None:
     duracao_total = duracao_audio()
     por_foto = duracao_total / len(ORDEM)
     print(f"Áudio: {duracao_total:.2f}s · {len(ORDEM)} fotos · "
-          f"{por_foto:.2f}s cada")
+          f"{por_foto:.2f}s cada · cartão final +{CTA_SEGUNDOS:.1f}s")
 
     legenda = gerar_ass(duracao_total)
     print(f"Legenda gravada em {legenda.name}")
 
-    # Um input por foto, cada um cortado pro mesmo quadro vertical.
+    # Um slide por foto, na duração do ritmo, mais um último slide extra:
+    # a MESMA foto de fechamento (não uma nova), só que congelada pelos
+    # segundos do cartão final — dá o efeito de "a imagem para e aparece
+    # o convite pra seguir", sem cortar pra uma tela em branco.
+    slides = [(nome, por_foto) for nome in ORDEM]
+    slides.append((ORDEM[-1], CTA_SEGUNDOS))
+
     entradas, filtros, rotulos = [], [], []
-    for i, nome in enumerate(ORDEM):
+    for i, (nome, duracao_slide) in enumerate(slides):
         caminho = FOTOS / nome
         if not caminho.exists():
             raise SystemExit(f"Não achei {caminho}")
-        entradas += ["-loop", "1", "-t", f"{por_foto:.3f}", "-i", str(caminho)]
+        entradas += ["-loop", "1", "-t", f"{duracao_slide:.3f}", "-i", str(caminho)]
 
         largura_foto, altura_foto = dimensoes(caminho)
         if largura_foto > altura_foto:
@@ -182,27 +206,32 @@ def main() -> None:
             )
         rotulos.append(f"[v{i}]")
 
-    concat = "".join(rotulos) + f"concat=n={len(ORDEM)}:v=1:a=0[slides]"
+    concat = "".join(rotulos) + f"concat=n={len(slides)}:v=1:a=0[semlegenda]"
     # libass lê o arquivo relativo ao cwd do processo ffmpeg, então
     # rodamos com cwd=RAIZ e passamos só o nome do arquivo.
-    legendado = (
-        f"[slides]subtitles={legenda.name}:fontsdir={FONTES}[video]"
-    )
-    filtro_completo = ";".join(filtros) + ";" + concat + ";" + legendado
+    legendado = f"[semlegenda]subtitles={legenda.name}:fontsdir={FONTES}[video]"
+
+    # A música não toca durante o cartão final — ela já termina sozinha
+    # (o jingle tem fade próprio). `apad` só completa com silêncio até o
+    # vídeo (foto + cartão) acabar, pra as duas trilhas baterem em
+    # duração sem precisar de -shortest cortando o último frame.
+    indice_audio = len(slides)
+    audio_esticado = f"[{indice_audio}:a]apad=pad_dur={CTA_SEGUNDOS}[audio]"
+
+    filtro_completo = ";".join(filtros) + ";" + concat + ";" + legendado + ";" + audio_esticado
 
     comando = [
         "ffmpeg", "-y", "-v", "error", "-stats",
         *entradas,
         "-i", str(AUDIO),
         "-filter_complex", filtro_completo,
-        "-map", "[video]", "-map", f"{len(ORDEM)}:a",
+        "-map", "[video]", "-map", "[audio]",
         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20",
         "-c:a", "aac", "-b:a", "192k",
-        "-shortest",
         str(SAIDA),
     ]
     subprocess.run(comando, cwd=RAIZ, check=True)
-    print(f"\nGravado em {SAIDA}")
+    print(f"\nGravado em {SAIDA} ({duracao_total + CTA_SEGUNDOS:.1f}s no total)")
 
 
 if __name__ == "__main__":
