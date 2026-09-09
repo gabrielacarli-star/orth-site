@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Gera o jingle cantado da Kaiser Impressões 3D com a Eleven Music.
 
-    python3 gerar_jingle.py           # gera as duas opções de letra
-    python3 gerar_jingle.py A         # só a opção A
-    python3 gerar_jingle.py B --variantes 4
+    python3 gerar_jingle.py A          # só a opção A
+    python3 gerar_jingle.py B          # opção B, andamento médio
+    python3 gerar_jingle.py B2         # opção B, mesma letra, mais animada
+    python3 gerar_jingle.py B2 --variantes 4
 
 A música já vem com a voz cantando a letra — não é uma base instrumental
 com voz colada depois.
@@ -24,7 +25,10 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent
 DURACAO_MS = 24_000
 
-ESTILO = (
+# Estilo padrão: mid-tempo, pop acústico. Foi o que gerou a opção B
+# original — a letra agradou, mas o andamento saiu devagar demais pro
+# gosto do cliente.
+ESTILO_PADRAO = (
     "Warm, upbeat Brazilian pop jingle for a small creative business ad. "
     "One friendly female voice singing lead, acoustic guitar, light "
     "percussion, claps, a small brass stab on the chorus. Confident and "
@@ -34,9 +38,37 @@ ESTILO = (
     "no long intro."
 )
 
+# Estilo animado: mesmo tom (marca artesanal, não corporativo), mas com
+# andamento e instrumentação que empurram pra frente. Descrever o BPM
+# explicitamente e nomear o groove ("four-on-the-floor", "driving") é o
+# que faz a Eleven Music realmente acelerar — só pedir "upbeat" de novo
+# tende a devolver a mesma sensação de antes.
+#
+# A primeira tentativa foi a 132 BPM com "no held notes: keep the
+# syllables moving" — nas três variantes a PRIMEIRA palavra ("Brinde")
+# saiu engolida ou trocada ("Tem de", "Vinte, trinta, real", "Pinge").
+# O pedido de cantar rápido sem segurar nota nenhuma competiu com a
+# dicção logo na entrada, antes da voz "aquecer". 122 BPM e pedir dicção
+# nítida explicitamente resolve — ainda é bem mais rápido que o estilo
+# padrão, mas dá espaço pra primeira palavra sair inteira.
+ESTILO_ANIMADO = (
+    "Upbeat, energetic Brazilian pop jingle for a small creative business "
+    "ad. Tempo around 122 BPM, driving four-on-the-floor beat, punchy "
+    "rhythm guitar, bright synth stabs, claps and shaker running "
+    "throughout, quick horn hits on the chorus. One confident, excited "
+    "female voice singing lead — feels like a fun, danceable ad hook, not "
+    "a ballad and not rushed. Diction has to stay crisp and unhurried on "
+    "every single word, especially the very first word of the song — "
+    "articulate it fully before the beat pulls the tempo forward. Clear "
+    "Brazilian Portuguese throughout, understandable on a phone speaker. "
+    "Full energy from the first beat to the last, but never at the cost "
+    "of clarity."
+)
+
 OPCOES = {
     "A": {
         "titulo": "Kaiser Impressões 3D — opção A",
+        "estilo": ESTILO_PADRAO,
         "letra": [
             "Tem uma ideia? Manda pra cá,",
             "a Kaiser faz ela ganhar forma de verdade.",
@@ -48,6 +80,21 @@ OPCOES = {
     },
     "B": {
         "titulo": "Kaiser Impressões 3D — opção B",
+        "estilo": ESTILO_PADRAO,
+        "letra": [
+            "Brinde, troféu, protótipo, presente,",
+            "a Kaiser imprime o que você tem na mente.",
+            "Quebrou uma peça? A gente repõe,",
+            "sua ideia em 3D, é a Kaiser que compõe.",
+            "Kaiser, Kaiser, impressão 3D,",
+            "do desenho ao objeto, sob encomenda, é!",
+        ],
+    },
+    # Mesma letra da B — só o andamento muda. É a variação pedida depois
+    # de ouvir a B e achar o ritmo devagar demais.
+    "B2": {
+        "titulo": "Kaiser Impressões 3D — opção B (mais animada)",
+        "estilo": ESTILO_ANIMADO,
         "letra": [
             "Brinde, troféu, protótipo, presente,",
             "a Kaiser imprime o que você tem na mente.",
@@ -76,7 +123,7 @@ def cliente():
 def montar_prompt(cfg: dict) -> str:
     letra = "\n".join(cfg["letra"])
     return (
-        f"{ESTILO}\n\n"
+        f"{cfg['estilo']}\n\n"
         f"Song title: {cfg['titulo']}.\n"
         "Structure: sing the four verse lines once, then the two chorus "
         "lines, then repeat the chorus once more to close. The brand name "
@@ -87,11 +134,20 @@ def montar_prompt(cfg: dict) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description="Gera o jingle da Kaiser")
-    ap.add_argument("opcao", nargs="?", default="AB", help="A, B, ou AB pras duas (padrão)")
+    ap.add_argument(
+        "opcao", nargs="?", default="AB",
+        help="A, B, B2, ou uma combinação tipo AB / BB2 (padrão AB)",
+    )
     ap.add_argument("--variantes", type=int, default=3)
     args = ap.parse_args()
 
-    quais = ["A", "B"] if args.opcao.upper() == "AB" else [args.opcao.upper()]
+    # "AB" continua sendo o atalho pras duas opções originais. Fora isso,
+    # é uma lista separada por vírgula de chaves exatas de OPCOES — assim
+    # "B2" não é confundido com "B" + "2".
+    if args.opcao.upper() == "AB":
+        quais = ["A", "B"]
+    else:
+        quais = [p.strip().upper() for p in args.opcao.split(",") if p.strip()]
     for q in quais:
         if q not in OPCOES:
             sys.exit(f"Opção '{q}' não existe. Use A, B ou AB.")
