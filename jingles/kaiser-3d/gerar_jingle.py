@@ -83,7 +83,7 @@ OPCOES = {
         "estilo": ESTILO_PADRAO,
         "letra": [
             "Brinde, troféu, brinquedo, presente,",
-            "protótipo também? A Kaiser inventa!",
+            "a Kaiser imprime o que você tem na mente.",
             "Quebrou uma peça? A gente repõe,",
             "sua ideia em 3D, é a Kaiser que compõe.",
             "Kaiser, Kaiser, impressão 3D,",
@@ -96,12 +96,19 @@ OPCOES = {
     # "brinquedo" entrou na lista da primeira linha depois: a galeria do
     # site é praticamente só brinquedo (hortinha sensorial, polvo
     # articulado, fidget toy), e a letra original não mencionava nenhum.
+    # Entrou no lugar de "protótipo", e não como quinto item ou linha
+    # nova: uma tentativa anterior colocou os dois na mesma linha (cinco
+    # itens) e quebrou a primeira palavra ("Brinde" saiu como "Imprime",
+    # "Binde", "Print"); outra deu ao protótipo uma linha própria e
+    # quebrou a rima AABB que a versão aprovada tinha (presente/mente).
+    # Manter a MESMA estrutura da versão que já soou bem — só trocar uma
+    # palavra por outra no mesmo lugar — é o que preserva o ritmo.
     "B2": {
         "titulo": "Kaiser Impressões 3D — opção B (mais animada)",
         "estilo": ESTILO_ANIMADO,
         "letra": [
             "Brinde, troféu, brinquedo, presente,",
-            "protótipo também? A Kaiser inventa!",
+            "a Kaiser imprime o que você tem na mente.",
             "Quebrou uma peça? A gente repõe,",
             "sua ideia em 3D, é a Kaiser que compõe.",
             "Kaiser, Kaiser, impressão 3D,",
