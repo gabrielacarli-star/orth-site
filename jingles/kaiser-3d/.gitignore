@@ -1,3 +1,10 @@
 .env
 bruto/
 *.mp3
+
+# Fotos da Kaiser (baixadas do Drive dela) e tudo derivado de uma
+# renderização: grande, é dela, e é barato refazer com montar_video.py.
+video/fotos/
+video/*.mp4
+video/legenda.ass
+video/palavras.json
