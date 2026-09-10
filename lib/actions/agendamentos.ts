@@ -22,6 +22,8 @@ export async function criarAgendamento(
   const hora = String(formData.get("hora") || "")
   const duracao_minutos = Number(formData.get("duracao_minutos") || 60)
   const notas = String(formData.get("notas") || "").trim() || null
+  const vendedorIdForm = String(formData.get("vendedor_id") || "").trim()
+  const vendedor_id = perfil.role === "admin" && vendedorIdForm ? vendedorIdForm : perfil.id
 
   if (!titulo || !data || !hora) {
     return { error: "Preencha o título, a data e o horário." }
@@ -33,7 +35,7 @@ export async function criarAgendamento(
   }
 
   const { error } = await supabase.from("agendamentos").insert({
-    vendedor_id: perfil.id,
+    vendedor_id,
     titulo,
     cliente_nome,
     data_hora: data_hora.toISOString(),
@@ -51,11 +53,9 @@ export async function criarAgendamento(
 export async function removerAgendamento(id: string) {
   const perfil = await requireVendedor()
   const supabase = await createClient()
-  const { error } = await supabase
-    .from("agendamentos")
-    .delete()
-    .eq("id", id)
-    .eq("vendedor_id", perfil.id)
+  const query = supabase.from("agendamentos").delete().eq("id", id)
+  const { error } =
+    perfil.role === "admin" ? await query : await query.eq("vendedor_id", perfil.id)
   if (error) throw new Error(error.message)
   revalidatePath("/sistema/vendedor/agenda")
 }

@@ -26,6 +26,11 @@ export function CriarVendedorForm({ comissaoPadrao }: { comissaoPadrao: number }
         Cadastrar novo vendedor
       </h2>
 
+      <label className="sm:col-span-2 flex items-center gap-2 text-sm text-orth-muted cursor-pointer">
+        <input type="checkbox" name="tambem_admin" className="rounded accent-orth-electric" />
+        Esta pessoa também é administradora (acesso completo ao painel admin)
+      </label>
+
       <input name="nome" placeholder="Nome completo" required className={inputClass} />
       <input
         name="email"

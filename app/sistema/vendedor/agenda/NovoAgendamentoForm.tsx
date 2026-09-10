@@ -7,7 +7,13 @@ const initialState: AgendamentoFormState = {}
 const inputClass =
   "w-full rounded-lg bg-orth-dark border border-orth-line/20 px-3.5 py-2 text-white placeholder:text-orth-muted/60 focus:outline-none focus:ring-2 focus:ring-orth-electric text-sm"
 
-export function NovoAgendamentoForm() {
+export function NovoAgendamentoForm({
+  vendedores,
+  vendedorSelecionado,
+}: {
+  vendedores?: { id: string; nome: string }[]
+  vendedorSelecionado?: string
+}) {
   const [state, formAction, pending] = useActionState(criarAgendamento, initialState)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -22,6 +28,21 @@ export function NovoAgendamentoForm() {
       className="grid grid-cols-1 sm:grid-cols-2 gap-3 rounded-xl border border-orth-line/10 bg-orth-navy/40 p-5"
     >
       <h3 className="sm:col-span-2 text-white text-sm font-medium">Novo compromisso</h3>
+
+      {vendedores && (
+        <select
+          name="vendedor_id"
+          required
+          defaultValue={vendedorSelecionado}
+          className={`sm:col-span-2 ${inputClass}`}
+        >
+          {vendedores.map((v) => (
+            <option key={v.id} value={v.id}>
+              {v.nome}
+            </option>
+          ))}
+        </select>
+      )}
 
       <input name="titulo" placeholder="Título (ex: Reunião com cliente)" required className={inputClass} />
       <input name="cliente_nome" placeholder="Nome do cliente (opcional)" className={inputClass} />

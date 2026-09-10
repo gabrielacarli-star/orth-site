@@ -18,7 +18,7 @@ export interface Vendedor {
 }
 
 export interface VendedorComPerfil extends Vendedor {
-  perfis: Pick<Perfil, "nome"> | null
+  perfis: Pick<Perfil, "nome" | "role"> | null
   email?: string
 }
 

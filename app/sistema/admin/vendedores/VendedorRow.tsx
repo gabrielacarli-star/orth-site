@@ -21,7 +21,14 @@ export function VendedorRow({ vendedor }: { vendedor: VendedorComPerfil }) {
   return (
     <tr className="border-t border-orth-line/10">
       <td className="py-3 pr-4">
-        <p className="text-white text-sm font-medium">{vendedor.perfis?.nome}</p>
+        <p className="text-white text-sm font-medium flex items-center gap-1.5">
+          {vendedor.perfis?.nome}
+          {vendedor.perfis?.role === "admin" && (
+            <span className="text-[10px] rounded-full px-1.5 py-0.5 bg-orth-electric/20 text-orth-sky">
+              admin
+            </span>
+          )}
+        </p>
         {vendedor.email && <p className="text-orth-muted text-xs">{vendedor.email}</p>}
       </td>
       <td className="py-3 pr-4 text-orth-muted text-sm">{vendedor.telefone || "—"}</td>

@@ -23,6 +23,7 @@ export async function criarVendedor(
   const telefone = String(formData.get("telefone") || "").trim() || null
   const comissaoRaw = String(formData.get("comissao_percentual") || "20")
   const comissao_percentual = Number(comissaoRaw.replace(",", "."))
+  const tambemAdmin = formData.get("tambem_admin") === "on"
 
   if (!nome || !email || senha.length < 8) {
     return { error: "Preencha nome, e-mail e uma senha com pelo menos 8 caracteres." }
@@ -45,7 +46,7 @@ export async function criarVendedor(
 
   const { error: perfilError } = await admin.from("perfis").insert({
     id: created.user.id,
-    role: "vendedor",
+    role: tambemAdmin ? "admin" : "vendedor",
     nome,
   })
 

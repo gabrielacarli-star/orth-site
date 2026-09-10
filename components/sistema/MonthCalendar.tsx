@@ -22,9 +22,12 @@ function mesParam(d: Date) {
 export function MonthCalendar({
   mes,
   agendamentos,
+  vendedorQuery = "",
 }: {
   mes: Date
   agendamentos: Agendamento[]
+  /** ex: "&vendedor=uuid" — preservado ao navegar entre meses */
+  vendedorQuery?: string
 }) {
   const inicioGrade = startOfWeek(startOfMonth(mes), { weekStartsOn: 0 })
   const fimGrade = endOfWeek(endOfMonth(mes), { weekStartsOn: 0 })
@@ -42,7 +45,7 @@ export function MonthCalendar({
     <div className="rounded-xl border border-orth-line/10 bg-orth-navy/40 p-4 sm:p-5">
       <div className="flex items-center justify-between mb-4">
         <Link
-          href={`?mes=${mesParam(subMonths(mes, 1))}`}
+          href={`?mes=${mesParam(subMonths(mes, 1))}${vendedorQuery}`}
           className="text-orth-muted hover:text-white text-sm px-2 py-1"
         >
           ← anterior
@@ -51,7 +54,7 @@ export function MonthCalendar({
           {format(mes, "MMMM 'de' yyyy", { locale: ptBR })}
         </h2>
         <Link
-          href={`?mes=${mesParam(addMonths(mes, 1))}`}
+          href={`?mes=${mesParam(addMonths(mes, 1))}${vendedorQuery}`}
           className="text-orth-muted hover:text-white text-sm px-2 py-1"
         >
           próximo →

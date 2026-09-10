@@ -11,7 +11,7 @@ export default async function VendedoresPage() {
   const [{ data: vendedores }, { data: config }, { data: usersData }] = await Promise.all([
     supabase
       .from("vendedores")
-      .select("*, perfis(nome)")
+      .select("*, perfis(nome, role)")
       .order("created_at", { ascending: false }),
     supabase.from("config").select("comissao_percentual_padrao").single(),
     admin.auth.admin.listUsers({ perPage: 1000 }),
