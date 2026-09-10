@@ -1,7 +1,14 @@
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { StatCard, formatBRL } from "@/components/sistema/StatCard"
-import type { Venda } from "@/lib/types"
+import { RankingVendas, type RankingItem } from "@/components/sistema/RankingVendas"
+
+interface VendaComVendedor {
+  vendedor_id: string
+  valor_venda: number
+  comissao_valor: number
+  perfis: { nome: string } | null
+}
 
 export default async function AdminDashboardPage() {
   const supabase = await createClient()
@@ -10,7 +17,7 @@ export default async function AdminDashboardPage() {
   inicioMes.setDate(1)
   inicioMes.setHours(0, 0, 0, 0)
 
-  const [{ count: vendedoresAtivos }, { data: vendasMes }, { data: pendentes }] =
+  const [{ count: vendedoresAtivos }, { data: vendasMesData }, { data: pendentes }] =
     await Promise.all([
       supabase
         .from("vendedores")
@@ -18,18 +25,34 @@ export default async function AdminDashboardPage() {
         .eq("ativo", true),
       supabase
         .from("vendas")
-        .select("valor_venda, comissao_valor")
+        .select("vendedor_id, valor_venda, comissao_valor, perfis(nome)")
         .gte("data_venda", inicioMes.toISOString().slice(0, 10)),
       supabase.from("vendas").select("comissao_valor").eq("status_comissao", "pendente"),
     ])
 
-  const vendas = (vendasMes ?? []) as Pick<Venda, "valor_venda" | "comissao_valor">[]
+  const vendas = (vendasMesData ?? []) as unknown as VendaComVendedor[]
   const totalVendidoMes = vendas.reduce((acc, v) => acc + Number(v.valor_venda), 0)
   const totalComissaoMes = vendas.reduce((acc, v) => acc + Number(v.comissao_valor), 0)
   const totalPendente = (pendentes ?? []).reduce(
     (acc, v) => acc + Number(v.comissao_valor),
     0
   )
+
+  const porVendedor = new Map<string, RankingItem>()
+  for (const v of vendas) {
+    const atual = porVendedor.get(v.vendedor_id) ?? {
+      vendedorId: v.vendedor_id,
+      nome: v.perfis?.nome ?? "—",
+      totalVendido: 0,
+      comissaoGerada: 0,
+      qtdVendas: 0,
+    }
+    atual.totalVendido += Number(v.valor_venda)
+    atual.comissaoGerada += Number(v.comissao_valor)
+    atual.qtdVendas += 1
+    porVendedor.set(v.vendedor_id, atual)
+  }
+  const ranking = [...porVendedor.values()].sort((a, b) => b.totalVendido - a.totalVendido)
 
   return (
     <div>
@@ -52,6 +75,10 @@ export default async function AdminDashboardPage() {
           value={formatBRL(totalPendente)}
           hint="Soma de todas as vendas ainda não marcadas como pagas"
         />
+      </div>
+
+      <div className="mt-6">
+        <RankingVendas ranking={ranking} />
       </div>
     </div>
   )
