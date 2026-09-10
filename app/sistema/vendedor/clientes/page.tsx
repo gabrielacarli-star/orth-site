@@ -1,6 +1,7 @@
 import { requireVendedor } from "@/lib/dal"
 import { createClient } from "@/lib/supabase/server"
 import { StatusClienteSelect } from "@/components/sistema/StatusClienteSelect"
+import { PropostaEditor } from "@/components/sistema/PropostaEditor"
 import { NovoClienteForm } from "./NovoClienteForm"
 import type { Cliente } from "@/lib/types"
 
@@ -38,7 +39,10 @@ export default async function VendedorClientesPage() {
               </p>
               {c.notas && <p className="text-orth-muted text-xs mt-0.5">{c.notas}</p>}
             </div>
-            <StatusClienteSelect clienteId={c.id} status={c.status} />
+            <div className="flex flex-col items-end gap-2">
+              <StatusClienteSelect clienteId={c.id} status={c.status} />
+              <PropostaEditor cliente={c} />
+            </div>
           </div>
         ))}
         {clientes.length === 0 && (

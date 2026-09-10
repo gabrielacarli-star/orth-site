@@ -45,6 +45,37 @@ export function NovoClienteAdminForm({
       <input name="origem" placeholder="Como chegou até vocês (opcional)" className={inputClass} />
       <input name="notas" placeholder="Notas (opcional)" className={inputClass} />
 
+      <div className="sm:col-span-2 border-t border-orth-line/10 pt-3 space-y-2">
+        <label className="flex items-center gap-2 text-sm text-orth-muted cursor-pointer">
+          <input type="checkbox" name="proposta_enviada" className="rounded accent-orth-electric" />
+          Já foi enviada uma proposta pra esse cliente?
+        </label>
+        <p className="text-orth-muted text-xs">
+          Se marcar, preencha os campos abaixo (ignorados se não marcar):
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <input
+            name="proposta_valor"
+            type="number"
+            step="0.01"
+            min="0.01"
+            placeholder="Valor da proposta (R$)"
+            className={inputClass}
+          />
+          <input
+            name="proposta_data"
+            type="date"
+            defaultValue={new Date().toISOString().slice(0, 10)}
+            className={inputClass}
+          />
+          <input
+            name="proposta_produtos"
+            placeholder="Produtos/serviços propostos (ex: site + Google Ads)"
+            className={`sm:col-span-2 ${inputClass}`}
+          />
+        </div>
+      </div>
+
       {state?.error && (
         <p className="sm:col-span-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
           {state.error}

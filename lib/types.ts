@@ -62,6 +62,10 @@ export interface Cliente {
   origem: string | null
   status: StatusCliente
   notas: string | null
+  proposta_enviada: boolean
+  proposta_valor: number | null
+  proposta_produtos: string | null
+  proposta_data: string | null
   created_at: string
 }
 
