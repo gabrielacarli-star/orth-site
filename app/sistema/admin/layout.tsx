@@ -4,7 +4,9 @@ import { Shell, type NavItem } from "@/components/sistema/Shell"
 const NAV: NavItem[] = [
   { href: "/sistema/admin", label: "Painel", exact: true },
   { href: "/sistema/admin/vendedores", label: "Vendedores" },
+  { href: "/sistema/admin/clientes", label: "Clientes" },
   { href: "/sistema/admin/vendas", label: "Vendas & Comissões" },
+  { href: "/sistema/vendedor/agenda", label: "Minha Agenda" },
   { href: "/sistema/admin/precos", label: "Preços & Comissão" },
 ]
 

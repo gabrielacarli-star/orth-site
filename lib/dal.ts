@@ -31,9 +31,12 @@ export async function requireAdmin() {
   return perfil
 }
 
+/**
+ * Qualquer conta logada tem um registro em `vendedores` (admins também vendem),
+ * então tanto admin quanto vendedor(a) podem acessar a área de vendedor.
+ */
 export async function requireVendedor() {
   const perfil = await getPerfil()
   if (!perfil) redirect("/sistema/login")
-  if (perfil.role !== "vendedor") redirect("/sistema/admin")
   return perfil
 }

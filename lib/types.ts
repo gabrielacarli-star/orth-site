@@ -50,6 +50,21 @@ export interface Agendamento {
   created_at: string
 }
 
+export type StatusCliente = "novo" | "em_contato" | "proposta_enviada" | "fechado" | "perdido"
+
+export interface Cliente {
+  id: string
+  vendedor_id: string
+  nome: string
+  telefone: string | null
+  email: string | null
+  empresa: string | null
+  origem: string | null
+  status: StatusCliente
+  notas: string | null
+  created_at: string
+}
+
 export interface TabelaPreco {
   id: string
   servico: string
