@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { StatCard, formatBRL } from "@/components/sistema/StatCard"
 import type { Venda } from "@/lib/types"
@@ -32,7 +33,15 @@ export default async function AdminDashboardPage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl text-white mb-6">Painel</h1>
+      <div className="flex items-center justify-between flex-wrap gap-3 mb-6">
+        <h1 className="font-display text-2xl text-white">Painel</h1>
+        <Link
+          href="/sistema/admin/vendas/nova"
+          className="text-sm rounded-lg bg-orth-electric hover:bg-orth-blue transition-colors text-white font-medium px-4 py-2"
+        >
+          + Registrar venda
+        </Link>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Vendedores ativos" value={String(vendedoresAtivos ?? 0)} />

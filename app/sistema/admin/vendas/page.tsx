@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { createClient } from "@/lib/supabase/server"
 import { formatBRL } from "@/components/sistema/StatCard"
 import { VendaFileLink } from "@/components/sistema/VendaFileLink"
@@ -33,12 +34,20 @@ export default async function AdminVendasPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <h1 className="font-display text-2xl text-white">Vendas & Comissões</h1>
-        <a
-          href="/api/sistema/relatorio"
-          className="text-sm rounded-lg bg-orth-electric hover:bg-orth-blue transition-colors text-white font-medium px-4 py-2"
-        >
-          Exportar tudo (Excel)
-        </a>
+        <div className="flex gap-2">
+          <Link
+            href="/sistema/admin/vendas/nova"
+            className="text-sm rounded-lg bg-orth-electric hover:bg-orth-blue transition-colors text-white font-medium px-4 py-2"
+          >
+            + Registrar venda
+          </Link>
+          <a
+            href="/api/sistema/relatorio"
+            className="text-sm rounded-lg border border-orth-line/20 hover:border-orth-electric transition-colors text-white font-medium px-4 py-2"
+          >
+            Exportar tudo (Excel)
+          </a>
+        </div>
       </div>
 
       <div className="rounded-xl border border-orth-line/10 bg-orth-navy/40 p-5 overflow-x-auto">
