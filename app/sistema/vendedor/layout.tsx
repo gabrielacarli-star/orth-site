@@ -8,6 +8,7 @@ function nav(isAdmin: boolean): NavItem[] {
     { href: "/sistema/vendedor/clientes", label: "Meus Clientes" },
     { href: "/sistema/vendedor/vendas", label: "Minhas Vendas" },
     { href: "/sistema/vendedor/precos", label: "Tabela de Preços" },
+    { href: "/sistema/manual", label: "Manual de Vendas" },
     { href: "/sistema/vendedor/empresa", label: "Sobre a ORTH" },
   ]
   if (isAdmin) {
