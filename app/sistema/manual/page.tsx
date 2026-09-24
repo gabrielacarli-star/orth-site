@@ -12,7 +12,6 @@ const TOC = [
   { id: "google-ads", label: "Google Ads" },
   { id: "meta-ads", label: "Meta Ads (Facebook e Instagram)" },
   { id: "google-vs-meta", label: "Google Ads x Meta Ads" },
-  { id: "instagram-gestao", label: "Gestão de Instagram x Meta Ads" },
   { id: "diagnostico", label: "Descobrindo o que o cliente precisa" },
   { id: "objecoes", label: "Perguntas e objeções comuns" },
   { id: "glossario", label: "Glossário rápido" },
@@ -60,8 +59,8 @@ export default async function ManualPage() {
             </h1>
             <p className="text-orth-muted leading-relaxed">
               Este material existe pra você entender, com profundidade, cada serviço que a ORTH
-              vende — o que é, pra que serve, qual o benefício real pro cliente e como responder
-              às dúvidas mais comuns. Não tem valores aqui — pra preços, consulte a{" "}
+              vende: o que é, pra que serve, qual o benefício real pro cliente e como responder
+              às dúvidas mais comuns. Não tem valores aqui. Pra preços, consulte a{" "}
               <Link
                 href={`${voltarHref}/precos`}
                 className="text-orth-sky hover:text-white underline underline-offset-2"
@@ -75,7 +74,7 @@ export default async function ManualPage() {
           <Secao id="inicio" kicker="Antes de começar" titulo="Como usar este guia">
             <p>
               Cada seção deste manual responde a uma pergunta que ou o cliente vai te fazer, ou
-              você precisa saber pra recomendar o serviço certo. A ideia não é decorar — é
+              você precisa saber pra recomendar o serviço certo. A ideia não é decorar, é
               entender o suficiente pra explicar com suas próprias palavras, com confiança.
             </p>
             <p>
@@ -86,25 +85,19 @@ export default async function ManualPage() {
           </Secao>
 
           <Secao id="servicos" kicker="Visão geral" titulo="O que a ORTH vende">
-            <p>
-              A ORTH ajuda negócios em três frentes, que normalmente andam juntas:
-            </p>
-            <div className="grid sm:grid-cols-3 gap-4">
+            <p>A ORTH ajuda negócios em duas frentes, que normalmente andam juntas:</p>
+            <div className="grid sm:grid-cols-2 gap-4">
               <Card titulo="1. Existir online">
-                Criação de site — a casa digital do negócio. Pode ser um site institucional
-                ou uma landing page, dependendo do objetivo.
+                Criação de site: a casa digital do negócio. Pode ser um site institucional, uma
+                landing page ou um web app, dependendo do objetivo.
               </Card>
               <Card titulo="2. Ser encontrado">
-                Gestão de Google Ads e Gestão de Meta Ads — tráfego pago pra colocar o negócio
-                na frente de quem procura ou de quem tem potencial de comprar.
-              </Card>
-              <Card titulo="3. Ser lembrado">
-                Gestão de Instagram — presença orgânica constante, que constrói confiança e
-                mantém o negócio na cabeça do cliente entre uma compra e outra.
+                Gestão de Google Ads e Gestão de Meta Ads: tráfego pago pra colocar o negócio na
+                frente de quem procura ou de quem tem potencial de comprar.
               </Card>
             </div>
             <p>
-              Um cliente ideal, com o tempo, tem as três frentes rodando ao mesmo tempo — cada
+              Um cliente ideal, com o tempo, tem as duas frentes rodando ao mesmo tempo. Cada
               uma resolve um problema diferente, e juntas elas se reforçam.
             </p>
           </Secao>
@@ -116,14 +109,14 @@ export default async function ManualPage() {
           >
             <p>
               Essas quatro palavras são usadas (e confundidas) o tempo todo. Saber a diferença
-              evita vender a coisa errada pro cliente errado — e evita prometer algo que não é
-              o que ele realmente precisa.
+              evita vender a coisa errada pro cliente errado, e evita prometer algo que não é o
+              que ele realmente precisa.
             </p>
 
             <Card titulo="Landing Page">
               Uma página <strong>única</strong>, focada em <strong>uma única ação</strong>: deixar
               o contato, comprar um produto específico, se inscrever num evento. Sem menu cheio
-              de distrações, sem 10 links pra clicar — só o caminho até a conversão. É a página
+              de distrações, sem 10 links pra clicar: só o caminho até a conversão. É a página
               certa pra colocar por trás de um anúncio (Google Ads ou Meta Ads), porque toda a
               atenção da pessoa vai pra uma coisa só.
             </Card>
@@ -131,7 +124,7 @@ export default async function ManualPage() {
             <Card titulo="Site Institucional">
               Um site com <strong>várias páginas</strong> (Home, Sobre, Serviços, Portfólio,
               Contato...) que apresenta a empresa <strong>inteira</strong>. É a casa digital
-              permanente do negócio — onde alguém cai quando procura o nome da empresa no Google,
+              permanente do negócio: onde alguém cai quando procura o nome da empresa no Google,
               pede indicação e vai conferir, ou quer entender tudo o que a empresa faz antes de
               decidir. Gera credibilidade e serve pra sempre, não só pra uma campanha.
             </Card>
@@ -139,21 +132,21 @@ export default async function ManualPage() {
             <Card titulo="Web App">
               Diferente de um site (que a pessoa só <strong>lê</strong>), um web app é algo que a
               pessoa <strong>usa</strong>: faz login, preenche dados, agenda, acompanha um pedido,
-              acessa um painel. Tem lógica por trás — banco de dados, permissões, cálculos. O
+              acessa um painel. Tem lógica por trás: banco de dados, permissões, cálculos. O
               próprio sistema onde você está lendo este manual agora é um web app. É um projeto
-              bem maior que um site, e entra em análise separada com a administração — nunca
-              trate como “só mais um site”.
+              maior e mais complexo que um site simples, com prazo e valor próprios (confira a
+              Tabela de Preços). Não trate como “só mais um site”.
             </Card>
 
             <Card titulo="Aplicativo (App nativo)">
               É o programa instalado direto no celular, baixado pela App Store ou Google Play
               (ou um site que se comporta como app, o chamado PWA). Só faz sentido quando o
-              negócio realmente precisa de recursos do celular — notificação push, câmera, GPS,
-              uso offline — ou quando o uso é tão frequente que “ter o ícone na tela” importa.
+              negócio realmente precisa de recursos do celular: notificação push, câmera, GPS,
+              uso offline, ou quando o uso é tão frequente que “ter o ícone na tela” importa.
               É o projeto mais caro e demorado dos quatro, porque envolve duas plataformas
-              (iOS e Android) e aprovação nas lojas. Na dúvida, um site bem feito resolve o
-              problema por uma fração do custo — não empurre “app” pro cliente sem necessidade
-              real, e sempre fale com a administração antes de propor.
+              (iOS e Android) e aprovação nas lojas. Na dúvida, um site ou web app bem feito
+              resolve o problema por uma fração do custo. Não empurre “app” pro cliente sem
+              necessidade real, e sempre fale com a administração antes de propor.
             </Card>
 
             <Tabela
@@ -189,20 +182,20 @@ export default async function ManualPage() {
 
           <Secao id="trafego" kicker="Fundamentos" titulo="O que é tráfego pago">
             <p>
-              <strong>Tráfego</strong> é só o nome técnico pra “pessoas chegando” — no site, no
+              <strong>Tráfego</strong> é só o nome técnico pra “pessoas chegando”: no site, no
               perfil, na loja. <strong>Tráfego pago</strong> é pagar pra aparecer na frente de
-              gente, em vez de esperar aparecer sozinho (orgânico) — o que pode levar meses ou
+              gente, em vez de esperar aparecer sozinho (orgânico), o que pode levar meses ou
               nunca acontecer, dependendo da concorrência.
             </p>
             <p>
-              As duas plataformas que a ORTH gerencia — <strong>Google Ads</strong> e{" "}
-              <strong>Meta Ads</strong> — funcionam como um leilão: quem anuncia dá um lance por
+              As duas plataformas que a ORTH gerencia, <strong>Google Ads</strong> e{" "}
+              <strong>Meta Ads</strong>, funcionam como um leilão: quem anuncia dá um lance por
               espaço/atenção, e a plataforma decide quem aparece com base nesse lance e na
               qualidade do anúncio.
             </p>
             <p>
               Ponto importante pra deixar claro com o cliente: <strong>a verba do anúncio vai
-              direto pra Google ou Meta</strong> — não passa pela ORTH. O que a ORTH cobra é pela{" "}
+              direto pra Google ou Meta</strong>, não passa pela ORTH. O que a ORTH cobra é pela{" "}
               <strong>gestão</strong>: estratégia, criação das campanhas, criativos, e otimização
               contínua pra gastar bem esse dinheiro.
             </p>
@@ -233,7 +226,7 @@ export default async function ManualPage() {
             </ul>
             <p>
               <strong>Por que funciona:</strong> Google Ads captura uma <strong>demanda que já
-              existe</strong>. A pessoa já decidiu que quer aquilo — só falta decidir com quem.
+              existe</strong>. A pessoa já decidiu que quer aquilo, só falta decidir com quem.
               É por isso que costuma converter mais rápido.
             </p>
             <p>
@@ -250,19 +243,19 @@ export default async function ManualPage() {
 
           <Secao id="meta-ads" kicker="Serviço" titulo="Meta Ads (Facebook e Instagram)">
             <p>
-              É a plataforma de anúncios da Meta — aparece no Feed, Stories e Reels do Facebook e
+              É a plataforma de anúncios da Meta, aparece no Feed, Stories e Reels do Facebook e
               do Instagram. Formatos: imagem única, carrossel, vídeo, Stories, Reels.
             </p>
             <p>
               <strong>Por que funciona:</strong> ao contrário do Google, a pessoa não precisa
               estar procurando nada. A Meta usa idade, interesses, comportamento e localização
-              pra <strong>encontrar quem tem perfil</strong> de comprar aquilo — é venda por
+              pra <strong>encontrar quem tem perfil</strong> de comprar aquilo. É venda por
               descoberta e impulso, muito visual.
             </p>
             <p>
               <strong>Benefícios pro cliente:</strong> ótimo pra produtos visuais (moda, estética,
               alimentação, decoração), construção de marca, alcance de público novo e amplo,
-              e <strong>remarketing</strong> — mostrar o anúncio de novo pra quem já visitou o
+              e <strong>remarketing</strong>: mostrar o anúncio de novo pra quem já visitou o
               site ou o perfil, mas não comprou.
             </p>
             <p>
@@ -274,7 +267,7 @@ export default async function ManualPage() {
 
           <Secao id="google-vs-meta" kicker="Comparação" titulo="Google Ads x Meta Ads: qual escolher">
             <p>
-              Não é uma escolha de “ou/ou” na maioria dos casos — os dois resolvem problemas
+              Não é uma escolha de “ou/ou” na maioria dos casos. Os dois resolvem problemas
               diferentes e se completam. Mas se precisar recomendar prioridade:
             </p>
             <Tabela
@@ -302,34 +295,6 @@ export default async function ManualPage() {
           </Secao>
 
           <Secao
-            id="instagram-gestao"
-            kicker="Ponto de confusão comum"
-            titulo="Gestão de Instagram x Meta Ads: não é a mesma coisa"
-          >
-            <p>
-              Esse é um dos pontos que mais gera dúvida e objeção do cliente — deixe muito claro
-              a diferença:
-            </p>
-            <Card titulo="Gestão de Instagram (orgânico)">
-              Planejamento de posts, stories, reels, legendas, hashtags, identidade visual do
-              perfil e interação com seguidores. <strong>Não é pago pra aparecer pra mais
-              gente</strong> — depende do algoritmo mostrar o conteúdo pra quem já segue e pra
-              descoberta orgânica. É construção de credibilidade e consistência ao longo do
-              tempo.
-            </Card>
-            <Card titulo="Meta Ads (pago)">
-              Investimento direto pra colocar o anúncio na frente de pessoas específicas,{" "}
-              <strong>além</strong> do alcance orgânico, com objetivo de conversão (venda, lead,
-              tráfego). É verba extra, que vai direto pra Meta.
-            </Card>
-            <p>
-              Os dois se completam: um perfil de Instagram bem cuidado dá <strong>prova social
-              </strong> pra quem clicou no anúncio e foi conferir o perfil antes de comprar. Um
-              anúncio ótimo levando pra um perfil fraco e abandonado é dinheiro desperdiçado.
-            </p>
-          </Secao>
-
-          <Secao
             id="diagnostico"
             kicker="Na prática"
             titulo="Como descobrir o que o cliente realmente precisa"
@@ -353,11 +318,7 @@ export default async function ManualPage() {
                 Meta Ads faz sentido.
               </li>
               <li>
-                <strong>“Você já vende bem, mas seu Instagram está parado ou sem identidade?”
-                </strong> Sim → Gestão de Instagram.
-              </li>
-              <li>
-                <strong>“Você precisa que o cliente FAÇA algo dentro do site — login, agendar,
+                <strong>“Você precisa que o cliente FAÇA algo dentro do site: login, agendar,
                 comprar com carrinho, acompanhar pedido?”</strong> Sim → provavelmente é um Web
                 App, não um site simples. Fale com a administração antes de propor qualquer
                 escopo ou prazo.
@@ -369,7 +330,7 @@ export default async function ManualPage() {
             <Objecao pergunta="Por que Google Ads / Meta Ads é tão caro?">
               <p>
                 Separe as duas partes: a <strong>verba do anúncio</strong> vai direto pra Google
-                ou Meta, não pra ORTH. O que a ORTH cobra é pela <strong>gestão</strong> —
+                ou Meta, não pra ORTH. O que a ORTH cobra é pela <strong>gestão</strong>:
                 estratégia, criação de campanhas e criativos, e otimização constante. É o
                 trabalho de ter alguém especializado cuidando disso todo dia, em vez de contratar
                 um funcionário só pra essa função.
@@ -378,15 +339,15 @@ export default async function ManualPage() {
             <Objecao pergunta="Meu site vai aparecer na primeira página do Google de graça?">
               <p>
                 Aparecer de graça (orgânico/SEO) é possível, mas é lento e depende de muitos
-                fatores fora do nosso controle — nunca prometa isso como garantia. Um site bem
+                fatores fora do nosso controle. Nunca prometa isso como garantia. Um site bem
                 construído ajuda o SEO ao longo do tempo, mas quem garante aparecer{" "}
                 <strong>imediatamente</strong> é o Google Ads (pago). Desconfie de qualquer
-                oferta no mercado que “garanta primeira página” de graça — isso não existe.
+                oferta no mercado que “garanta primeira página” de graça. Isso não existe.
               </p>
             </Objecao>
             <Objecao pergunta="Por que preciso de site se já tenho Instagram?">
               <p>
-                O Instagram não é seu — é uma plataforma que pode mudar regras, derrubar contas,
+                O Instagram não é seu: é uma plataforma que pode mudar regras, derrubar contas,
                 e o algoritmo decide quem vê seu conteúdo. O site é um canal <strong>próprio
                 </strong>, sempre no ar, do jeito que você quiser. Também é o que aparece quando
                 alguém pesquisa o nome da empresa no Google, e passa mais credibilidade pra
@@ -396,7 +357,7 @@ export default async function ManualPage() {
             <Objecao pergunta="Quanto tempo até eu ver resultado com tráfego pago?">
               <p>
                 Cliques e visitas começam quase imediatamente. Mas o <strong>primeiro mês</strong>{" "}
-                costuma ser de ajuste — o algoritmo da plataforma está aprendendo o que funciona
+                costuma ser de ajuste: o algoritmo da plataforma está aprendendo o que funciona
                 melhor pra aquele público e aquele orçamento. Seja honesto sobre isso: resultado
                 consistente melhora com o tempo, não é instantâneo.
               </p>
@@ -404,17 +365,17 @@ export default async function ManualPage() {
             <Objecao pergunta="Posso pausar o anúncio quando quiser?">
               <p>
                 Sim, a mensalidade é mês a mês. Mas vale explicar: ligar e desligar campanha o
-                tempo todo reseta o aprendizado da plataforma, e isso piora o resultado — manter
+                tempo todo reseta o aprendizado da plataforma, e isso piora o resultado. Manter
                 rodando de forma constante costuma valer mais a pena que picotar.
               </p>
             </Objecao>
             <Objecao pergunta="Vocês garantem vendas?">
               <p>
-                Nunca prometa garantia de venda — o resultado final depende de fatores fora do
+                Nunca prometa garantia de venda: o resultado final depende de fatores fora do
                 nosso controle (preço do cliente, atendimento dele, concorrência, produto). O
                 compromisso da ORTH é com o trabalho: estratégia, testes, otimização e
                 transparência total nos relatórios. Prometer venda garantida é o tipo de coisa
-                que pode virar problema sério depois — nunca faça isso.
+                que pode virar problema sério depois, nunca faça isso.
               </p>
             </Objecao>
           </Secao>
@@ -429,7 +390,7 @@ export default async function ManualPage() {
                 ["CPC (Custo por Clique)", "Quanto custa, em média, cada clique no anúncio."],
                 ["CPM (Custo por Mil)", "Quanto custa mostrar o anúncio 1.000 vezes."],
                 ["CPA (Custo por Aquisição)", "Quanto custou, em média, cada venda ou lead gerado."],
-                ["ROI / ROAS", "Retorno sobre o investimento — quanto voltou pra cada real investido."],
+                ["ROI / ROAS", "Retorno sobre o investimento: quanto voltou pra cada real investido."],
                 ["Funil de vendas", "O caminho do cliente desde conhecer a marca até comprar (topo, meio, fundo)."],
                 ["Remarketing", "Mostrar o anúncio de novo pra quem já visitou o site ou seguiu o perfil."],
                 ["SEO", "Otimização pra aparecer organicamente (de graça) nos resultados do Google."],
@@ -440,7 +401,7 @@ export default async function ManualPage() {
           </Secao>
 
           <p className="text-orth-muted text-xs pt-10 border-t border-orth-line/10 mt-10">
-            Documento interno da ORTH Digital — uso exclusivo da equipe. Não compartilhe fora da
+            Documento interno da ORTH Digital, uso exclusivo da equipe. Não compartilhe fora da
             empresa.
           </p>
         </main>
