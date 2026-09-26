@@ -8,6 +8,7 @@ const NAV: NavItem[] = [
   { href: "/sistema/admin/vendas", label: "Vendas & Comissões" },
   { href: "/sistema/vendedor/agenda", label: "Minha Agenda" },
   { href: "/sistema/admin/precos", label: "Preços & Comissão" },
+  { href: "/sistema/proposta", label: "Gerar Proposta" },
   { href: "/sistema/manual", label: "Manual de Vendas" },
 ]
 
