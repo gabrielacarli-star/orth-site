@@ -1,5 +1,6 @@
 import { renderToBuffer } from "@react-pdf/renderer"
 import { getPerfil } from "@/lib/dal"
+import { createClient } from "@/lib/supabase/server"
 import { PropostaDocument, type PropostaData } from "@/lib/pdf/PropostaDocument"
 
 function slug(texto: string) {
@@ -34,6 +35,34 @@ export async function POST(request: Request) {
     })
   }
 
+  const itensNormalizados = itens
+    .map((i) => ({
+      nome: String(i?.nome || "").trim(),
+      descricao: String(i?.descricao || "").trim(),
+      tipo: i?.tipo === "mensal" ? ("mensal" as const) : ("setup" as const),
+      valor: Number(i?.valor) || 0,
+    }))
+    .filter((i) => i.nome && i.valor > 0)
+
+  const supabase = await createClient()
+  const { data: precos } = await supabase.from("tabela_precos").select("servico, valor_minimo")
+  const minimosPorServico = new Map(
+    (precos ?? [])
+      .filter((p) => p.valor_minimo != null)
+      .map((p) => [(p.servico as string).trim().toLowerCase(), Number(p.valor_minimo)])
+  )
+
+  for (const item of itensNormalizados) {
+    if (item.tipo !== "mensal") continue
+    const minimo = minimosPorServico.get(item.nome.toLowerCase())
+    if (minimo != null && item.valor < minimo) {
+      return new Response(
+        `O valor de "${item.nome}" (R$ ${item.valor.toFixed(2)}/mês) está abaixo do mínimo permitido de R$ ${minimo.toFixed(2)}/mês.`,
+        { status: 400 }
+      )
+    }
+  }
+
   const dados: PropostaData = {
     tituloProposta,
     subtituloProposta: String(body.subtituloProposta || ""),
@@ -49,14 +78,7 @@ export async function POST(request: Request) {
     oQueIdentificamos: String(body.oQueIdentificamos || ""),
     comoVamosTrabalhar: String(body.comoVamosTrabalhar || ""),
     prazo: String(body.prazo || ""),
-    itens: itens
-      .map((i) => ({
-        nome: String(i?.nome || "").trim(),
-        descricao: String(i?.descricao || "").trim(),
-        tipo: i?.tipo === "mensal" ? ("mensal" as const) : ("setup" as const),
-        valor: Number(i?.valor) || 0,
-      }))
-      .filter((i) => i.nome && i.valor > 0),
+    itens: itensNormalizados,
     observacaoInvestimento: String(
       body.observacaoInvestimento ??
         "O valor investido em anúncios (verba de mídia) é pago diretamente às plataformas Google e Meta e não está incluso nos valores de gestão."

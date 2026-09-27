@@ -74,6 +74,7 @@ export interface TabelaPreco {
   servico: string
   valor_descricao: string
   condicao_pagamento: string | null
+  valor_minimo: number | null
   ordem: number
   created_at: string
 }

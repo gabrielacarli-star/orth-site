@@ -14,7 +14,7 @@ export default async function PropostaPage() {
   const supabase = await createClient()
   const { data: precos } = await supabase
     .from("tabela_precos")
-    .select("servico")
+    .select("servico, valor_minimo")
     .order("ordem", { ascending: true })
 
   const vendedoresPrecos = (precos ?? []).map((p) => ({
@@ -22,6 +22,7 @@ export default async function PropostaPage() {
     tipoSugerido: /google ads|meta ads|gestão/i.test(p.servico as string)
       ? ("mensal" as const)
       : ("setup" as const),
+    valorMinimo: p.valor_minimo != null ? Number(p.valor_minimo) : null,
   }))
 
   return (

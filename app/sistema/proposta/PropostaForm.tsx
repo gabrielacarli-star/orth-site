@@ -21,11 +21,13 @@ const MODELOS_TRABALHO: Record<string, { comoVamosTrabalhar: string; prazo: stri
   },
 }
 
-export function PropostaForm({
-  vendedoresPrecos,
-}: {
-  vendedoresPrecos: { servico: string; tipoSugerido: "setup" | "mensal" }[]
-}) {
+interface PrecoTabela {
+  servico: string
+  tipoSugerido: "setup" | "mensal"
+  valorMinimo: number | null
+}
+
+export function PropostaForm({ vendedoresPrecos }: { vendedoresPrecos: PrecoTabela[] }) {
   const [clienteNome, setClienteNome] = useState("")
   const [clienteSegmento, setClienteSegmento] = useState("")
   const [tituloProposta, setTituloProposta] = useState("")
@@ -67,6 +69,19 @@ export function PropostaForm({
     setItens((atual) => atual.filter((_, i) => i !== index))
   }
 
+  function encontrarMinimo(nome: string, tipo: "setup" | "mensal") {
+    if (tipo !== "mensal") return null
+    const match = vendedoresPrecos.find(
+      (v) => v.servico.trim().toLowerCase() === nome.trim().toLowerCase()
+    )
+    return match?.valorMinimo ?? null
+  }
+
+  const itensAbaixoDoMinimo = itens.filter((item) => {
+    const minimo = encontrarMinimo(item.nome, item.tipo)
+    return minimo != null && item.valor > 0 && item.valor < minimo
+  })
+
   async function gerarPdf() {
     setErro("")
     if (!clienteNome.trim() || !tituloProposta.trim()) {
@@ -76,6 +91,12 @@ export function PropostaForm({
     const itensValidos = itens.filter((i) => i.nome.trim() && i.valor > 0)
     if (itensValidos.length === 0) {
       setErro("Adicione ao menos um item de investimento com nome e valor.")
+      return
+    }
+    if (itensAbaixoDoMinimo.length > 0) {
+      setErro(
+        `Ajuste o valor de "${itensAbaixoDoMinimo[0].nome}": está abaixo do mínimo permitido pra esse serviço.`
+      )
       return
     }
 
@@ -219,49 +240,57 @@ export function PropostaForm({
         </div>
 
         <div className="space-y-3">
-          {itens.map((item, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto_auto_auto] gap-2 items-start bg-orth-dark/40 rounded-lg p-3"
-            >
-              <input
-                placeholder="Nome do item (ex: Setup de Meta Ads)"
-                value={item.nome}
-                onChange={(e) => atualizarItem(i, "nome", e.target.value)}
-                className={inputClass}
-              />
-              <input
-                placeholder="Descrição curta (opcional)"
-                value={item.descricao}
-                onChange={(e) => atualizarItem(i, "descricao", e.target.value)}
-                className={inputClass}
-              />
-              <select
-                value={item.tipo}
-                onChange={(e) => atualizarItem(i, "tipo", e.target.value)}
-                className={`${inputClass} sm:w-32`}
-              >
-                <option value="setup">Setup (único)</option>
-                <option value="mensal">Mensal</option>
-              </select>
-              <input
-                type="number"
-                step="0.01"
-                min="0"
-                placeholder="Valor (R$)"
-                value={item.valor || ""}
-                onChange={(e) => atualizarItem(i, "valor", Number(e.target.value))}
-                className={`${inputClass} sm:w-32`}
-              />
-              <button
-                type="button"
-                onClick={() => removerItem(i)}
-                className="text-xs text-orth-muted hover:text-red-400 transition-colors sm:py-2"
-              >
-                remover
-              </button>
-            </div>
-          ))}
+          {itens.map((item, i) => {
+            const minimo = encontrarMinimo(item.nome, item.tipo)
+            const abaixoDoMinimo = minimo != null && item.valor > 0 && item.valor < minimo
+            return (
+              <div key={i} className="bg-orth-dark/40 rounded-lg p-3">
+                <div className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_auto_auto_auto] gap-2 items-start">
+                  <input
+                    placeholder="Nome do item (ex: Setup de Meta Ads)"
+                    value={item.nome}
+                    onChange={(e) => atualizarItem(i, "nome", e.target.value)}
+                    className={inputClass}
+                  />
+                  <input
+                    placeholder="Descrição curta (opcional)"
+                    value={item.descricao}
+                    onChange={(e) => atualizarItem(i, "descricao", e.target.value)}
+                    className={inputClass}
+                  />
+                  <select
+                    value={item.tipo}
+                    onChange={(e) => atualizarItem(i, "tipo", e.target.value)}
+                    className={`${inputClass} sm:w-32`}
+                  >
+                    <option value="setup">Setup (único)</option>
+                    <option value="mensal">Mensal</option>
+                  </select>
+                  <input
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    placeholder="Valor (R$)"
+                    value={item.valor || ""}
+                    onChange={(e) => atualizarItem(i, "valor", Number(e.target.value))}
+                    className={`${inputClass} sm:w-32 ${abaixoDoMinimo ? "border-red-500" : ""}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => removerItem(i)}
+                    className="text-xs text-orth-muted hover:text-red-400 transition-colors sm:py-2"
+                  >
+                    remover
+                  </button>
+                </div>
+                {abaixoDoMinimo && (
+                  <p className="text-red-400 text-xs mt-1.5">
+                    Valor mínimo pra {item.nome}: R$ {minimo!.toFixed(2)} /mês
+                  </p>
+                )}
+              </div>
+            )
+          })}
         </div>
 
         <button
@@ -308,10 +337,14 @@ export function PropostaForm({
       <button
         type="button"
         onClick={gerarPdf}
-        disabled={gerando}
+        disabled={gerando || itensAbaixoDoMinimo.length > 0}
         className="w-full sm:w-auto rounded-lg bg-orth-electric hover:bg-orth-blue transition-colors text-white font-medium px-6 py-3 disabled:opacity-60"
       >
-        {gerando ? "Gerando PDF..." : "Gerar proposta em PDF"}
+        {gerando
+          ? "Gerando PDF..."
+          : itensAbaixoDoMinimo.length > 0
+            ? "Ajuste os valores mínimos antes de gerar"
+            : "Gerar proposta em PDF"}
       </button>
     </div>
   )
