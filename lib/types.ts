@@ -84,3 +84,28 @@ export interface Config {
   comissao_percentual_padrao: number
   updated_at: string
 }
+
+/** Nunca inclua refresh_token/access_token aqui: essa interface é usada em queries
+ * que rodam com sessão do vendedor, e essas colunas não devem chegar no cliente. */
+export interface GoogleNegocioConexao {
+  id: string
+  cliente_id: string
+  vendedor_id: string
+  google_email: string | null
+  location_display_name: string | null
+  descricao_negocio: string | null
+  palavras_chave: string | null
+  ativo: boolean
+  ultimo_post_em: string | null
+  ultimo_erro: string | null
+  created_at: string
+}
+
+export interface GoogleNegocioPost {
+  id: string
+  conexao_id: string
+  conteudo: string
+  status: "publicado" | "erro"
+  erro_mensagem: string | null
+  created_at: string
+}
