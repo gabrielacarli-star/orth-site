@@ -10,6 +10,7 @@ function nav(isAdmin: boolean): NavItem[] {
     { href: "/sistema/vendedor/precos", label: "Tabela de Preços" },
     { href: "/sistema/proposta", label: "Gerar Proposta" },
     { href: "/sistema/manual", label: "Manual de Vendas" },
+    { href: "/sistema/assistente", label: "Assistente IA" },
     { href: "/sistema/vendedor/empresa", label: "Sobre a ORTH" },
   ]
   if (isAdmin) {

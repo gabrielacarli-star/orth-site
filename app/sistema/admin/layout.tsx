@@ -10,6 +10,7 @@ const NAV: NavItem[] = [
   { href: "/sistema/admin/precos", label: "Preços & Comissão" },
   { href: "/sistema/proposta", label: "Gerar Proposta" },
   { href: "/sistema/manual", label: "Manual de Vendas" },
+  { href: "/sistema/assistente", label: "Assistente IA" },
 ]
 
 export default async function AdminLayout({
