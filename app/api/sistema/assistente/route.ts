@@ -45,10 +45,9 @@ export async function POST(request: Request) {
   const client = new Anthropic()
 
   const stream = client.messages.stream({
-    model: "claude-opus-5",
+    model: "claude-haiku-4-5",
     max_tokens: 4096,
     system: SYSTEM_PROMPT_ASSISTENTE,
-    output_config: { effort: "low" },
     messages: historico,
   })
 
