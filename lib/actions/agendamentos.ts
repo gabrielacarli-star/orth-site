@@ -50,6 +50,50 @@ export async function criarAgendamento(
   return { success: true }
 }
 
+export async function atualizarAgendamento(
+  id: string,
+  _prevState: AgendamentoFormState,
+  formData: FormData
+): Promise<AgendamentoFormState> {
+  const perfil = await requireVendedor()
+  const supabase = await createClient()
+
+  const titulo = String(formData.get("titulo") || "").trim()
+  const cliente_nome = String(formData.get("cliente_nome") || "").trim() || null
+  const data = String(formData.get("data") || "")
+  const hora = String(formData.get("hora") || "")
+  const duracao_minutos = Number(formData.get("duracao_minutos") || 60)
+  const notas = String(formData.get("notas") || "").trim() || null
+
+  if (!titulo || !data || !hora) {
+    return { error: "Preencha o título, a data e o horário." }
+  }
+
+  const data_hora = new Date(`${data}T${hora}:00`)
+  if (Number.isNaN(data_hora.getTime())) {
+    return { error: "Data ou horário inválido." }
+  }
+
+  const query = supabase
+    .from("agendamentos")
+    .update({
+      titulo,
+      cliente_nome,
+      data_hora: data_hora.toISOString(),
+      duracao_minutos: Number.isFinite(duracao_minutos) ? duracao_minutos : 60,
+      notas,
+    })
+    .eq("id", id)
+
+  const { error } = perfil.role === "admin" ? await query : await query.eq("vendedor_id", perfil.id)
+
+  if (error) return { error: error.message }
+
+  revalidatePath("/sistema/vendedor/agenda")
+  revalidatePath("/sistema/vendedor")
+  return { success: true }
+}
+
 export async function removerAgendamento(id: string) {
   const perfil = await requireVendedor()
   const supabase = await createClient()
