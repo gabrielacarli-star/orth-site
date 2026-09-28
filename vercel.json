@@ -3,6 +3,10 @@
     {
       "path": "/api/cron/google-negocio-posts",
       "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/resumo-diario-agenda",
+      "schedule": "0 10 * * *"
     }
   ]
 }
