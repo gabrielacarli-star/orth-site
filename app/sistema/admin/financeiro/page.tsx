@@ -31,6 +31,7 @@ export default async function FinanceiroPage() {
   const pagoNoMes = lancamentos
     .filter((l) => l.tipo === "despesa" && l.status === "pago" && l.data_pago?.startsWith(mesAtual))
     .reduce((s, l) => s + l.valor, 0)
+  const saldoLiquidoNoMes = recebidoNoMes - pagoNoMes
 
   return (
     <div className="space-y-6">
@@ -41,11 +42,16 @@ export default async function FinanceiroPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
         <StatCard label="A receber" value={formatBRL(aReceber)} hint="Pendente" />
         <StatCard label="A pagar" value={formatBRL(aPagar)} hint="Pendente" />
         <StatCard label="Recebido no mês" value={formatBRL(recebidoNoMes)} />
         <StatCard label="Pago no mês" value={formatBRL(pagoNoMes)} />
+        <StatCard
+          label="Saldo líquido no mês"
+          value={formatBRL(saldoLiquidoNoMes)}
+          hint="Recebido - Pago"
+        />
       </div>
 
       <NovoLancamentoForm />
