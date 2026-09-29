@@ -11,6 +11,8 @@ interface VendaComVendedor {
   valor_venda: number
   valor_setup: number | null
   valor_mensalidade: number | null
+  valor_setup_liquido: number | null
+  data_recebimento_setup: string | null
   comissao_percentual: number
   comissao_valor: number
   comprovante_path: string | null
@@ -26,7 +28,7 @@ export default async function AdminVendasPage() {
   const { data } = await supabase
     .from("vendas")
     .select(
-      "id, cliente_nome, servico, valor_venda, valor_setup, valor_mensalidade, comissao_percentual, comissao_valor, comprovante_path, contrato_path, status_comissao, data_venda, perfis(nome)"
+      "id, cliente_nome, servico, valor_venda, valor_setup, valor_mensalidade, valor_setup_liquido, data_recebimento_setup, comissao_percentual, comissao_valor, comprovante_path, contrato_path, status_comissao, data_venda, perfis(nome)"
     )
     .order("data_venda", { ascending: false })
 
@@ -82,6 +84,13 @@ export default async function AdminVendasPage() {
                       {v.valor_setup ? `Setup ${formatBRL(Number(v.valor_setup))}` : ""}
                       {v.valor_setup && v.valor_mensalidade ? " + " : ""}
                       {v.valor_mensalidade ? `Mensal ${formatBRL(Number(v.valor_mensalidade))}` : ""}
+                    </p>
+                  )}
+                  {v.valor_setup_liquido != null && (
+                    <p className="text-orth-muted text-xs font-normal">
+                      Líquido {formatBRL(Number(v.valor_setup_liquido))}
+                      {v.data_recebimento_setup &&
+                        ` em ${new Date(v.data_recebimento_setup + "T00:00:00").toLocaleDateString("pt-BR")}`}
                     </p>
                   )}
                 </td>

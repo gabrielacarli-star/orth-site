@@ -33,7 +33,9 @@ async function criarLancamentosFinanceiro(params: {
   servico: string
   valor_setup: number
   valor_mensalidade: number
+  valor_setup_liquido: number | null
   data_venda: string
+  data_recebimento_setup: string | null
   data_primeira_mensalidade: string | null
 }) {
   const linhas: Record<string, unknown>[] = []
@@ -42,11 +44,11 @@ async function criarLancamentosFinanceiro(params: {
     linhas.push({
       tipo: "receita",
       descricao: `Setup - ${params.servico} - ${params.cliente_nome}`,
-      valor: params.valor_setup,
+      valor: params.valor_setup_liquido ?? params.valor_setup,
       categoria: "Venda",
       cliente_nome: params.cliente_nome,
       recorrente: false,
-      data_prevista: params.data_venda,
+      data_prevista: params.data_recebimento_setup || params.data_venda,
     })
   }
   if (params.valor_mensalidade > 0 && params.data_primeira_mensalidade) {
@@ -84,6 +86,9 @@ export async function registrarVenda(
   const mensalidadeRaw = String(formData.get("valor_mensalidade") || "").replace(",", ".")
   const valor_setup = setupRaw ? Number(setupRaw) : 0
   const valor_mensalidade = mensalidadeRaw ? Number(mensalidadeRaw) : 0
+  const setupLiquidoRaw = String(formData.get("valor_setup_liquido") || "").replace(",", ".")
+  const valor_setup_liquido = setupLiquidoRaw ? Number(setupLiquidoRaw) : null
+  const data_recebimento_setup = String(formData.get("data_recebimento_setup") || "") || null
   const data_venda = String(formData.get("data_venda") || "") || undefined
   const data_primeira_mensalidade = String(formData.get("data_primeira_mensalidade") || "") || null
   const observacoes = String(formData.get("observacoes") || "").trim() || null
@@ -101,6 +106,9 @@ export async function registrarVenda(
   }
   if (valor_mensalidade > 0 && !data_primeira_mensalidade) {
     return { error: "Informe a data da primeira mensalidade." }
+  }
+  if (valor_setup_liquido !== null && !Number.isFinite(valor_setup_liquido)) {
+    return { error: "Informe um valor líquido recebido válido." }
   }
   if (!comprovante || comprovante.size === 0) {
     return { error: "Anexe o comprovante de pagamento do cliente." }
@@ -137,6 +145,8 @@ export async function registrarVenda(
     valor_venda,
     valor_setup: valor_setup > 0 ? valor_setup : null,
     valor_mensalidade: valor_mensalidade > 0 ? valor_mensalidade : null,
+    valor_setup_liquido,
+    data_recebimento_setup,
     comissao_percentual,
     comprovante_path,
     contrato_path,
@@ -151,7 +161,9 @@ export async function registrarVenda(
     servico,
     valor_setup,
     valor_mensalidade,
+    valor_setup_liquido,
     data_venda: data_venda || new Date().toISOString().slice(0, 10),
+    data_recebimento_setup,
     data_primeira_mensalidade,
   })
 
@@ -176,6 +188,9 @@ export async function registrarVendaAdmin(
   const mensalidadeRaw = String(formData.get("valor_mensalidade") || "").replace(",", ".")
   const valor_setup = setupRaw ? Number(setupRaw) : 0
   const valor_mensalidade = mensalidadeRaw ? Number(mensalidadeRaw) : 0
+  const setupLiquidoRaw = String(formData.get("valor_setup_liquido") || "").replace(",", ".")
+  const valor_setup_liquido = setupLiquidoRaw ? Number(setupLiquidoRaw) : null
+  const data_recebimento_setup = String(formData.get("data_recebimento_setup") || "") || null
   const data_venda = String(formData.get("data_venda") || "") || undefined
   const data_primeira_mensalidade = String(formData.get("data_primeira_mensalidade") || "") || null
   const observacoes = String(formData.get("observacoes") || "").trim() || null
@@ -196,6 +211,9 @@ export async function registrarVendaAdmin(
   }
   if (valor_mensalidade > 0 && !data_primeira_mensalidade) {
     return { error: "Informe a data da primeira mensalidade." }
+  }
+  if (valor_setup_liquido !== null && !Number.isFinite(valor_setup_liquido)) {
+    return { error: "Informe um valor líquido recebido válido." }
   }
   if (!comprovante || comprovante.size === 0) {
     return { error: "Anexe o comprovante de pagamento do cliente." }
@@ -235,6 +253,8 @@ export async function registrarVendaAdmin(
     valor_venda,
     valor_setup: valor_setup > 0 ? valor_setup : null,
     valor_mensalidade: valor_mensalidade > 0 ? valor_mensalidade : null,
+    valor_setup_liquido,
+    data_recebimento_setup,
     comissao_percentual: vendedor.comissao_percentual,
     comprovante_path,
     contrato_path,
@@ -249,7 +269,9 @@ export async function registrarVendaAdmin(
     servico,
     valor_setup,
     valor_mensalidade,
+    valor_setup_liquido,
     data_venda: data_venda || new Date().toISOString().slice(0, 10),
+    data_recebimento_setup,
     data_primeira_mensalidade,
   })
 

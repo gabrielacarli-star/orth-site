@@ -67,6 +67,13 @@ export default async function MinhasVendasPage() {
                       {v.valor_mensalidade ? `Mensal ${formatBRL(Number(v.valor_mensalidade))}` : ""}
                     </p>
                   )}
+                  {v.valor_setup_liquido != null && (
+                    <p className="text-orth-muted text-xs font-normal">
+                      Líquido {formatBRL(Number(v.valor_setup_liquido))}
+                      {v.data_recebimento_setup &&
+                        ` em ${new Date(v.data_recebimento_setup + "T00:00:00").toLocaleDateString("pt-BR")}`}
+                    </p>
+                  )}
                 </td>
                 <td className="py-3 pr-4 text-white text-sm whitespace-nowrap">
                   {formatBRL(Number(v.comissao_valor))}

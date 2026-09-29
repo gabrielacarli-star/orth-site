@@ -30,6 +30,8 @@ export interface Venda {
   valor_venda: number
   valor_setup: number | null
   valor_mensalidade: number | null
+  valor_setup_liquido: number | null
+  data_recebimento_setup: string | null
   comissao_percentual: number
   comissao_valor: number
   comprovante_path: string | null

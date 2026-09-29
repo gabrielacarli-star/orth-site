@@ -68,6 +68,29 @@ export function NovaVendaForm() {
 
       <div>
         <label className="block text-sm text-orth-muted mb-1.5">
+          Valor líquido do setup (se pago parcelado no cartão)
+        </label>
+        <input
+          name="valor_setup_liquido"
+          type="number"
+          step="0.01"
+          min="0"
+          placeholder="deixe em branco se for igual ao setup"
+          className={inputClass}
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm text-orth-muted mb-1.5">Data que cai na conta</label>
+        <input name="data_recebimento_setup" type="date" className={inputClass} />
+        <p className="text-orth-muted text-xs mt-1">
+          Normalmente 1 dia útil depois da venda, no cartão. Usada no Financeiro em vez da data da
+          venda.
+        </p>
+      </div>
+
+      <div>
+        <label className="block text-sm text-orth-muted mb-1.5">
           Data da 1ª mensalidade (se houver)
         </label>
         <input name="data_primeira_mensalidade" type="date" className={inputClass} />
