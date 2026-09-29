@@ -27,26 +27,33 @@ export async function criarLancamento(
   _prevState: LancamentoFormState,
   formData: FormData
 ): Promise<LancamentoFormState> {
-  const perfil = await requireAdmin()
-  const campos = lerCampos(formData)
+  try {
+    const perfil = await requireAdmin()
+    const campos = lerCampos(formData)
 
-  if (!campos.descricao || !campos.data_prevista) {
-    return { error: "Preencha a descrição e a data prevista." }
+    if (!campos.descricao || !campos.data_prevista) {
+      return { error: "Preencha a descrição e a data prevista." }
+    }
+    if (!Number.isFinite(campos.valor) || campos.valor <= 0) {
+      return { error: "Informe um valor válido." }
+    }
+
+    const admin = createAdminClient()
+    const { error } = await admin.from("financeiro_lancamentos").insert({
+      ...campos,
+      criado_por: perfil.id,
+    })
+
+    if (error) return { error: error.message }
+
+    revalidatePath("/sistema/admin/financeiro")
+    return { success: true }
+  } catch (err) {
+    if (err && typeof err === "object" && "digest" in err && String(err.digest).startsWith("NEXT_REDIRECT")) {
+      throw err
+    }
+    return { error: `Erro inesperado: ${err instanceof Error ? err.message : String(err)}` }
   }
-  if (!Number.isFinite(campos.valor) || campos.valor <= 0) {
-    return { error: "Informe um valor válido." }
-  }
-
-  const admin = createAdminClient()
-  const { error } = await admin.from("financeiro_lancamentos").insert({
-    ...campos,
-    criado_por: perfil.id,
-  })
-
-  if (error) return { error: error.message }
-
-  revalidatePath("/sistema/admin/financeiro")
-  return { success: true }
 }
 
 export async function atualizarLancamento(
