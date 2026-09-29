@@ -80,11 +80,13 @@ export async function GET(request: Request) {
       continue
     }
 
-    const { data: reservado } = await admin
+    const { data: jaEnviado } = await admin
       .from("resumos_diarios_enviados")
-      .upsert({ vendedor_id: v.id, data: hoje }, { onConflict: "vendedor_id,data", ignoreDuplicates: true })
-      .select()
-    if (!reservado || reservado.length === 0) {
+      .select("vendedor_id")
+      .eq("vendedor_id", v.id)
+      .eq("data", hoje)
+      .maybeSingle()
+    if (jaEnviado) {
       resultados.push({ vendedorId: v.id, status: "já enviado hoje" })
       continue
     }
@@ -110,6 +112,7 @@ export async function GET(request: Request) {
         subject: `Sua agenda de hoje na ORTH (${itens.length} compromisso${itens.length > 1 ? "s" : ""})`,
         html,
       })
+      await admin.from("resumos_diarios_enviados").insert({ vendedor_id: v.id, data: hoje })
       resultados.push({ vendedorId: v.id, status: "enviado" })
     } catch (err) {
       resultados.push({
