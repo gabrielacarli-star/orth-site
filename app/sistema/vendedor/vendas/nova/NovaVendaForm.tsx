@@ -67,6 +67,16 @@ export function NovaVendaForm() {
       </p>
 
       <div>
+        <label className="block text-sm text-orth-muted mb-1.5">
+          Data da 1ª mensalidade (se houver)
+        </label>
+        <input name="data_primeira_mensalidade" type="date" className={inputClass} />
+        <p className="text-orth-muted text-xs mt-1">
+          Preenchendo, o sistema já lança essa cobrança no Financeiro automaticamente.
+        </p>
+      </div>
+
+      <div>
         <label className="block text-sm text-orth-muted mb-1.5">Data da venda</label>
         <input
           name="data_venda"

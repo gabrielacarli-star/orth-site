@@ -28,6 +28,49 @@ async function uploadArquivo(
   return path
 }
 
+async function criarLancamentosFinanceiro(params: {
+  cliente_nome: string
+  servico: string
+  valor_setup: number
+  valor_mensalidade: number
+  data_venda: string
+  data_primeira_mensalidade: string | null
+}) {
+  const linhas: Record<string, unknown>[] = []
+
+  if (params.valor_setup > 0) {
+    linhas.push({
+      tipo: "receita",
+      descricao: `Setup - ${params.servico} - ${params.cliente_nome}`,
+      valor: params.valor_setup,
+      categoria: "Venda",
+      cliente_nome: params.cliente_nome,
+      recorrente: false,
+      data_prevista: params.data_venda,
+    })
+  }
+  if (params.valor_mensalidade > 0 && params.data_primeira_mensalidade) {
+    linhas.push({
+      tipo: "receita",
+      descricao: `Mensalidade - ${params.servico} - ${params.cliente_nome}`,
+      valor: params.valor_mensalidade,
+      categoria: "Venda",
+      cliente_nome: params.cliente_nome,
+      recorrente: true,
+      data_prevista: params.data_primeira_mensalidade,
+    })
+  }
+
+  if (linhas.length === 0) return
+
+  try {
+    const admin = createAdminClient()
+    await admin.from("financeiro_lancamentos").insert(linhas)
+  } catch {
+    // Não bloqueia o registro da venda se o Financeiro falhar; dá pra lançar manualmente depois.
+  }
+}
+
 export async function registrarVenda(
   _prevState: VendaFormState,
   formData: FormData
@@ -42,6 +85,7 @@ export async function registrarVenda(
   const valor_setup = setupRaw ? Number(setupRaw) : 0
   const valor_mensalidade = mensalidadeRaw ? Number(mensalidadeRaw) : 0
   const data_venda = String(formData.get("data_venda") || "") || undefined
+  const data_primeira_mensalidade = String(formData.get("data_primeira_mensalidade") || "") || null
   const observacoes = String(formData.get("observacoes") || "").trim() || null
   const comprovante = formData.get("comprovante") as File | null
   const contrato = formData.get("contrato") as File | null
@@ -54,6 +98,9 @@ export async function registrarVenda(
   }
   if (valor_setup <= 0 && valor_mensalidade <= 0) {
     return { error: "Informe o valor de setup e/ou de mensalidade." }
+  }
+  if (valor_mensalidade > 0 && !data_primeira_mensalidade) {
+    return { error: "Informe a data da primeira mensalidade." }
   }
   if (!comprovante || comprovante.size === 0) {
     return { error: "Anexe o comprovante de pagamento do cliente." }
@@ -99,9 +146,19 @@ export async function registrarVenda(
 
   if (error) return { error: error.message }
 
+  await criarLancamentosFinanceiro({
+    cliente_nome,
+    servico,
+    valor_setup,
+    valor_mensalidade,
+    data_venda: data_venda || new Date().toISOString().slice(0, 10),
+    data_primeira_mensalidade,
+  })
+
   revalidatePath("/sistema/vendedor/vendas")
   revalidatePath("/sistema/vendedor")
   revalidatePath("/sistema/admin/vendas")
+  revalidatePath("/sistema/admin/financeiro")
   return { success: true }
 }
 
@@ -120,6 +177,7 @@ export async function registrarVendaAdmin(
   const valor_setup = setupRaw ? Number(setupRaw) : 0
   const valor_mensalidade = mensalidadeRaw ? Number(mensalidadeRaw) : 0
   const data_venda = String(formData.get("data_venda") || "") || undefined
+  const data_primeira_mensalidade = String(formData.get("data_primeira_mensalidade") || "") || null
   const observacoes = String(formData.get("observacoes") || "").trim() || null
   const comprovante = formData.get("comprovante") as File | null
   const contrato = formData.get("contrato") as File | null
@@ -135,6 +193,9 @@ export async function registrarVendaAdmin(
   }
   if (valor_setup <= 0 && valor_mensalidade <= 0) {
     return { error: "Informe o valor de setup e/ou de mensalidade." }
+  }
+  if (valor_mensalidade > 0 && !data_primeira_mensalidade) {
+    return { error: "Informe a data da primeira mensalidade." }
   }
   if (!comprovante || comprovante.size === 0) {
     return { error: "Anexe o comprovante de pagamento do cliente." }
@@ -183,9 +244,19 @@ export async function registrarVendaAdmin(
 
   if (error) return { error: error.message }
 
+  await criarLancamentosFinanceiro({
+    cliente_nome,
+    servico,
+    valor_setup,
+    valor_mensalidade,
+    data_venda: data_venda || new Date().toISOString().slice(0, 10),
+    data_primeira_mensalidade,
+  })
+
   revalidatePath("/sistema/admin/vendas")
   revalidatePath("/sistema/admin")
   revalidatePath("/sistema/vendedor/vendas")
+  revalidatePath("/sistema/admin/financeiro")
   return { success: true }
 }
 
