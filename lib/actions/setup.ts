@@ -56,14 +56,9 @@ export async function criarPrimeiroAdmin(
     return { error: perfilError.message }
   }
 
-  const { data: config } = await admin
-    .from("config")
-    .select("comissao_percentual_padrao")
-    .single()
-
   const { error: vendedorError } = await admin.from("vendedores").insert({
     id: created.user.id,
-    comissao_percentual: config?.comissao_percentual_padrao ?? 20,
+    comissao_percentual: 0,
   })
 
   if (vendedorError) {
