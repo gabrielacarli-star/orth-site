@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { requireVendedor } from "@/lib/dal"
+import { createAdminClient } from "@/lib/supabase/admin"
 import { createClient } from "@/lib/supabase/server"
 
 export interface AgendamentoFormState {
@@ -9,12 +10,26 @@ export interface AgendamentoFormState {
   success?: boolean
 }
 
+function lerParticipantes(formData: FormData, excluir: string) {
+  return [...new Set(formData.getAll("participantes").map(String))].filter((id) => id && id !== excluir)
+}
+
+async function salvarParticipantes(agendamentoId: string, vendedorIds: string[]) {
+  const admin = createAdminClient()
+  await admin.from("agendamento_participantes").delete().eq("agendamento_id", agendamentoId)
+  if (vendedorIds.length > 0) {
+    await admin.from("agendamento_participantes").insert(
+      vendedorIds.map((vendedor_id) => ({ agendamento_id: agendamentoId, vendedor_id }))
+    )
+  }
+}
+
 export async function criarAgendamento(
   _prevState: AgendamentoFormState,
   formData: FormData
 ): Promise<AgendamentoFormState> {
   const perfil = await requireVendedor()
-  const supabase = await createClient()
+  const admin = createAdminClient()
 
   const titulo = String(formData.get("titulo") || "").trim()
   const cliente_nome = String(formData.get("cliente_nome") || "").trim() || null
@@ -34,16 +49,23 @@ export async function criarAgendamento(
     return { error: "Data ou horário inválido." }
   }
 
-  const { error } = await supabase.from("agendamentos").insert({
-    vendedor_id,
-    titulo,
-    cliente_nome,
-    data_hora: data_hora.toISOString(),
-    duracao_minutos: Number.isFinite(duracao_minutos) ? duracao_minutos : 60,
-    notas,
-  })
+  const { data: criado, error } = await admin
+    .from("agendamentos")
+    .insert({
+      vendedor_id,
+      titulo,
+      cliente_nome,
+      data_hora: data_hora.toISOString(),
+      duracao_minutos: Number.isFinite(duracao_minutos) ? duracao_minutos : 60,
+      notas,
+    })
+    .select("id")
+    .single()
 
   if (error) return { error: error.message }
+
+  const participantes = lerParticipantes(formData, vendedor_id)
+  if (participantes.length > 0) await salvarParticipantes(criado.id, participantes)
 
   revalidatePath("/sistema/vendedor/agenda")
   revalidatePath("/sistema/vendedor")
@@ -56,7 +78,17 @@ export async function atualizarAgendamento(
   formData: FormData
 ): Promise<AgendamentoFormState> {
   const perfil = await requireVendedor()
-  const supabase = await createClient()
+  const admin = createAdminClient()
+
+  const { data: existente } = await admin
+    .from("agendamentos")
+    .select("id, vendedor_id")
+    .eq("id", id)
+    .maybeSingle()
+  if (!existente) return { error: "Compromisso não encontrado." }
+  if (perfil.role !== "admin" && existente.vendedor_id !== perfil.id) {
+    return { error: "Você não tem acesso a esse compromisso." }
+  }
 
   const titulo = String(formData.get("titulo") || "").trim()
   const cliente_nome = String(formData.get("cliente_nome") || "").trim() || null
@@ -74,7 +106,7 @@ export async function atualizarAgendamento(
     return { error: "Data ou horário inválido." }
   }
 
-  const query = supabase
+  const { error } = await admin
     .from("agendamentos")
     .update({
       titulo,
@@ -85,9 +117,9 @@ export async function atualizarAgendamento(
     })
     .eq("id", id)
 
-  const { error } = perfil.role === "admin" ? await query : await query.eq("vendedor_id", perfil.id)
-
   if (error) return { error: error.message }
+
+  await salvarParticipantes(id, lerParticipantes(formData, existente.vendedor_id))
 
   revalidatePath("/sistema/vendedor/agenda")
   revalidatePath("/sistema/vendedor")

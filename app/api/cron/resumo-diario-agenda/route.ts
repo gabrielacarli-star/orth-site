@@ -53,19 +53,36 @@ export async function GET(request: Request) {
     admin.auth.admin.listUsers({ perPage: 1000 }),
     admin
       .from("agendamentos")
-      .select("vendedor_id, titulo, cliente_nome, data_hora, notas")
+      .select("id, vendedor_id, titulo, cliente_nome, data_hora, notas")
       .eq("status", "agendado")
       .gte("data_hora", inicioUTC)
       .lte("data_hora", fimUTC)
       .order("data_hora", { ascending: true }),
   ])
 
+  const idsDeHoje = (agendamentos ?? []).map((a) => a.id)
+  const { data: participantes } =
+    idsDeHoje.length > 0
+      ? await admin
+          .from("agendamento_participantes")
+          .select("agendamento_id, vendedor_id")
+          .in("agendamento_id", idsDeHoje)
+      : { data: [] }
+
   const emailPorId = new Map(usersData?.users.map((u) => [u.id, u.email]))
-  const agendaPorVendedor = new Map<string, typeof agendamentos>()
-  for (const a of agendamentos ?? []) {
-    const lista = agendaPorVendedor.get(a.vendedor_id) ?? []
-    lista.push(a)
-    agendaPorVendedor.set(a.vendedor_id, lista)
+  const agendamentoPorId = new Map((agendamentos ?? []).map((a) => [a.id, a]))
+  const agendaPorVendedor = new Map<string, NonNullable<typeof agendamentos>>()
+
+  function adicionar(vendedorId: string, item: NonNullable<typeof agendamentos>[number]) {
+    const lista = agendaPorVendedor.get(vendedorId) ?? []
+    lista.push(item)
+    agendaPorVendedor.set(vendedorId, lista)
+  }
+
+  for (const a of agendamentos ?? []) adicionar(a.vendedor_id, a)
+  for (const p of participantes ?? []) {
+    const item = agendamentoPorId.get(p.agendamento_id)
+    if (item) adicionar(p.vendedor_id, item)
   }
 
   const resultados: { vendedorId: string; status: string }[] = []
@@ -73,6 +90,7 @@ export async function GET(request: Request) {
   for (const v of vendedores ?? []) {
     const itens = agendaPorVendedor.get(v.id)
     if (!itens || itens.length === 0) continue
+    itens.sort((a, b) => new Date(a.data_hora).getTime() - new Date(b.data_hora).getTime())
 
     const email = emailPorId.get(v.id)
     if (!email) {

@@ -14,7 +14,7 @@ export default async function FinanceiroPage() {
     .select("*")
     .order("data_prevista", { ascending: false })
 
-  const lancamentos = (data ?? []) as FinanceiroLancamento[]
+  const lancamentos = (data ?? []).map((l) => ({ ...l, valor: Number(l.valor) })) as FinanceiroLancamento[]
 
   const hoje = new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" })
   const mesAtual = hoje.slice(0, 7)

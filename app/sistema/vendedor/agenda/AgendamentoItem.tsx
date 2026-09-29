@@ -12,11 +12,25 @@ function pad(n: number) {
   return String(n).padStart(2, "0")
 }
 
-export function AgendamentoItem({ agendamento }: { agendamento: Agendamento }) {
+export function AgendamentoItem({
+  agendamento,
+  todosVendedores,
+  participantes,
+  souDono,
+}: {
+  agendamento: Agendamento
+  todosVendedores: { id: string; nome: string }[]
+  participantes: string[]
+  souDono: boolean
+}) {
   const [editando, setEditando] = useState(false)
   const [removendo, startRemover] = useTransition()
   const acaoComId = atualizarAgendamento.bind(null, agendamento.id)
   const [state, formAction, pending] = useActionState(acaoComId, initialState)
+
+  const nomePorId = new Map(todosVendedores.map((v) => [v.id, v.nome]))
+  const nomesParticipantes = participantes.map((id) => nomePorId.get(id) ?? "—")
+  const outrasPessoas = todosVendedores.filter((v) => v.id !== agendamento.vendedor_id)
 
   if (editando) {
     const d = new Date(agendamento.data_hora)
@@ -52,6 +66,26 @@ export function AgendamentoItem({ agendamento }: { agendamento: Agendamento }) {
           placeholder="Notas (opcional)"
           className={inputClass}
         />
+
+        {outrasPessoas.length > 0 && (
+          <div className="sm:col-span-2">
+            <p className="text-orth-muted text-xs mb-1.5">Participantes</p>
+            <div className="flex flex-wrap gap-3">
+              {outrasPessoas.map((v) => (
+                <label key={v.id} className="flex items-center gap-1.5 text-sm text-white cursor-pointer">
+                  <input
+                    type="checkbox"
+                    name="participantes"
+                    value={v.id}
+                    defaultChecked={participantes.includes(v.id)}
+                    className="rounded accent-orth-electric"
+                  />
+                  {v.nome}
+                </label>
+              ))}
+            </div>
+          </div>
+        )}
 
         {state?.error && (
           <p className="sm:col-span-2 text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
@@ -93,25 +127,30 @@ export function AgendamentoItem({ agendamento }: { agendamento: Agendamento }) {
           })}{" "}
           · {agendamento.duracao_minutos} min
         </p>
+        {nomesParticipantes.length > 0 && (
+          <p className="text-orth-muted text-xs mt-0.5">Com: {nomesParticipantes.join(", ")}</p>
+        )}
         {agendamento.notas && (
           <p className="text-orth-muted text-xs mt-0.5">{agendamento.notas}</p>
         )}
       </div>
-      <div className="flex items-center gap-3 shrink-0">
-        <button
-          onClick={() => setEditando(true)}
-          className="text-xs text-orth-muted hover:text-white transition-colors"
-        >
-          editar
-        </button>
-        <button
-          onClick={() => startRemover(() => removerAgendamento(agendamento.id))}
-          disabled={removendo}
-          className="text-xs text-orth-muted hover:text-red-400 transition-colors"
-        >
-          remover
-        </button>
-      </div>
+      {souDono && (
+        <div className="flex items-center gap-3 shrink-0">
+          <button
+            onClick={() => setEditando(true)}
+            className="text-xs text-orth-muted hover:text-white transition-colors"
+          >
+            editar
+          </button>
+          <button
+            onClick={() => startRemover(() => removerAgendamento(agendamento.id))}
+            disabled={removendo}
+            className="text-xs text-orth-muted hover:text-red-400 transition-colors"
+          >
+            remover
+          </button>
+        </div>
+      )}
     </div>
   )
 }
