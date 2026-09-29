@@ -101,6 +101,37 @@ export interface GoogleNegocioConexao {
   created_at: string
 }
 
+/** senha_cifrada nunca deve chegar ao cliente em texto puro fora de uma ação explícita de revelar. */
+export interface SenhaAcesso {
+  id: string
+  titulo: string
+  usuario: string | null
+  url: string | null
+  notas: string | null
+  criado_por: string | null
+  created_at: string
+  updated_at: string
+}
+
+export type TipoLancamento = "receita" | "despesa"
+export type StatusLancamento = "pendente" | "pago"
+
+export interface FinanceiroLancamento {
+  id: string
+  tipo: TipoLancamento
+  descricao: string
+  valor: number
+  categoria: string | null
+  cliente_nome: string | null
+  recorrente: boolean
+  data_prevista: string
+  data_pago: string | null
+  status: StatusLancamento
+  criado_por: string | null
+  created_at: string
+  updated_at: string
+}
+
 export interface GoogleNegocioPost {
   id: string
   conexao_id: string
