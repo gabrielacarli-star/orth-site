@@ -9,6 +9,8 @@ interface VendaComVendedor {
   cliente_nome: string
   servico: string
   valor_venda: number
+  valor_setup: number | null
+  valor_mensalidade: number | null
   comissao_percentual: number
   comissao_valor: number
   comprovante_path: string | null
@@ -24,7 +26,7 @@ export default async function AdminVendasPage() {
   const { data } = await supabase
     .from("vendas")
     .select(
-      "id, cliente_nome, servico, valor_venda, comissao_percentual, comissao_valor, comprovante_path, contrato_path, status_comissao, data_venda, perfis(nome)"
+      "id, cliente_nome, servico, valor_venda, valor_setup, valor_mensalidade, comissao_percentual, comissao_valor, comprovante_path, contrato_path, status_comissao, data_venda, perfis(nome)"
     )
     .order("data_venda", { ascending: false })
 
@@ -75,6 +77,13 @@ export default async function AdminVendasPage() {
                 <td className="py-3 pr-4 text-orth-muted text-sm">{v.servico}</td>
                 <td className="py-3 pr-4 text-white text-sm whitespace-nowrap">
                   {formatBRL(Number(v.valor_venda))}
+                  {(v.valor_setup || v.valor_mensalidade) && (
+                    <p className="text-orth-muted text-xs font-normal">
+                      {v.valor_setup ? `Setup ${formatBRL(Number(v.valor_setup))}` : ""}
+                      {v.valor_setup && v.valor_mensalidade ? " + " : ""}
+                      {v.valor_mensalidade ? `Mensal ${formatBRL(Number(v.valor_mensalidade))}` : ""}
+                    </p>
+                  )}
                 </td>
                 <td className="py-3 pr-4 text-white text-sm whitespace-nowrap">
                   {formatBRL(Number(v.comissao_valor))}

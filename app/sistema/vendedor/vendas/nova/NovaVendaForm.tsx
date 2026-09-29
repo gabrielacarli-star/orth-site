@@ -39,9 +39,32 @@ export function NovaVendaForm() {
       </div>
 
       <div>
-        <label className="block text-sm text-orth-muted mb-1.5">Valor da venda (R$)</label>
-        <input name="valor_venda" type="number" step="0.01" min="0.01" required className={inputClass} />
+        <label className="block text-sm text-orth-muted mb-1.5">Setup (R$)</label>
+        <input
+          name="valor_setup"
+          type="number"
+          step="0.01"
+          min="0"
+          placeholder="0,00"
+          className={inputClass}
+        />
       </div>
+
+      <div>
+        <label className="block text-sm text-orth-muted mb-1.5">Mensalidade (R$)</label>
+        <input
+          name="valor_mensalidade"
+          type="number"
+          step="0.01"
+          min="0"
+          placeholder="0,00"
+          className={inputClass}
+        />
+      </div>
+
+      <p className="sm:col-span-2 text-orth-muted text-xs -mt-2">
+        Preencha pelo menos um dos dois. Deixe em branco (ou 0) o que não se aplicar.
+      </p>
 
       <div>
         <label className="block text-sm text-orth-muted mb-1.5">Data da venda</label>

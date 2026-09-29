@@ -28,6 +28,8 @@ export interface Venda {
   cliente_nome: string
   servico: string
   valor_venda: number
+  valor_setup: number | null
+  valor_mensalidade: number | null
   comissao_percentual: number
   comissao_valor: number
   comprovante_path: string | null

@@ -60,6 +60,13 @@ export default async function MinhasVendasPage() {
                 <td className="py-3 pr-4 text-orth-muted text-sm">{v.servico}</td>
                 <td className="py-3 pr-4 text-white text-sm whitespace-nowrap">
                   {formatBRL(Number(v.valor_venda))}
+                  {(v.valor_setup || v.valor_mensalidade) && (
+                    <p className="text-orth-muted text-xs font-normal">
+                      {v.valor_setup ? `Setup ${formatBRL(Number(v.valor_setup))}` : ""}
+                      {v.valor_setup && v.valor_mensalidade ? " + " : ""}
+                      {v.valor_mensalidade ? `Mensal ${formatBRL(Number(v.valor_mensalidade))}` : ""}
+                    </p>
+                  )}
                 </td>
                 <td className="py-3 pr-4 text-white text-sm whitespace-nowrap">
                   {formatBRL(Number(v.comissao_valor))}

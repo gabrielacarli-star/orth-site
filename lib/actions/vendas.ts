@@ -37,8 +37,10 @@ export async function registrarVenda(
 
   const cliente_nome = String(formData.get("cliente_nome") || "").trim()
   const servico = String(formData.get("servico") || "").trim()
-  const valorRaw = String(formData.get("valor_venda") || "").replace(",", ".")
-  const valor_venda = Number(valorRaw)
+  const setupRaw = String(formData.get("valor_setup") || "").replace(",", ".")
+  const mensalidadeRaw = String(formData.get("valor_mensalidade") || "").replace(",", ".")
+  const valor_setup = setupRaw ? Number(setupRaw) : 0
+  const valor_mensalidade = mensalidadeRaw ? Number(mensalidadeRaw) : 0
   const data_venda = String(formData.get("data_venda") || "") || undefined
   const observacoes = String(formData.get("observacoes") || "").trim() || null
   const comprovante = formData.get("comprovante") as File | null
@@ -47,8 +49,11 @@ export async function registrarVenda(
   if (!cliente_nome || !servico) {
     return { error: "Preencha o cliente e o serviço vendido." }
   }
-  if (!Number.isFinite(valor_venda) || valor_venda <= 0) {
-    return { error: "Informe um valor de venda válido." }
+  if (!Number.isFinite(valor_setup) || !Number.isFinite(valor_mensalidade)) {
+    return { error: "Informe valores válidos pra setup e/ou mensalidade." }
+  }
+  if (valor_setup <= 0 && valor_mensalidade <= 0) {
+    return { error: "Informe o valor de setup e/ou de mensalidade." }
   }
   if (!comprovante || comprovante.size === 0) {
     return { error: "Anexe o comprovante de pagamento do cliente." }
@@ -67,6 +72,7 @@ export async function registrarVenda(
     .single()
 
   const comissao_percentual = vendedor?.comissao_percentual ?? 20
+  const valor_venda = valor_setup + valor_mensalidade
 
   let comprovante_path: string
   let contrato_path: string
@@ -82,6 +88,8 @@ export async function registrarVenda(
     cliente_nome,
     servico,
     valor_venda,
+    valor_setup: valor_setup > 0 ? valor_setup : null,
+    valor_mensalidade: valor_mensalidade > 0 ? valor_mensalidade : null,
     comissao_percentual,
     comprovante_path,
     contrato_path,
@@ -107,8 +115,10 @@ export async function registrarVendaAdmin(
   const vendedor_id = String(formData.get("vendedor_id") || "").trim()
   const cliente_nome = String(formData.get("cliente_nome") || "").trim()
   const servico = String(formData.get("servico") || "").trim()
-  const valorRaw = String(formData.get("valor_venda") || "").replace(",", ".")
-  const valor_venda = Number(valorRaw)
+  const setupRaw = String(formData.get("valor_setup") || "").replace(",", ".")
+  const mensalidadeRaw = String(formData.get("valor_mensalidade") || "").replace(",", ".")
+  const valor_setup = setupRaw ? Number(setupRaw) : 0
+  const valor_mensalidade = mensalidadeRaw ? Number(mensalidadeRaw) : 0
   const data_venda = String(formData.get("data_venda") || "") || undefined
   const observacoes = String(formData.get("observacoes") || "").trim() || null
   const comprovante = formData.get("comprovante") as File | null
@@ -120,8 +130,11 @@ export async function registrarVendaAdmin(
   if (!cliente_nome || !servico) {
     return { error: "Preencha o cliente e o serviço vendido." }
   }
-  if (!Number.isFinite(valor_venda) || valor_venda <= 0) {
-    return { error: "Informe um valor de venda válido." }
+  if (!Number.isFinite(valor_setup) || !Number.isFinite(valor_mensalidade)) {
+    return { error: "Informe valores válidos pra setup e/ou mensalidade." }
+  }
+  if (valor_setup <= 0 && valor_mensalidade <= 0) {
+    return { error: "Informe o valor de setup e/ou de mensalidade." }
   }
   if (!comprovante || comprovante.size === 0) {
     return { error: "Anexe o comprovante de pagamento do cliente." }
@@ -143,6 +156,8 @@ export async function registrarVendaAdmin(
     return { error: "Vendedor não encontrado." }
   }
 
+  const valor_venda = valor_setup + valor_mensalidade
+
   let comprovante_path: string
   let contrato_path: string
   try {
@@ -157,6 +172,8 @@ export async function registrarVendaAdmin(
     cliente_nome,
     servico,
     valor_venda,
+    valor_setup: valor_setup > 0 ? valor_setup : null,
+    valor_mensalidade: valor_mensalidade > 0 ? valor_mensalidade : null,
     comissao_percentual: vendedor.comissao_percentual,
     comprovante_path,
     contrato_path,
