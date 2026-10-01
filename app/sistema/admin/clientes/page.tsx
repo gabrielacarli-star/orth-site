@@ -1,8 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
 import { createAdminClient } from "@/lib/supabase/admin"
-import { StatusClienteSelect } from "@/components/sistema/StatusClienteSelect"
-import { PropostaEditor } from "@/components/sistema/PropostaEditor"
-import { GoogleNegocioEditor } from "@/components/sistema/GoogleNegocioEditor"
+import { AdminClientesKanban } from "@/components/sistema/AdminClientesKanban"
 import { NovoClienteAdminForm } from "./NovoClienteAdminForm"
 import type { Cliente, GoogleNegocioConexao } from "@/lib/types"
 
@@ -51,6 +49,9 @@ export default async function AdminClientesPage({
   }))
 
   const porVendedor = new Map<string, Grupo>()
+  for (const v of vendedores) {
+    porVendedor.set(v.id, { vendedorId: v.id, nome: v.nome, clientes: [] })
+  }
   for (const c of clientes) {
     const grupo = porVendedor.get(c.vendedor_id) ?? {
       vendedorId: c.vendedor_id,
@@ -79,42 +80,7 @@ export default async function AdminClientesPage({
 
       <NovoClienteAdminForm vendedores={vendedores} />
 
-      {grupos.length === 0 && (
-        <p className="py-4 text-center text-orth-muted text-sm rounded-xl border border-orth-line/10 bg-orth-navy/40">
-          Nenhum cliente cadastrado ainda.
-        </p>
-      )}
-
-      {grupos.map((grupo) => (
-        <section key={grupo.vendedorId} className="space-y-3">
-          <h2 className="text-white font-display text-lg flex items-baseline gap-2">
-            {grupo.nome}
-            <span className="text-orth-muted text-sm font-sans">
-              {grupo.clientes.length} {grupo.clientes.length === 1 ? "lead" : "leads"}
-            </span>
-          </h2>
-
-          <div className="rounded-xl border border-orth-line/10 bg-orth-navy/40 p-5 divide-y divide-orth-line/10">
-            {grupo.clientes.map((c) => (
-              <div key={c.id} className="py-3 flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-white text-sm font-medium">{c.nome}</p>
-                  {c.empresa && <p className="text-orth-muted text-xs">{c.empresa}</p>}
-                  <p className="text-orth-muted text-xs mt-0.5">
-                    {[c.telefone, c.email].filter(Boolean).join(" · ") || "—"}
-                  </p>
-                  {c.notas && <p className="text-orth-muted text-xs mt-0.5">{c.notas}</p>}
-                </div>
-                <div className="flex flex-col items-end gap-2">
-                  <StatusClienteSelect clienteId={c.id} status={c.status} />
-                  <PropostaEditor cliente={c} />
-                  <GoogleNegocioEditor clienteId={c.id} conexao={conexoesPorCliente.get(c.id) ?? null} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      ))}
+      <AdminClientesKanban grupos={grupos} conexoesPorCliente={conexoesPorCliente} />
     </div>
   )
 }

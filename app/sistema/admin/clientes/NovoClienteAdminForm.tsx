@@ -45,6 +45,17 @@ export function NovoClienteAdminForm({
       <input name="origem" placeholder="Como chegou até vocês (opcional)" className={inputClass} />
       <input name="notas" placeholder="Notas (opcional)" className={inputClass} />
 
+      <div className="sm:col-span-2">
+        <label className="block text-sm text-orth-muted mb-1.5">Em qual parte do funil ele está?</label>
+        <select name="status" defaultValue="novo" className={inputClass}>
+          <option value="novo">Novo</option>
+          <option value="em_contato">Em contato</option>
+          <option value="proposta_enviada">Proposta enviada</option>
+          <option value="fechado">Fechado</option>
+          <option value="perdido">Perdido</option>
+        </select>
+      </div>
+
       <div className="sm:col-span-2 border-t border-orth-line/10 pt-3 space-y-2">
         <label className="flex items-center gap-2 text-sm text-orth-muted cursor-pointer">
           <input type="checkbox" name="proposta_enviada" className="rounded accent-orth-electric" />

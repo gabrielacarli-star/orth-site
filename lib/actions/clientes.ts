@@ -15,6 +15,7 @@ function lerCampos(formData: FormData) {
   const propostaEnviada = formData.get("proposta_enviada") === "on"
   const valorRaw = String(formData.get("proposta_valor") || "").replace(",", ".")
   const valor = Number(valorRaw)
+  const statusSelecionado = String(formData.get("status") || "") as StatusCliente | ""
 
   return {
     nome: String(formData.get("nome") || "").trim(),
@@ -30,7 +31,7 @@ function lerCampos(formData: FormData) {
     proposta_data: propostaEnviada
       ? String(formData.get("proposta_data") || "") || new Date().toISOString().slice(0, 10)
       : null,
-    status: propostaEnviada ? ("proposta_enviada" as const) : undefined,
+    status: propostaEnviada ? ("proposta_enviada" as const) : statusSelecionado || undefined,
   }
 }
 

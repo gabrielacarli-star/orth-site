@@ -1,9 +1,7 @@
 import { requireVendedor } from "@/lib/dal"
 import { createClient } from "@/lib/supabase/server"
 import { createAdminClient } from "@/lib/supabase/admin"
-import { StatusClienteSelect } from "@/components/sistema/StatusClienteSelect"
-import { PropostaEditor } from "@/components/sistema/PropostaEditor"
-import { GoogleNegocioEditor } from "@/components/sistema/GoogleNegocioEditor"
+import { KanbanClientes } from "@/components/sistema/KanbanClientes"
 import { NovoClienteForm } from "./NovoClienteForm"
 import type { Cliente, GoogleNegocioConexao } from "@/lib/types"
 
@@ -57,30 +55,7 @@ export default async function VendedorClientesPage({
 
       <NovoClienteForm />
 
-      <div className="rounded-xl border border-orth-line/10 bg-orth-navy/40 p-5 divide-y divide-orth-line/10">
-        {clientes.map((c) => (
-          <div key={c.id} className="py-3 flex items-start justify-between gap-4">
-            <div>
-              <p className="text-white text-sm font-medium">{c.nome}</p>
-              {c.empresa && <p className="text-orth-muted text-xs">{c.empresa}</p>}
-              <p className="text-orth-muted text-xs mt-0.5">
-                {[c.telefone, c.email].filter(Boolean).join(" · ") || "—"}
-              </p>
-              {c.notas && <p className="text-orth-muted text-xs mt-0.5">{c.notas}</p>}
-            </div>
-            <div className="flex flex-col items-end gap-2">
-              <StatusClienteSelect clienteId={c.id} status={c.status} />
-              <PropostaEditor cliente={c} />
-              <GoogleNegocioEditor clienteId={c.id} conexao={conexoesPorCliente.get(c.id) ?? null} />
-            </div>
-          </div>
-        ))}
-        {clientes.length === 0 && (
-          <p className="py-4 text-center text-orth-muted text-sm">
-            Nenhum cliente cadastrado ainda.
-          </p>
-        )}
-      </div>
+      <KanbanClientes clientes={clientes} conexoesPorCliente={conexoesPorCliente} />
     </div>
   )
 }
