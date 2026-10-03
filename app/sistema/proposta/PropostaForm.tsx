@@ -44,6 +44,39 @@ export function PropostaForm({ vendedoresPrecos }: { vendedoresPrecos: PrecoTabe
   ])
   const [gerando, setGerando] = useState(false)
   const [erro, setErro] = useState("")
+  const [gerandoDiagnostico, setGerandoDiagnostico] = useState(false)
+  const [erroDiagnostico, setErroDiagnostico] = useState("")
+
+  async function gerarDiagnostico() {
+    setErroDiagnostico("")
+    if (!clienteNome.trim()) {
+      setErroDiagnostico("Preencha o nome do cliente antes de gerar o diagnóstico.")
+      return
+    }
+    setGerandoDiagnostico(true)
+    try {
+      const resposta = await fetch("/api/sistema/proposta/diagnostico", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          clienteNome,
+          clienteSegmento,
+          tituloProposta,
+          itens: itens.map((i) => ({ nome: i.nome, descricao: i.descricao })),
+        }),
+      })
+      if (!resposta.ok) {
+        setErroDiagnostico(await resposta.text())
+        return
+      }
+      const { texto } = await resposta.json()
+      setOQueIdentificamos(texto)
+    } catch {
+      setErroDiagnostico("Não foi possível gerar o diagnóstico. Tente novamente.")
+    } finally {
+      setGerandoDiagnostico(false)
+    }
+  }
 
   function aplicarModelo(nome: string) {
     const modelo = MODELOS_TRABALHO[nome]
@@ -171,11 +204,26 @@ export function PropostaForm({ vendedoresPrecos }: { vendedoresPrecos: PrecoTabe
       </div>
 
       <div className="rounded-xl border border-orth-line/10 bg-orth-navy/40 p-5 space-y-3">
-        <h3 className="text-white font-medium">1. O que identificamos</h3>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <h3 className="text-white font-medium">1. O que identificamos</h3>
+          <button
+            type="button"
+            onClick={gerarDiagnostico}
+            disabled={gerandoDiagnostico}
+            className="text-xs rounded-full border border-orth-line/20 px-3 py-1 text-orth-muted hover:text-white hover:border-orth-electric transition-colors disabled:opacity-60"
+          >
+            {gerandoDiagnostico ? "Gerando..." : "✨ Gerar diagnóstico com IA"}
+          </button>
+        </div>
         <p className="text-orth-muted text-xs">
-          Escreva o diagnóstico específico desse cliente: o que ele já tem, a oportunidade e por
-          que a estratégia proposta faz sentido pra ele. Pule uma linha em branco entre parágrafos.
+          Escreva o diagnóstico específico desse cliente, ou preencha o nome, o segmento e os itens
+          abaixo e deixe a IA escrever pra você. Pule uma linha em branco entre parágrafos.
         </p>
+        {erroDiagnostico && (
+          <p className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+            {erroDiagnostico}
+          </p>
+        )}
         <textarea
           value={oQueIdentificamos}
           onChange={(e) => setOQueIdentificamos(e.target.value)}
